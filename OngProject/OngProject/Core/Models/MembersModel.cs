@@ -1,4 +1,4 @@
-﻿using OngProject.Core.Models;
+using OngProject.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace OngProject.Infrastructure.Data
