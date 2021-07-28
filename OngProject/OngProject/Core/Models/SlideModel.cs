@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Models
 {
-    public class Slide : EntityBase
+    public class SlideModel : EntityBase
     {
        
         [Required]

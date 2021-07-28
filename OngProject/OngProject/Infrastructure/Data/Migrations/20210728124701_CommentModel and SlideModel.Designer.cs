@@ -10,8 +10,8 @@ using OngProject.Infrastructure.Data;
 namespace OngProject.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210728105651_CommentModel")]
-    partial class CommentModel
+    [Migration("20210728124701_CommentModel and SlideModel")]
+    partial class CommentModelandSlideModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

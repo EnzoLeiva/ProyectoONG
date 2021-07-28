@@ -2,7 +2,7 @@
 
 namespace OngProject.Infrastructure.Data.Migrations
 {
-    public partial class CommentModel : Migration
+    public partial class CommentModelandSlideModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
