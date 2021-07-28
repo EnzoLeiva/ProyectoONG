@@ -27,5 +27,11 @@ namespace OngProject.Infrastructure.Data
         public DbSet<CommentModel> Comments { get; set; }
 
 
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<ContactsModel> Contacts { get; set; }
+        public DbSet<ActivitiesModel> Activities { get; set; }
+        public DbSet<MembersModel> Member { get; set; }
+
+
     }
 }
