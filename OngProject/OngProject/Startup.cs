@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Data;
+using OngProject.Infrastructure.Repositories;
+using OngProject.Infrastructure.Repositories.IRepository;
 
 namespace OngProject
 {
@@ -24,6 +27,9 @@ namespace OngProject
 
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+            services.AddScoped(typeof(BaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
