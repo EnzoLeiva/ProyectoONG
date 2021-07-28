@@ -17,5 +17,7 @@ namespace OngProject.Infrastructure.Data
         }
 
         public DbSet<MemberModel> Members { get; set; }
+        public DbSet<SlideModel> Slides { get; set; }
+
     }
 }
