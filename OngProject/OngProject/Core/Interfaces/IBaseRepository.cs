@@ -8,7 +8,7 @@ namespace OngProject.Core.Interfaces
 {
     public interface IBaseRepository<T> where T : EntityBase
     {
-        bool SaveChanges();
+        
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
         Task Insert(T entity);
