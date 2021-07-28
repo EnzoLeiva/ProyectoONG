@@ -19,7 +19,5 @@ namespace OngProject.Infrastructure.Data
         public DbSet<MemberModel> Members { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
         public DbSet<ContactsModel> Contacts { get; set; }
-        public DbSet<ActivitiesModel> Activities { get; set; }
-
     }
 }
