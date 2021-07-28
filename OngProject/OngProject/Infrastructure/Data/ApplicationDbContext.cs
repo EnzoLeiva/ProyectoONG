@@ -32,7 +32,7 @@ namespace OngProject.Infrastructure.Data
         public DbSet<ContactsModel> Contacts { get; set; }
         public DbSet<ActivitiesModel> Activities { get; set; }
         public DbSet<MembersModel> Member { get; set; }
-
+        public DbSet<NewsModel> News { get; set; }
 
     }
 }
