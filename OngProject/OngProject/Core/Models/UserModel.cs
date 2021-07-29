@@ -33,7 +33,7 @@ namespace OngProject.Core.Models
         
         public int roleId { get; set; } // Clave foranea hacia ID de Role
         [ForeignKey("roleId")]
-        public virtual Role Role { get; set;}
+        public virtual RoleModel RoleModel { get; set;}
         
     }
 }
