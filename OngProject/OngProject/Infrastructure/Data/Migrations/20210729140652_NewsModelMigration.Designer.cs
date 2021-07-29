@@ -10,7 +10,7 @@ using OngProject.Infrastructure.Data;
 namespace OngProject.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210729012932_NewsModelMigration")]
+    [Migration("20210729140652_NewsModelMigration")]
     partial class NewsModelMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
