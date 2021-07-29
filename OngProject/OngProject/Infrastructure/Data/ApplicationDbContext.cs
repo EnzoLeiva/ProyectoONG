@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using OngProject.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -16,6 +18,14 @@ namespace OngProject.Infrastructure.Data
         {
         }
 
+        DbSet<UserModel> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<UserModel>()
+                .HasIndex(u => u.email)
+                .IsUnique();
+        }
         public DbSet<MemberModel> Members { get; set; }
     }
 }

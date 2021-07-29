@@ -10,6 +10,7 @@ namespace OngProject.Core.Models
 {
     public class UserModel : EntityBase
     {
+
         [MaxLength(255)]
         [Required]
         public string firstName { get; set; }
