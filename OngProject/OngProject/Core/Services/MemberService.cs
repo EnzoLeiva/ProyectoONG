@@ -1,4 +1,5 @@
 ﻿using OngProject.Core.Interfaces;
+using OngProject.Core.Interfaces.IUnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace OngProject.Core.Services
 {
     public class MemberService: IMemberService
     {
-
+        private readonly IUnitOfWork _unitOfWork;
     }
 }
