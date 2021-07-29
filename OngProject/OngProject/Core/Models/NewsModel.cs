@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Models
 {
-    public class NewsModel
+    public class NewsModel : EntityBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
