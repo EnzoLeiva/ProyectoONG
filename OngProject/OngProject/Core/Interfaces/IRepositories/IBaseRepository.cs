@@ -14,5 +14,6 @@ namespace OngProject.Core.Interfaces
         Task Insert(T entity);
         Task Update(T entity);
         Task Delete(int id);
+        bool EntityExists(int id);
     }
 }
