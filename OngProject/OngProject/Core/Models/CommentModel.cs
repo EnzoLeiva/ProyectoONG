@@ -12,8 +12,9 @@ namespace OngProject.Core.Models
     public int User_id { get; set; }
        
     public int post_id { get; set; }
-        [Required]
-        public string Body { get; set; }
+        
+    [Required]
+    public string Body { get; set; }
 
 
 

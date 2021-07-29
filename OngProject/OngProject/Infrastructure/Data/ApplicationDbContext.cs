@@ -16,7 +16,17 @@ namespace OngProject.Infrastructure.Data
         {
         }
 
+
+
         public DbSet<MemberModel> Members { get; set; }
+      
+        
+        
+        
+        
+        public DbSet<CommentModel> Comments { get; set; }
+
+
         public DbSet<SlideModel> Slides { get; set; }
 
         public DbSet<CategoryModel> Categories { get; set; }
