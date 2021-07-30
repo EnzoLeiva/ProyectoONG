@@ -15,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OngProject.Core.Interfaces.IServices;
+using OngProject.Core.Services;
 
 namespace OngProject
 {
@@ -41,6 +43,10 @@ namespace OngProject
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
             });
+
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IActivitiesService, ActivitiesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
