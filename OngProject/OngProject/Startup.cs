@@ -1,10 +1,9 @@
-<<<<<<< HEAD
+using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IUnitOfWork;
@@ -13,8 +12,6 @@ using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Infrastructure.Repositories;
 using System;
-=======
->>>>>>> 6983bc6fb0c3b6134a8d30b850ad91a7c3a2c216
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
