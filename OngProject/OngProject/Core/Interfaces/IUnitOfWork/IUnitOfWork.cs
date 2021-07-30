@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Interfaces.IUnitOfWork
 {
-   public interface IUnitOfWork : IDisposable
+
+    public interface IUnitOfWork : IDisposable
     {
         IBaseRepository<CategoryModel> CategoryRepository { get; }
         IBaseRepository<ContactsModel> ContactsRepository { get; }
@@ -18,6 +19,7 @@ namespace OngProject.Core.Interfaces.IUnitOfWork
         IBaseRepository<SlideModel> SlideRepository { get; }
         IBaseRepository<TestimonialsModel> TestimonialsRepository { get; }
         IBaseRepository<NewsModel> NewsRepository { get; }
+        IBaseRepository<UserModel> UserRepository { get; }
 
         void SaveChanges();
         Task SaveChangesAsync();

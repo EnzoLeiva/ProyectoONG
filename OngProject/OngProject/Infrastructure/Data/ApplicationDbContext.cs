@@ -25,6 +25,7 @@ namespace OngProject.Infrastructure.Data
                 .IsUnique();
         }
         public DbSet<MemberModel> Members { get; set; }
+        public DbSet<RoleModel> Roles { get; set; }
         public DbSet<OrganizationModel> Organizations { get; set; }
         public DbSet<CommentModel> Comments { get; set; }
         public DbSet<SlideModel> Slides { get; set; }
