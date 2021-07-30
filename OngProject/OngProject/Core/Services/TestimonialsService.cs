@@ -11,12 +11,12 @@ namespace OngProject.Core.Services
     public class TestimonialsService : ITestimonialsService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ITestimonialsService _testimonialsService;
+        
 
-        public TestimonialsService(IUnitOfWork unitOfWork, ITestimonialsService testimonialsService)
+        public TestimonialsService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _testimonialsService = testimonialsService;
+           
         }
 
         public Task Delete(int id)
