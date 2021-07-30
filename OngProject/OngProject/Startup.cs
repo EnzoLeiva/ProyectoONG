@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Infrastructure.Repositories;
 using System;
+=======
+>>>>>>> 6983bc6fb0c3b6134a8d30b850ad91a7c3a2c216
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
