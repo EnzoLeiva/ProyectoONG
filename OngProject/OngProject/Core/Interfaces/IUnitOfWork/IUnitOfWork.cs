@@ -5,7 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace OngProject.Core.Interfaces.IUnitOfWork
+<<<<<<< HEAD
 { 
+=======
+{
+
+>>>>>>> d58856843e79bc2515e7e41754a16bc45f249eec
     public interface IUnitOfWork : IDisposable
 
     {
