@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Services;
 using OngProject.Infrastructure.Data;
+using OngProject.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace OngProject
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddTransient<IMemberService, MemberService>();
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
