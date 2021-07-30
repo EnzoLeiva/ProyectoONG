@@ -44,6 +44,8 @@ namespace OngProject
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IActivitiesService, ActivitiesService>();
+            services.AddTransient<IRoleService, RoleService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
