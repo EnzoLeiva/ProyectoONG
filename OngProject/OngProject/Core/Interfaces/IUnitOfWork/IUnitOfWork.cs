@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Interfaces.IUnitOfWork
 {
+
     public interface IUnitOfWork : IDisposable
     {
         IBaseRepository<CategoryModel> CategoryRepository { get; }
