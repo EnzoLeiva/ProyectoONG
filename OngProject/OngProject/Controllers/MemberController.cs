@@ -13,5 +13,10 @@ namespace OngProject.Controllers
     public class MemberController : ControllerBase
     {
         private readonly IMemberService _memberService;
+
+        public MemberController(IMemberService memberService)
+        {
+            _memberService = memberService;
+        }
     }
 }

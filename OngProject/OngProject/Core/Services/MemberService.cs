@@ -10,5 +10,10 @@ namespace OngProject.Core.Services
     public class MemberService: IMemberService
     {
         private readonly IUnitOfWork _unitOfWork;
+
+        public MemberService(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
     }
 }

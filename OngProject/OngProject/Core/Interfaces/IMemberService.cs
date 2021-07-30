@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Interfaces
 {
-    interface IMemberService
+    public interface IMemberService
     {
     }
 }
