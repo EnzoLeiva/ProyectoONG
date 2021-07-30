@@ -36,5 +36,10 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.Update(categoryModel);
         }
+
+        public bool EntityExists(int id)
+        {
+            return _unitOfWork.CategoryRepository.EntityExists(id);
+        }
     }
 }
