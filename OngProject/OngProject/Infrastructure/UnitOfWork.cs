@@ -62,6 +62,10 @@ namespace OngProject.Infrastructure
         public IBaseRepository<TestimonialsModel> TestimonialsRepository => _testimonialsRepository ?? new BaseRepository<TestimonialsModel>(_context);
 
 
+        private readonly IBaseRepository<UserModel> _userRepository;
+
+        public IBaseRepository<UserModel> UserRepository => _userRepository ?? new BaseRepository<UserModel>(_context);
+        
         public void Dispose()
         {
             if (_context != null)
