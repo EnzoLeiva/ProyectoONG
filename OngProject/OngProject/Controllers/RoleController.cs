@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using OngProject.Core.Interfaces.IUnitOfWork;
-using OngProject.Infrastructure.Data;
+using OngProject.Core.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +10,14 @@ namespace OngProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class RoleController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
 
-        public UserController(ApplicationDbContext context)
+        private readonly IRoleService _iRoleService;
+
+        public RoleController(IRoleService iRoleService)
         {
-            this._context = context;
+            _iRoleService = iRoleService;
         }
     }
 }
