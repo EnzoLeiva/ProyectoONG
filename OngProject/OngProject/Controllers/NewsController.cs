@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Data;
 
 namespace OngProject.Controllers
@@ -12,11 +13,11 @@ namespace OngProject.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly INewsService _newsService;
 
-        public NewsController(ApplicationDbContext context)
+        public NewsController(INewsService newsService)
         {
-            _context = context;
+            _newsService = newsService;
         }
     }
 }
