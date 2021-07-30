@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Repositories;
 using OngProject.Core.Services;
+using OngProject.Core.Interfaces.IUnitOfWork;
+using OngProject.Infrastructure;
 
 namespace OngProject
 {
@@ -40,6 +42,7 @@ namespace OngProject
 
            
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>(); 
             services.AddTransient<ICategoryService, CategoryService>();
         }
 
