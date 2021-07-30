@@ -49,7 +49,7 @@ namespace OngProject
             services.AddTransient<IActivitiesService, ActivitiesService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<ICategoryService, CategoryService>();
-
+            services.AddTransient<INewsService, NewsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
