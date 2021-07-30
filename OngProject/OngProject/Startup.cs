@@ -1,20 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using OngProject.Infrastructure.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OngProject.Core.Interfaces;
-using OngProject.Core.Interfaces.IUnitOfWork;
-using OngProject.Core.Services;
-using OngProject.Infrastructure;
-using OngProject.Infrastructure.Repositories;
 
 namespace OngProject
 {
