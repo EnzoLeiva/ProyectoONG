@@ -40,8 +40,11 @@ namespace OngProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
             });
 
-            services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+
+
+
             services.AddTransient<INewsService, NewsService>();
         }
 
