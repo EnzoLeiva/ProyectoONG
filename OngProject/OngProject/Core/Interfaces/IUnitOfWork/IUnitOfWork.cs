@@ -18,6 +18,7 @@ namespace OngProject.Core.Interfaces.IUnitOfWork
         IBaseRepository<SlideModel> SlideRepository { get; }
         IBaseRepository<TestimonialsModel> TestimonialsRepository { get; }
         IBaseRepository<NewsModel> NewsRepository { get; }
+        IBaseRepository<UserModel> UserRepository { get; }
 
         void SaveChanges();
         Task SaveChangesAsync();
