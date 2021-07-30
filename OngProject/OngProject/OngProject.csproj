@@ -22,7 +22,6 @@
     <Folder Include="Core\Mapper\" />
     <Folder Include="Core\DTOs\" />
     <Folder Include="Core\Helper\" />
-    <Folder Include="Core\Services\" />
     <Folder Include="Templates\" />
   </ItemGroup>
 
