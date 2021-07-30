@@ -52,6 +52,7 @@ namespace OngProject
             services.AddTransient<IOrganizationService, OrganizationService>();
 
             services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<ITestimonialsService, TestimonialsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
