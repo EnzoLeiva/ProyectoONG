@@ -8,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Services
 {
-    public class UserService
+    public class UserService //: IUserService
     {
-        public UserService()
+        private readonly IUnitOfWork _unitOfWork;
+        
+        public UserService(IUnitOfWork unitOfWork)
         {
-      
+            _unitOfWork = unitOfWork;
         }
+
 
     }
 }

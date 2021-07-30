@@ -14,11 +14,10 @@ namespace OngProject.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public UserController(ApplicationDbContext context)
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            this._context = context;
+            _userService = userService;
         }
     }
 }
