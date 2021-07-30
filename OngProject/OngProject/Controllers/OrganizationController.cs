@@ -9,7 +9,6 @@ namespace OngProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [ApiController]
     public class OrganizationController: ControllerBase
     {
         private readonly IOrganizationService _organizationService;

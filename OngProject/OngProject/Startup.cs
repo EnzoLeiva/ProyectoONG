@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
-using OngProject.Core.Services;
+
 
 namespace OngProject
 {
@@ -48,6 +48,7 @@ namespace OngProject
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IActivitiesService, ActivitiesService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IOrganizationService, OrganizationService>();
 
         }
