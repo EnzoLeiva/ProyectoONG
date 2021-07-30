@@ -48,6 +48,7 @@ namespace OngProject
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IActivitiesService, ActivitiesService>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IOrganizationService, OrganizationService>();
 
         }
 
