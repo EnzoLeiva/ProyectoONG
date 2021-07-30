@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using OngProject.Core.Interfaces;
+using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Services;
+using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Infrastructure.Repositories;
 using System;
@@ -33,6 +35,7 @@ namespace OngProject
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddTransient<IMemberService, MemberService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             services.AddControllers();
