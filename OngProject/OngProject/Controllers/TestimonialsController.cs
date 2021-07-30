@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OngProject.Core.Interfaces.IServices;
+using OngProject.Core.Services;
 using OngProject.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -9,12 +11,13 @@ namespace OngProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TestimonialsController : Controller
+    public class TestimonialsController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-        public TestimonialsController(ApplicationDbContext context)
+        private readonly ITestimonialsService _testimonialsService;
+
+        public TestimonialsController(ITestimonialsService testimonialsService)
         {
-            this._context = context;
+            _testimonialsService = testimonialsService;
         }
     }
 }
