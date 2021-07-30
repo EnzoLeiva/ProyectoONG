@@ -35,8 +35,6 @@ namespace OngProject
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddTransient<IMemberService, MemberService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
