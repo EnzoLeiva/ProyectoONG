@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.Interfaces;
+using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,14 @@ namespace OngProject.Controllers
         {
             _memberService = memberService;
         }
+        [Route("api/members")]
+        [HttpGet]
+        public async Task<IEnumerable<MemberModel>> GetMembers()
+        {
+            return await _memberService.GetMembers();
+           
+        }
+
+
     }
 }
