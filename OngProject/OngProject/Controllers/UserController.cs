@@ -25,7 +25,7 @@ namespace OngProject.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!_userService.EntityExists(id))
+            if (!_userService.UserExists(id))
                 return NotFound();
             await _userService.DeleteUser(id);
             return Ok();

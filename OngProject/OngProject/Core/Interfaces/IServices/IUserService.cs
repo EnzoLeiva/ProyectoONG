@@ -9,6 +9,6 @@ namespace OngProject.Core.Interfaces.IServices
     {
 
         public Task DeleteUser(int Id);
-        public bool EntityExists(int Id);
+        public bool UserExists(int Id);
     }
 }

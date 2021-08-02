@@ -23,7 +23,7 @@ namespace OngProject.Core.Services
             return _unitOfWork.UserRepository.Delete(Id);
         }
 
-        public bool EntityExists(int Id)
+        public bool UserExists(int Id)
         {
             return _unitOfWork.UserRepository.EntityExists(Id);
         }
