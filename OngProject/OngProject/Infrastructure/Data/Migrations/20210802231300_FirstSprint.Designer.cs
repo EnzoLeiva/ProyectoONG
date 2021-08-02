@@ -10,8 +10,8 @@ using OngProject.Infrastructure.Data;
 namespace OngProject.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210730154223_RoleTable")]
-    partial class RoleTable
+    [Migration("20210802231300_FirstSprint")]
+    partial class FirstSprint
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
