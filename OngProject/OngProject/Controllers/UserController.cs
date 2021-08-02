@@ -27,8 +27,17 @@ namespace OngProject.Controllers
         {
             if (!_userService.UserExists(id))
                 return NotFound();
-            await _userService.DeleteUser(id);
-            return Ok();
+
+            bool response = await _userService.DeleteUser(id);
+
+            if (response == true)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
     }

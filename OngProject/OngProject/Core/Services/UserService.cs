@@ -18,9 +18,21 @@ namespace OngProject.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task DeleteUser(int Id)
+        public async Task<bool> DeleteUser(int Id)
         {
-            return _unitOfWork.UserRepository.Delete(Id);
+
+            try
+            {
+                await _unitOfWork.UserRepository.Delete(Id);
+                await _unitOfWork.SaveChangesAsync();
+                
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool UserExists(int Id)

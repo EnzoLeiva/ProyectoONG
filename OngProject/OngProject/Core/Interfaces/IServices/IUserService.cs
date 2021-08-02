@@ -7,8 +7,7 @@ namespace OngProject.Core.Interfaces.IServices
 {
     public interface IUserService
     {
-
-        public Task DeleteUser(int Id);
+        public Task<bool> DeleteUser(int Id);
         public bool UserExists(int Id);
     }
 }
