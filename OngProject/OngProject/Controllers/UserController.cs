@@ -36,7 +36,7 @@ namespace OngProject.Controllers
             }
             else
             {
-                return BadRequest();
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
             }
         }
 
