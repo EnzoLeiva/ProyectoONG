@@ -1,4 +1,5 @@
 ﻿
+using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
 using System;
@@ -8,12 +9,23 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.Services
 {
-    public class UserService
+    public class UserService: IUserService
     {
-        public UserService()
+
+        private readonly IUnitOfWork _unitOfWork;
+        public UserService(IUnitOfWork unitOfWork)
         {
-      
+            _unitOfWork = unitOfWork;
         }
 
+        public Task DeleteUser(int Id)
+        {
+            return _unitOfWork.UserRepository.Delete(Id);
+        }
+
+        public bool EntityExists(int Id)
+        {
+            return _unitOfWork.UserRepository.EntityExists(Id);
+        }
     }
 }

@@ -50,7 +50,7 @@ namespace OngProject
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IOrganizationService, OrganizationService>();
-
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
         }
