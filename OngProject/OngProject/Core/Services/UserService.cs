@@ -34,7 +34,10 @@ namespace OngProject.Core.Services
             var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.email),
+                    new Claim(ClaimTypes.Role, user.RoleModel?.Name),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+
                 };
 
             var authSigningKey = new SymmetricSecurityKey(key);
@@ -42,7 +45,7 @@ namespace OngProject.Core.Services
             var token = new JwtSecurityToken(
                 expires: DateTime.Now.AddHours(1),
                 claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256Signature)
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
 
             return tokenHandler.WriteToken(token);
