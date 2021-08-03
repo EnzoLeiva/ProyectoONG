@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OngProject.Core.DTOs;
+using OngProject.Core.Interfaces.IServices;
+using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using OngProject.Infrastructure.Data;
 using System.Collections.Generic;
@@ -9,15 +12,22 @@ using System.Threading.Tasks;
 namespace OngProject.Controllers
 {
 
+    [Route("[controller]")]
     [ApiController]
-    [Route("api/[controller]")]
     public class SlideController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ISlideService _slideService;
 
-        public SlideController(ApplicationDbContext context)
+        public SlideController(ISlideService slideService)
         {
-            this._context = context;
+            _slideService = slideService;
+        }
+
+        [Route("/slides")]
+        [HttpGet]
+        public async Task<IEnumerable<SlideDto>> GetSlides()
+        {
+            return await _slideService.GetAll();             
         }
 
 
