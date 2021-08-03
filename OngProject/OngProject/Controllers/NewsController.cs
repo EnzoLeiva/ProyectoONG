@@ -24,5 +24,15 @@ namespace OngProject.Controllers
             _inewsService = inewsService;
 
         }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            if (!_inewsService.UserExists(id))
+                return NotFound();
+
+            var response = await _inewsService.GetById(id);
+            return Ok(response);
+        }
     }
 }

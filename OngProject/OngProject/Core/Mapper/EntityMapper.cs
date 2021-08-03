@@ -27,6 +27,35 @@ namespace OngProject.Core.Mapper
 
             return commentDto;
         }
+
+        public NewsDto FromNewsToNewsDto(NewsModel news) 
+        {
+            var newsDto = new NewsDto()
+            {
+                Name = news.Name,
+                Image = news.Image,
+                Content = news.Content
+            };
+
+            return newsDto;
+        }
     }
 
+}
+
+        public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
+        {
+            var organizationDto = new OrganizationDto()
+            {
+                Name = organization.Name,
+                Image = organization.Image,
+                Phone = organization.Phone,
+                FacebookUrl = organization.FacebookUrl,
+                LinkedinUrl = organization.LinkedinUrl,
+                InstagramUrl = organization.InstagramUrl,
+            };
+
+            return organizationDto;
+        }
+    }
 }

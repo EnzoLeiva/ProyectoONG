@@ -28,9 +28,14 @@ namespace OngProject.Core.Services
             return slidesDtoList;
         }
 
-        //public Task<SlideModel> GetById(int Id)
-        //{
-        //    return _unitOfWork.SlideRepository.GetById(Id);
-        //}
+        public Task<SlideModel> GetById(int Id)
+        {
+            return _unitOfWork.SlideRepository.GetById(Id);
+        }
+
+        public bool EntityExists(int id)
+        {
+            return _unitOfWork.SlideRepository.EntityExists(id);
+        }
     }
 }

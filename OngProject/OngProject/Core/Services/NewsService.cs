@@ -6,6 +6,8 @@ using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
+using OngProject.Core.DTOs;
+using OngProject.Core.Mapper;
 
 namespace OngProject.Core.Services
 {
@@ -28,9 +30,12 @@ namespace OngProject.Core.Services
             return _unitOfWork.NewsRepository.GetAll();
         }
 
-        public Task<NewsModel> GetById(int id)
+        public async Task<NewsDto> GetById(int id)
         {
-            return _unitOfWork.NewsRepository.GetById(id);
+            var mapper = new EntityMapper();
+            var news = await _unitOfWork.NewsRepository.GetById(id);
+            var newsDto = mapper.FromNewsToNewsDto(news);
+            return newsDto;
         }
 
         public Task Insert(NewsModel newsModel)
@@ -42,6 +47,11 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.NewsRepository.Update(newsModel);
 
+        }
+
+        public bool UserExists(int Id)
+        {
+            return _unitOfWork.NewsRepository.EntityExists(Id);
         }
     }
 }
