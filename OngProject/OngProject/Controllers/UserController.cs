@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
@@ -18,11 +18,11 @@ namespace OngProject.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
-        public UserController(IUserService userService, IConfiguration configuration)
+        
+        public UserController(IUserService userService)
         {
             this._userService = userService;
-            this._configuration = configuration;
+          
         }
 
         [HttpDelete("{id}")]
