@@ -8,7 +8,7 @@ using OngProject.Core.Interfaces;
 
 namespace OngProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -18,6 +18,28 @@ namespace OngProject.Controllers
             _iCategoryService = iCategoryService;
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> delete(int id)
+        {
+            if (_iCategoryService.EntityExists(id))
+            {
+              
+
+                bool response = await _iCategoryService.Delete(id);
+
+                if (response == true)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                }
+
+            }
+            else
+                return NotFound();
+        }
 
     }
 }
