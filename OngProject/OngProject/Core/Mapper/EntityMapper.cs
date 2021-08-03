@@ -27,6 +27,18 @@ namespace OngProject.Core.Mapper
 
             return commentDto;
         }
+
+        public NewsDto FromNewsToNewsDto(NewsModel news) 
+        {
+            var newsDto = new NewsDto()
+            {
+                Name = news.Name,
+                Image = news.Image,
+                Content = news.Content
+            };
+
+            return newsDto;
+        }
     }
 
 }
