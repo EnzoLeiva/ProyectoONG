@@ -51,6 +51,8 @@ namespace OngProject
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IContactsService, ContactsService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
