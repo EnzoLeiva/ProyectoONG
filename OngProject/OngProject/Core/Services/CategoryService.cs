@@ -29,11 +29,14 @@ namespace OngProject.Core.Services
             return _unitOfWork.CategoryRepository.Insert(categoryModel);
         }
 
+       
+
         public async Task<bool> Delete(int Id)
         {
             try
             {
                await _unitOfWork.CategoryRepository.Delete(Id);
+               await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
