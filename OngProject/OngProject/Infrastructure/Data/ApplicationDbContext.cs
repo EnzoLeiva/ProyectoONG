@@ -48,7 +48,7 @@ namespace OngProject.Infrastructure.Data
                         Id = i,
                         Name = "Activity " + i,
                         Image = "Image from activity " + i,
-                        Content = "Test number " + i,
+                        Content = "Content from activity " + i,
                         CreatedAt = DateTime.Now
                     }
                 );
