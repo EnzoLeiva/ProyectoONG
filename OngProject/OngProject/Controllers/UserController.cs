@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
+using OngProject.Core.Models;
 using OngProject.Core.Services;
 using OngProject.Infrastructure.Data;
 using System;
@@ -40,5 +41,11 @@ namespace OngProject.Controllers
             }
         }
 
+        [Route("api/users")]
+        [HttpGet]
+        public async Task<IEnumerable<UserModel>> GetUsers()
+        {
+            return await _userService.GetUsers();
+        }
     }
 }

@@ -39,5 +39,10 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.UserRepository.EntityExists(Id);
         }
+
+        public async Task<IEnumerable<UserModel>> GetUsers()
+        {
+            return await _unitOfWork.UserRepository.GetAll();
+        }
     }
 }
