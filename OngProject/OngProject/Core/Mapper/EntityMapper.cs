@@ -19,5 +19,20 @@ namespace OngProject.Core.Mapper
 
             return slideDto;
         }
+
+        public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
+        {
+            var organizationDto = new OrganizationDto()
+            {
+                Name = organization.Name,
+                Image = organization.Image,
+                Phone = organization.Phone,
+                FacebookUrl = organization.FacebookUrl,
+                LinkedinUrl = organization.LinkedinUrl,
+                InstagramUrl = organization.InstagramUrl,
+            };
+
+            return organizationDto;
+        }
     }
 }
