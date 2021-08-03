@@ -27,7 +27,6 @@ namespace OngProject.Core.Mapper
 
             return commentDto;
         }
-
     }
 
 }
