@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
+using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -16,17 +17,17 @@ namespace OngProject.Controllers
     {
 
         private readonly ICommentService _iCommentService;
-        public CommentController(ICommentService iCommentService)
+        private readonly IUnitOfWork _iUnitOfWork;
+
+        public CommentController(ICommentService iCommentService, IUnitOfWork iUnitOfWork)
         {
             _iCommentService = iCommentService;
+            _iUnitOfWork = iUnitOfWork;
         }
         [HttpGet("/comments")]
-        public Task<IEnumerable<CommentDto>> GetAllComment()
+        public async Task<IEnumerable<CommentModel>> GetAllComment()
         {
-            IQueryable<CommentDto> query = (IQueryable<CommentDto>)_iCommentService.GetAllComments();
-            var commentsByDesc = query.OrderByDescending(c => c.CreatedAt);
-
-            return (Task<IEnumerable<CommentDto>>)commentsByDesc;
+            return await _iUnitOfWork.CommentRepository.GetAll();
         }
 
     }

@@ -25,7 +25,9 @@ namespace OngProject.Core.Services
             var commentList = await _unitOfWOrk.CommentRepository.GetAll();
             var commentDtoList = commentList.Select(c => mapper.FromCommentToCommentDto(c)).ToList();
 
-            return commentDtoList;
+            IQueryable<CommentDto> commentOrdered = (IQueryable<CommentDto>)commentDtoList.OrderByDescending(c => c.CreatedAt);
+
+            return commentOrdered;
         }
     }
 }
