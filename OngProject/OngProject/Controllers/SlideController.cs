@@ -30,6 +30,21 @@ namespace OngProject.Controllers
             return await _slideService.GetAll();             
         }
 
+        [Route("/slides/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetDetailsSlides(int id)
+        {
+            if (_slideService.EntityExists(id))
+            {
+                var listDetails = await _slideService.GetById(id);
+                return Ok(listDetails);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
 
     }
 
