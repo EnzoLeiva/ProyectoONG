@@ -22,7 +22,5 @@ namespace OngProject.Core.Models
         [MaxLength(255)]
         public string OrganizationId { get; set; }
 
-
-
     }
 }

@@ -52,6 +52,7 @@ namespace OngProject
             services.AddTransient<IOrganizationService, OrganizationService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
         }
 
