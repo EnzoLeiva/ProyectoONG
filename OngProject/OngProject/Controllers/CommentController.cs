@@ -25,9 +25,9 @@ namespace OngProject.Controllers
             _iUnitOfWork = iUnitOfWork;
         }
         [HttpGet("/comments")]
-        public async Task<IEnumerable<CommentModel>> GetAllComment()
+        public async Task<IEnumerable<CommentDto>> GetAllComment()
         {
-            return await _iUnitOfWork.CommentRepository.GetAll();
+            return await _iCommentService.GetAllComments();
         }
 
     }
