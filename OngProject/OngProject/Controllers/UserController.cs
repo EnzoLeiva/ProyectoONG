@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Route("api/users")]
+    [Route("users")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -41,7 +41,7 @@ namespace OngProject.Controllers
             }
         }
 
-        [Route("api/users")]
+        
         [HttpGet]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {
