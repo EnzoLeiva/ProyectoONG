@@ -23,6 +23,9 @@ namespace OngProject.Infrastructure.Data
             builder.Entity<UserModel>()
                 .HasIndex(u => u.email)
                 .IsUnique();
+
+            base.OnModelCreating(builder);
+            this.SeedActivities(builder);
         }
         public DbSet<MemberModel> Members { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
@@ -35,5 +38,21 @@ namespace OngProject.Infrastructure.Data
         public DbSet<NewsModel> News { get; set; }
         public DbSet<TestimonialsModel> Testimonials { get; set; }
 
+        private void SeedActivities(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<ActivitiesModel>().HasData(
+                    new ActivitiesModel
+                    {
+                        Id = i,
+                        Name = "Activity " + i,
+                        Image = "Image from activity " + i,
+                        Content = "Content from activity " + i,
+                        CreatedAt = DateTime.Now
+                    }
+                );
+            }
+        }
     }
 }
