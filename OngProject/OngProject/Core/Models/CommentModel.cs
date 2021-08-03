@@ -16,7 +16,5 @@ namespace OngProject.Core.Models
     [Required]
     public string Body { get; set; }
 
-
-
     }
 }
