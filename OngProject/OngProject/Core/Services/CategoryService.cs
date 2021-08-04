@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IUnitOfWork;
+using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 
 namespace OngProject.Core.Services
@@ -24,12 +26,15 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.GetById(Id);
         }
-        public Task Insert(CategoryModel categoryModel)
+        public async Task<CategoryDto> CreateCategory (CategoryModel category)
         {
-            return _unitOfWork.CategoryRepository.Insert(categoryModel);
+            var mapper = new EntityMapper();
+            await _unitOfWork.CategoryRepository.Insert(category);
+            var categoryDto = mapper.FromCategoryToCategoryDto(category);
+            return categoryDto;
         }
 
-       
+
 
         public async Task<bool> Delete(int Id)
         {
