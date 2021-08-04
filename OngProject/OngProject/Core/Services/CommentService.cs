@@ -29,5 +29,16 @@ namespace OngProject.Core.Services
 
             return commentOrdered;
         }
+
+        public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int idPost)
+        {
+            var mapper = new EntityMapper();
+           
+                var commentList = await _unitOfWOrk.CommentRepository.GetAll();
+                var commentDtoList = commentList.Where(x => x.post_id == idPost).OrderByDescending(c => c.CreatedAt).Select(c => mapper.FromCommentToCommentDto(c)).ToList();
+           
+            
+            return commentDtoList;
+        }
     }
 }
