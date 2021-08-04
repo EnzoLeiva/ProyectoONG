@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.Interfaces;
+using OngProject.Core.DTOs;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -19,7 +20,7 @@ namespace OngProject.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (_iCategoryService.EntityExists(id))
             {
@@ -39,6 +40,12 @@ namespace OngProject.Controllers
             }
             else
                 return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<CategoryDto>> GetAll()
+        {
+            return await _iCategoryService.GetAll();
         }
 
     }
