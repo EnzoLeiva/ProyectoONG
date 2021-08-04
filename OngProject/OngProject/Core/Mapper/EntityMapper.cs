@@ -54,5 +54,15 @@ namespace OngProject.Core.Mapper
 
             return organizationDto;
         }
+
+        public CategoryDto FromCategoryToCategoryDto (CategoryModel category)
+        {
+            var categoryDto = new CategoryDto()
+            {
+                Name = category.Name
+            };
+
+            return categoryDto;
+        }
     }
 }
