@@ -8,7 +8,7 @@ using OngProject.Core.Interfaces;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -41,5 +41,14 @@ namespace OngProject.Controllers
                 return NotFound();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            if (!_iCategoryService.EntityExists(id))
+                return NotFound();
+
+            var category = await _iCategoryService.GetById(id);
+            return Ok(category);
+        }
     }
 }
