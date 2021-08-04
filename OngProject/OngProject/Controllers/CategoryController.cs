@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.Interfaces;
+using OngProject.Core.DTOs;
+using OngProject.Core.Mapper;
+using OngProject.Core.Models;
 
 namespace OngProject.Controllers
 {
@@ -13,6 +16,7 @@ namespace OngProject.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _iCategoryService;
+
         public CategoryController(ICategoryService iCategoryService)
         {
             _iCategoryService = iCategoryService;
@@ -39,6 +43,22 @@ namespace OngProject.Controllers
             }
             else
                 return NotFound();
+        }
+
+        [HttpPost("/categories")]
+
+        public async Task<IActionResult> CreateCategory(CategoryModel categoryobject)
+        {
+            if (categoryobject != null)
+            {
+                var response = await _iCategoryService.CreateCategory(categoryobject);
+
+                return CreatedAtAction("CreateCategory", response);
+            }
+
+            return BadRequest();
+
+            
         }
 
     }
