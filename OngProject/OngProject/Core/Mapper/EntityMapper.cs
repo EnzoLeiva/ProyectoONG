@@ -28,7 +28,7 @@ namespace OngProject.Core.Mapper
             return commentDto;
         }
 
-        public NewsDto FromNewsToNewsDto(NewsModel news) 
+        public NewsDto FromNewsToNewsDto(NewsModel news)
         {
             var newsDto = new NewsDto()
             {
@@ -39,9 +39,6 @@ namespace OngProject.Core.Mapper
 
             return newsDto;
         }
-    }
-
-}
 
         public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
         {

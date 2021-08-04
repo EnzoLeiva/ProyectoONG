@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.DTOs
 {
-    public class CommentDto : EntityBase
+    public class CommentDto
     {
         [Required]
         public string Body { get; set; }
