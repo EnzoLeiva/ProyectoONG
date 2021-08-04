@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -19,11 +20,11 @@ namespace OngProject.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (_iCategoryService.EntityExists(id))
             {
-              
+
 
                 bool response = await _iCategoryService.Delete(id);
 
@@ -41,5 +42,20 @@ namespace OngProject.Controllers
                 return NotFound();
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            if (!_iCategoryService.EntityExists(id))
+                return NotFound();
+
+            var category = await _iCategoryService.GetById(id);
+            return Ok(category);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<CategoryDto>> GetAll()
+        {
+            return await _iCategoryService.GetAll();
+        }
     }
 }

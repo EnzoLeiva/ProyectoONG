@@ -10,6 +10,7 @@ namespace OngProject.Core.Interfaces.IServices
     public interface ISlideService
     {
         public Task<IEnumerable<SlideDto>> GetAll();
-        //public Task<SlideModel> GetById(int Id);
+        public Task<SlideModel> GetById(int Id);
+        public bool EntityExists(int id);
     }
 }

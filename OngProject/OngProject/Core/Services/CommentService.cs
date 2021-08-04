@@ -23,11 +23,9 @@ namespace OngProject.Core.Services
         {
             var mapper = new EntityMapper();
             var commentList = await _unitOfWOrk.CommentRepository.GetAll();
-            var commentDtoList = commentList.Select(c => mapper.FromCommentToCommentDto(c)).ToList();
+            var commentDtoList = commentList.OrderByDescending(c => c.CreatedAt).Select(c => mapper.FromCommentToCommentDto(c)).ToList();
 
-            IQueryable<CommentDto> commentOrdered = (IQueryable<CommentDto>)commentDtoList.OrderByDescending(c => c.CreatedAt);
-
-            return commentOrdered;
+            return commentDtoList;
         }
 
         public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int idPost)
