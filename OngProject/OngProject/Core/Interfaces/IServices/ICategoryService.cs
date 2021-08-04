@@ -9,7 +9,7 @@ namespace OngProject.Core.Interfaces
 {
     public interface ICategoryService
     {
-        public Task<IEnumerable<CategoryModel>> GetAll();
+        public Task<IEnumerable<CategoryDto>> GetAll();
         public Task<CategoryModel> GetById(int Id);
         public Task<CategoryDto> CreateCategory(CategoryModel category);
         public Task<bool> Delete(int Id);
