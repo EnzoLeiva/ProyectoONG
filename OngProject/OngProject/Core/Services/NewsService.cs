@@ -49,7 +49,7 @@ namespace OngProject.Core.Services
 
         }
 
-        public bool UserExists(int Id)
+        public bool NewsExists(int Id)
         {
             return _unitOfWork.NewsRepository.EntityExists(Id);
         }

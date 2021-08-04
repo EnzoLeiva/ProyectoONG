@@ -19,6 +19,6 @@ namespace OngProject.Core.Interfaces.IServices
 
         public Task Update(NewsModel newsModel);
 
-        public bool UserExists(int Id);
+        public bool NewsExists(int Id);
     }
 }
