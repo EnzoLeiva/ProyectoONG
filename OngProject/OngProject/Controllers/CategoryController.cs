@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
-using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]")]
+    [Route("/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -61,7 +60,7 @@ namespace OngProject.Controllers
             return await _iCategoryService.GetAll();
         }
 
-        [HttpPost("/categories")]
+        [HttpPost]
 
         public async Task<IActionResult> CreateCategory(CategoryModel categoryobject)
         {
