@@ -1,4 +1,5 @@
 ﻿using OngProject.Core.DTOs;
+using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -74,6 +75,19 @@ namespace OngProject.Core.Mapper
             };
 
             return userDto;
+        }
+
+        public UserModel FromRegisterDtoToUser(RegisterDTO register)
+        {
+            var user = new UserModel()
+            {
+                firstName = register.firstName,
+                lastName = register.lastName,
+                email = register.email,
+                password = register.password
+            };
+
+            return user;
         }
     }
 }
