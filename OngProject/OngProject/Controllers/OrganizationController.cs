@@ -19,7 +19,7 @@ namespace OngProject.Controllers
             _organizationService = organizationService;
         }
         
-        [HttpGet("/public/{id}")]
+        [HttpGet("public/{id}")]
         public async Task<OrganizationDto> GetById(int id)
         {
            return await _organizationService.GetById(id);

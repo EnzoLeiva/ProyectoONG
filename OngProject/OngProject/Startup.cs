@@ -21,6 +21,8 @@ using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using OngProject.Core.Services.Auth;
+using OngProject.Core.Interfaces.IServices.SendEmail;
+using OngProject.Core.Services.SendEmail;
 
 namespace OngProject
 {
@@ -83,6 +85,7 @@ namespace OngProject
             services.AddTransient<ITestimonialsService, TestimonialsService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddAWSService<IAmazonS3>();
+            services.AddTransient<ISendEmailService, SendEmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
