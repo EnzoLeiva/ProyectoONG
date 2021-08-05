@@ -11,6 +11,7 @@ using OngProject.Core.Interfaces.IUnitOfWork;
 using Microsoft.Extensions.Configuration;
 using OngProject.Core.Mapper;
 using OngProject.Core.DTOs;
+using OngProject.Core.DTOs.Auth;
 
 namespace OngProject.Core.Services.Auth
 {
@@ -23,6 +24,44 @@ namespace OngProject.Core.Services.Auth
         {
             this._unitOfWork = unitOfWork;
             this._configuration = configuration;
+           
+        }
+
+        public async Task<UserDto> register(RegisterDTO register)
+        {
+            var userExists = await _unitOfWork.UserRepository.GetByEmail(register.email);
+
+            if (userExists != null)
+            {
+                throw new Exception("User already exists!");
+            }
+            else {
+                try
+                {
+                    register.password = UserModel.ComputeSha256Hash(register.password);
+
+                    var mapper = new EntityMapper();
+                    var user = mapper.FromRegisterDtoToUser(register);
+                    user.RoleModel = await _unitOfWork.RoleRepository.GetById(2);
+
+                    await _unitOfWork.UserRepository.Insert(user);
+                    await _unitOfWork.SaveChangesAsync();
+
+                    if (user != null)
+                    {
+                        var token = GetToken(user);
+                        var map = new EntityMapper();
+                        return map.FromUserToUserDto(user, token);
+                    }
+
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
+            }
+             
            
         }
 
@@ -64,5 +103,7 @@ namespace OngProject.Core.Services.Auth
 
             return tokenHandler.WriteToken(token);
         }
+
+       
     }
 }

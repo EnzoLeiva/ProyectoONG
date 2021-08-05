@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
+using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
@@ -26,6 +27,27 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
+        [HttpPost("/auth/register")]
+        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
+        {
+            try
+            {
+                var user = await this._auth.register(request);
+
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+           
+
+            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+        }
+
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
@@ -33,7 +55,7 @@ namespace OngProject.Controllers
 
             if(user == null)
             {
-                return Ok("{ok:false}");
+                return NotFound();
             }
 
              return Ok(user);
