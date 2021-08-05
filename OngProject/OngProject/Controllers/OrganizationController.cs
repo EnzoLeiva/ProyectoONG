@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace OngProject.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/organizations")]
     public class OrganizationController : ControllerBase
     {
         private readonly IOrganizationService _organizationService;
@@ -18,9 +18,8 @@ namespace OngProject.Controllers
         {
             _organizationService = organizationService;
         }
-
-        [HttpGet("{id}")]
-        [HttpGet("/public")]
+        
+        [HttpGet("/public/{id}")]
         public async Task<OrganizationDto> GetById(int id)
         {
            return await _organizationService.GetById(id);
