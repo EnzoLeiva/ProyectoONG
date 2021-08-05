@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Core\Helper\" />
+    <Folder Include="Infrastructure\Data\Migrations\" />
   </ItemGroup>
 
 </Project>

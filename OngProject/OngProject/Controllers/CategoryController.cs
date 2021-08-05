@@ -9,7 +9,7 @@ using OngProject.Core.Interfaces;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]")]
+    [Route("/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {

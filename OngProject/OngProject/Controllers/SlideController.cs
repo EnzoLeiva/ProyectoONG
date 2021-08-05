@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace OngProject.Controllers
 {
 
-    [Route("[controller]")]
+    [Route("/slides")]
     [ApiController]
     public class SlideController : ControllerBase
     {
@@ -22,16 +22,14 @@ namespace OngProject.Controllers
         {
             _slideService = slideService;
         }
-
-        [Route("/slides")]
+       
         [HttpGet]
         public async Task<IEnumerable<SlideDto>> GetSlides()
         {
             return await _slideService.GetAll();             
         }
-
-        [Route("/slides/{id}")]
-        [HttpGet]
+        
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetDetailsSlides(int id)
         {
             if (_slideService.EntityExists(id))

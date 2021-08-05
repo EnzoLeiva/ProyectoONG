@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/members")]
     [ApiController]
     public class MemberController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace OngProject.Controllers
         {
             _memberService = memberService;
         }
-        [Route("api/members")]
+        
         [HttpGet]
         public async Task<IEnumerable<MemberModel>> GetMembers()
         {
