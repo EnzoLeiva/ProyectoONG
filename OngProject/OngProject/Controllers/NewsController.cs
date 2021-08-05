@@ -28,7 +28,7 @@ namespace OngProject.Controllers
         [HttpGet("id")]
         public async Task<IActionResult> GetById(int id)
         {
-            if (!_inewsService.UserExists(id))
+            if (!_inewsService.NewsExists(id))
                 return NotFound();
 
             var response = await _inewsService.GetById(id);
