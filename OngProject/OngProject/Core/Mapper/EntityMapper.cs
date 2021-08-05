@@ -63,5 +63,17 @@ namespace OngProject.Core.Mapper
             };
             return categoryDto;
         }
+
+        public UserDto FromUserToUserDto(UserModel user, string token)
+        {
+            var userDto = new UserDto()
+            {
+                Name = $"{user.firstName} {user.lastName}",
+                Email = user.email,
+                Token = token
+            };
+
+            return userDto;
+        }
     }
 }

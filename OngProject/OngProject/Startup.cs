@@ -19,6 +19,7 @@ using OngProject.Core.Interfaces.IServices;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using OngProject.Core.Services.Auth;
 
 namespace OngProject
 {
@@ -79,6 +80,7 @@ namespace OngProject
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
