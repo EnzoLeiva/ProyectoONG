@@ -62,18 +62,21 @@ namespace OngProject.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateCategory(CategoryModel categoryobject)
+        public async Task<IActionResult> Post([FromForm] CategoryCreateDto categoryCreateDto)
         {
-            if (categoryobject != null)
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
             {
-                var response = await _iCategoryService.CreateCategory(categoryobject);
+                var response = await _iCategoryService.Post(categoryCreateDto);
 
-                return CreatedAtAction("CreateCategory", response);
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
             }
 
-            return BadRequest();
-
-            
         }
 
     }
