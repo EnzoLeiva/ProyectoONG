@@ -30,5 +30,11 @@ namespace OngProject.Controllers
             return await _iCommentService.GetAllComments();
         }
 
+        [HttpGet("/posts/{id_post}/comments")]
+        public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int id_post)
+        {
+           return await _iCommentService.GetCommentsByPost(id_post);
+        }
+
     }
 }
