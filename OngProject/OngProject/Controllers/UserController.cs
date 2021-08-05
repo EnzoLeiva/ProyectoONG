@@ -28,15 +28,22 @@ namespace OngProject.Controllers
         }
 
         [HttpPost("/auth/register")]
-        public async Task<ActionResult<UserModel>> Register([FromBody] RegisterDTO request)
+        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
         {
-
-            var user = await this._auth.register(request);
-
-            if (user != null)
+            try
             {
-                return user;
+                var user = await this._auth.register(request);
+
+                if (user != null)
+                {
+                    return Ok(user);
+                }
             }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+           
 
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
@@ -48,7 +55,7 @@ namespace OngProject.Controllers
 
             if(user == null)
             {
-                return Ok("{ok:false}");
+                return NotFound();
             }
 
              return Ok(user);

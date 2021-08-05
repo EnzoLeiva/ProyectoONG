@@ -10,7 +10,7 @@ namespace OngProject.Core.Services.Auth
 {
     public interface IAuthService
     {
-        public Task<UserModel> register(RegisterDTO register);
+        public Task<UserDto> register(RegisterDTO register);
         public Task<UserDto> login(LoginDTO login);
         public string GetToken(UserModel user);
     }

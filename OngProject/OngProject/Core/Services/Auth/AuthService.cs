@@ -27,13 +27,13 @@ namespace OngProject.Core.Services.Auth
            
         }
 
-        public async Task<UserModel> register(RegisterDTO register)
+        public async Task<UserDto> register(RegisterDTO register)
         {
             var userExists = await _unitOfWork.UserRepository.GetByEmail(register.email);
 
             if (userExists != null)
             {
-                return null;
+                throw new Exception("User already exists!");
             }
             else {
                 try
@@ -42,13 +42,21 @@ namespace OngProject.Core.Services.Auth
 
                     var mapper = new EntityMapper();
                     var user = mapper.FromRegisterDtoToUser(register);
+                    user.RoleModel = await _unitOfWork.RoleRepository.GetById(2);
 
                     await _unitOfWork.UserRepository.Insert(user);
                     await _unitOfWork.SaveChangesAsync();
-                    return user;
 
+                    if (user != null)
+                    {
+                        var token = GetToken(user);
+                        var map = new EntityMapper();
+                        return map.FromUserToUserDto(user, token);
+                    }
+
+                    return null;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     return null;
                 }
