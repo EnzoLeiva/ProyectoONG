@@ -8,7 +8,7 @@ using OngProject.Core.Interfaces.IServices.SendEmail;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class SendEmailController : ControllerBase
     {
