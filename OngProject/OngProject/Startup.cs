@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
 using System.Text;
+using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using OngProject.Core.Services.Auth;
@@ -81,6 +82,7 @@ namespace OngProject
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddAWSService<IAmazonS3>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
