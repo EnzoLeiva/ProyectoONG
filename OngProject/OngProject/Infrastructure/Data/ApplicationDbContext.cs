@@ -65,7 +65,7 @@ namespace OngProject.Infrastructure.Data
                     new RoleModel
                     {
                         Id = i,
-                        Name = i == 1 ? "Admin" : "Starnard",
+                        Name = i == 1 ? "Admin" : "Standard",
                         Description = i == 1 ? "Admin User" : "Standard User",
                         IsDeleted = false,
                         CreatedAt = DateTime.Now
@@ -85,7 +85,7 @@ namespace OngProject.Infrastructure.Data
                         firstName = "User " + i,
                         lastName = i < 11 ? "AdminUser " + i : "RegularUser " + i,
                         email = "mail" + i + "@Mail.com",
-                        password = i < 11 ? "Admin123" : "User123",
+                        password = i < 11 ? UserModel.ComputeSha256Hash("Admin123") : UserModel.ComputeSha256Hash("User123"),
                         photo = "Test.jpg",
                         roleId = i < 11 ? 1 : 2,
                         CreatedAt = DateTime.Now,

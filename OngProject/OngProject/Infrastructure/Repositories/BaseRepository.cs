@@ -31,6 +31,15 @@ namespace OngProject.Infrastructure.Repositories
             return await _entities.FindAsync(id);
         }
 
+        public async Task<UserModel> GetByEmail(string email)
+        {
+            IQueryable<UserModel> query = _context.Users.Include(u => u.RoleModel);
+
+            var user = await query.Where(x => x.email.ToUpper() == email.ToUpper()).FirstOrDefaultAsync();
+
+            return user;
+        }
+
         public async Task Insert(T entity)
         {
             entity.CreatedAt = DateTime.Now;
