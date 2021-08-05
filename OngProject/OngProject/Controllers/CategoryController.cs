@@ -11,7 +11,7 @@ using OngProject.Core.Interfaces;
 namespace OngProject.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [Route("[controller]")]
+    [Route("/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
