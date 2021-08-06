@@ -28,6 +28,15 @@ namespace OngProject.Infrastructure.Data
             this.SeedActivities(builder);
             this.SeedRoles(builder);
             this.SeedUsers(builder);
+
+            this.SeedContacts(builder);
+            this.SeedSlides(builder);
+            this.SeedComments(builder);
+            this.SeedTestimonials(builder);
+            this.SeedMembers(builder);
+            this.SeedCategories(builder);
+            this.SeedNews(builder);
+            this.SeedOrganization(builder);
         }
         public DbSet<MemberModel> Members { get; set; }
         public DbSet<RoleModel> Roles { get; set; }
@@ -65,7 +74,7 @@ namespace OngProject.Infrastructure.Data
                     new RoleModel
                     {
                         Id = i,
-                        Name = i == 1 ? "Admin" : "Starnard",
+                        Name = i == 1 ? "Admin" : "Standard",
                         Description = i == 1 ? "Admin User" : "Standard User",
                         IsDeleted = false,
                         CreatedAt = DateTime.Now
@@ -85,7 +94,7 @@ namespace OngProject.Infrastructure.Data
                         firstName = "User " + i,
                         lastName = i < 11 ? "AdminUser " + i : "RegularUser " + i,
                         email = "mail" + i + "@Mail.com",
-                        password = i < 11 ? "Admin123" : "User123",
+                        password = i < 11 ? UserModel.ComputeSha256Hash("Admin123") : UserModel.ComputeSha256Hash("User123"),
                         photo = "Test.jpg",
                         roleId = i < 11 ? 1 : 2,
                         CreatedAt = DateTime.Now,
@@ -93,6 +102,194 @@ namespace OngProject.Infrastructure.Data
                     }
                 );
             }
+        }
+
+
+
+        public void SeedNews(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<NewsModel>().HasData(
+                    new NewsModel
+                    {
+                        Id = i,
+                        Name = "new's name ",
+                        Content = "Content " + i + " Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        Image = "image " + i,
+                        CategoryId = i,
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+
+                    });
+            }
+
+            // add more new to categories 1
+
+            for (int j = 11; j < 15; j++)
+            {
+                for (int i = 1; i < 3; i++, j++)
+                {
+                    modelBuilder.Entity<NewsModel>().HasData(
+                           new NewsModel
+                           {
+                               Id = j,
+                               Name = "new's name ",
+                               Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                               Image = "image ",
+                               CategoryId = i,
+                               CreatedAt = DateTime.Now,
+                               IsDeleted = false
+
+                           });
+
+                }
+
+            }
+
+        }
+        public void SeedCategories(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<CategoryModel>().HasData(
+                    new CategoryModel
+                    {
+                        Id = i,
+                        Name = "name " + i,
+                        Description = "Descripcion " + i + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                        Image = "image " + i,
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+                    }
+                    );
+            }
+        }
+
+        public void SeedMembers(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<MemberModel>().HasData(
+                    new MemberModel
+                    {
+                        Id = i,
+                        Name = "name" + i,
+                        FacebookUrl = "https://facebook.com/member" + i,
+                        InstagramUrl = "https://instagram/member" + i,
+                        LinkedinUrl = "https://Linkedin/member" + i,
+                        Image = "image " + i,
+                        Description = "Descripcion" + i + "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+
+                    }
+                    );
+            }
+        }
+        public void SeedTestimonials(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<TestimonialsModel>().HasData(
+                    new TestimonialsModel
+                    {
+                        Id = i,
+                        Name = "name " + i,
+                        Image = "image" + i,
+                        Content = "Content" + i + "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+                    }
+                    );
+            }
+        }
+
+
+        public void SeedComments(ModelBuilder modelBuilder)
+        {
+            int k = 1;
+            for (int i = 1; i < 11; i++) //post, usuario
+            {
+                for (int j = 1; j < 4; j++, k++) // agrega 3 comentarios para cada post_id o user_id
+                    modelBuilder.Entity<CommentModel>().HasData(
+                        new CommentModel
+                        {
+                            Id = k,
+                            User_id = i,
+                            post_id = i,
+                            Body = "body of post_id=" + i,
+                            CreatedAt = DateTime.Now,
+                            IsDeleted = false
+                        }
+                        );
+            }
+
+        }
+
+
+        public void SeedOrganization(ModelBuilder modelBuilder)
+        {
+            Random rPhone = new Random();
+
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<OrganizationModel>().HasData(
+                   new OrganizationModel
+                   {
+                       Id = i,
+                       Name = "organizacion" + i,
+                       Image = "image" + i,
+                       Adress = "Adress " + i + i + i,
+                       Phone = rPhone.Next(11111111, 99999999),
+                       Email = "email" + i + "@gmail.com",
+                       WelcomeText = "texto welcome to visit" + i,
+                       AboutUsText = "text about us" + i,
+                       FacebookUrl = "https://facebook.com/organization" + i,
+                       CreatedAt = DateTime.Now,
+                       IsDeleted = false
+                   });
+            }
+        }
+        private void SeedSlides(ModelBuilder modelBuilder)
+        {
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<SlideModel>().HasData(
+                    new SlideModel
+                    {
+                        Id = i,
+                        ImageUrl = "imagen " + i,
+                        Order = i,
+                        Text = "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
+                        OrganizationId = i.ToString(),
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+                    }
+                    );
+            }
+
+        }
+        private void SeedContacts(ModelBuilder modelBuilder)
+        {
+            Random rPhone = new Random();
+
+            for (int i = 1; i < 11; i++)
+            {
+                modelBuilder.Entity<ContactsModel>().HasData(
+                    new ContactsModel
+                    {
+                        Id = i,
+                        Name = "Contact " + i,
+                        Phone = rPhone.Next(11111111, 99999999),
+                        Email = "email" + i + "gmail.com",
+                        Message = "Message Message Message Message" + i,
+                        CreatedAt = DateTime.Now,
+                        IsDeleted = false
+                    }
+                    );
+            }
+
         }
     }
 }

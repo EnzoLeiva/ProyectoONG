@@ -1,4 +1,5 @@
 ﻿using OngProject.Core.DTOs;
+using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,31 @@ namespace OngProject.Core.Mapper
                 Name = category.Name
             };
             return categoryDto;
+        }
+
+        public UserDto FromUserToUserDto(UserModel user, string token)
+        {
+            var userDto = new UserDto()
+            {
+                Name = $"{user.firstName} {user.lastName}",
+                Email = user.email,
+                Token = token
+            };
+
+            return userDto;
+        }
+
+        public UserModel FromRegisterDtoToUser(RegisterDTO register)
+        {
+            var user = new UserModel()
+            {
+                firstName = register.firstName,
+                lastName = register.lastName,
+                email = register.email,
+                password = register.password
+            };
+
+            return user;
         }
         public CategoryModel FromCategoryCreateDtoToCategory(CategoryCreateDto categoryCreateDto)
         {

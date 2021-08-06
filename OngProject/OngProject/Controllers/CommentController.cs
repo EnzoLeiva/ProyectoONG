@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Route("[controller]")]
+    [Route("/comments")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -24,10 +24,16 @@ namespace OngProject.Controllers
             _iCommentService = iCommentService;
             _iUnitOfWork = iUnitOfWork;
         }
-        [HttpGet("/comments")]
+        [HttpGet]
         public async Task<IEnumerable<CommentDto>> GetAllComment()
         {
             return await _iCommentService.GetAllComments();
+        }
+
+        [HttpGet("/posts/{id_post}/comments")]
+        public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int id_post)
+        {
+           return await _iCommentService.GetCommentsByPost(id_post);
         }
 
     }

@@ -12,6 +12,7 @@ namespace OngProject.Core.Interfaces
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
         Task Insert(T entity);
+        public Task<UserModel> GetByEmail(string email);
         Task Update(T entity);
         Task Delete(int id);
         bool EntityExists(int id);

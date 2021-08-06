@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
@@ -11,6 +12,7 @@ using OngProject.Core.Models;
 
 namespace OngProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
