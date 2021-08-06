@@ -89,5 +89,19 @@ namespace OngProject.Core.Mapper
 
             return user;
         }
+        public CategoryModel FromCategoryCreateDtoToCategory(CategoryCreateDto categoryCreateDto)
+        {
+            if (categoryCreateDto == null)
+            {
+                return null;
+            }
+            return new CategoryModel
+            {
+                Description = categoryCreateDto.Description,
+                Image = "category_" + categoryCreateDto.Name,
+                Name = categoryCreateDto.Name,
+            };
+        }
+
     }
 }

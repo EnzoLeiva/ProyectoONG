@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
+using OngProject.Core.Mapper;
+using OngProject.Core.Models;
 
 namespace OngProject.Controllers
 {
@@ -16,6 +18,7 @@ namespace OngProject.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _iCategoryService;
+
         public CategoryController(ICategoryService iCategoryService)
         {
             _iCategoryService = iCategoryService;
@@ -26,7 +29,6 @@ namespace OngProject.Controllers
         {
             if (_iCategoryService.EntityExists(id))
             {
-
 
                 bool response = await _iCategoryService.Delete(id);
 
@@ -59,5 +61,25 @@ namespace OngProject.Controllers
         {
             return await _iCategoryService.GetAll();
         }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Post([FromForm] CategoryCreateDto categoryCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var response = await _iCategoryService.Post(categoryCreateDto);
+
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
+
     }
 }

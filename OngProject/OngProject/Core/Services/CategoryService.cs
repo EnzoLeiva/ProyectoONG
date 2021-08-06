@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IUnitOfWork;
@@ -30,9 +31,15 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.GetById(Id);
         }
-        public Task Insert(CategoryModel categoryModel)
+        public async Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto)
         {
-            return _unitOfWork.CategoryRepository.Insert(categoryModel);
+            var mapper = new EntityMapper();
+            var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
+
+            await _unitOfWork.CategoryRepository.Insert(category);
+            await _unitOfWork.SaveChangesAsync();
+
+            return category;
         }
 
 
