@@ -81,5 +81,35 @@ namespace OngProject.Controllers
 
         }
 
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> Put([FromForm] CategoryCreateDto updateCategoryDto, int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var categoryExists = await _iCategoryService.GetById(id);
+
+                if(categoryExists == null) 
+                {
+                    return NotFound("category inexistent");
+                }
+                else
+                {
+                    var res = await _iCategoryService.Put(updateCategoryDto, id);
+                    
+                    return Ok(res);
+
+                }
+
+                
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
     }
 }

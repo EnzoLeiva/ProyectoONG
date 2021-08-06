@@ -57,9 +57,17 @@ namespace OngProject.Core.Services
             }
             return true;
         }
-        public Task Update(CategoryModel categoryModel)
+        public async Task<CategoryModel> Put([FromForm] CategoryCreateDto updateCategoryDto, int id)
         {
-            return _unitOfWork.CategoryRepository.Update(categoryModel);
+            var mapper = new EntityMapper();
+            var category = mapper.FromCategoryCreateDtoToCategory(updateCategoryDto);
+
+            category.Id = id;
+
+            await _unitOfWork.CategoryRepository.Update(category);
+            await _unitOfWork.SaveChangesAsync();
+
+            return category;
         }
 
         public bool EntityExists(int id)
