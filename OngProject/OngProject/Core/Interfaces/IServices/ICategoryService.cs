@@ -14,7 +14,7 @@ namespace OngProject.Core.Interfaces
         public Task<CategoryModel> GetById(int Id);
         public Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto);
         public Task<bool> Delete(int Id);
-        public Task Update(CategoryModel categoryModel);
+        public Task<CategoryModel> Put([FromForm] CategoryCreateDto updateCategoryDto, int id);
         public bool EntityExists(int id);
     }
 }
