@@ -9,7 +9,9 @@ namespace OngProject.Core.Interfaces
     public interface IMemberService
     {
         public Task<IEnumerable<MemberModel>> GetMembers();
-        public Task<MemberModel> Post([FromForm] MemberCreateDto memberCreateDto); 
+        public Task<MemberModel> Post([FromForm] MemberCreateDto memberCreateDto);
+        public Task<bool> Delete(int Id);
+        public bool EntityExists(int id);
 
     }
 }

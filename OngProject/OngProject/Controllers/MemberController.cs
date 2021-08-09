@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
@@ -47,6 +48,29 @@ namespace OngProject.Controllers
                 }
             }            
 
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (_memberService.EntityExists(id))
+            {
+
+                bool response = await _memberService.Delete(id);
+
+                if (response == true)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                }
+
+            }
+            else
+                return NotFound();
         }
 
 

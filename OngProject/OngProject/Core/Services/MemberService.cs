@@ -3,6 +3,7 @@ using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -32,6 +33,25 @@ namespace OngProject.Core.Services
             await _unitOfWork.SaveChangesAsync();
 
             return member;
+        }
+
+        public async Task<bool> Delete(int Id)
+        {
+            try
+            {
+                await _unitOfWork.MemberRepository.Delete(Id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool EntityExists(int id)
+        {
+            return _unitOfWork.MemberRepository.EntityExists(id);
         }
     }
 }
