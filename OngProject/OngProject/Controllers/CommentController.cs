@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize (Roles = "Admin")]
     [Route("/comments")]
     [ApiController]
     public class CommentController : ControllerBase
