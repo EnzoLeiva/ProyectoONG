@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OngProject.Core.DTOs;
@@ -44,6 +45,22 @@ namespace OngProject.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (_slideService.EntityExists(id))
+            {
+                bool result = await _slideService.Delete(id);
+                if(result)
+                    return Ok();
+                else
+                    return BadRequest(StatusCodes.Status500InternalServerError);
+            }
+            else
+                return NotFound();
+        }
     }
 
 }
