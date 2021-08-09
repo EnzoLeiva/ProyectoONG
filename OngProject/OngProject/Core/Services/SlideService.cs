@@ -18,8 +18,23 @@ namespace OngProject.Core.Services
         public SlideService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        } 
-        
+        }
+
+        public async Task<bool> Delete(int id) 
+        {
+            try
+            {
+               await _unitOfWork.SlideRepository.Delete(id);
+               await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
         public async Task<IEnumerable<SlideDto>> GetAll()
         {
             var mapper = new EntityMapper();
