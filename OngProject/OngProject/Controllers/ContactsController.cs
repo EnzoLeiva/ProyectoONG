@@ -19,7 +19,7 @@ namespace OngProject.Controllers
         {
             _contactsService = contactsService;
         }
-        [Route("api/contacts")]
+        
         [HttpGet]
         public async Task<IEnumerable<ContactsModel>> GetMembers()
         {
