@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("/members")]
     [ApiController]
     public class MemberController : ControllerBase
