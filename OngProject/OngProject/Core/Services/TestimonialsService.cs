@@ -17,5 +17,23 @@ namespace OngProject.Core.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            try
+            {
+                await _unitOfWork.TestimonialsRepository.Delete(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool EntityExist(int id)
+        {
+            return _unitOfWork.TestimonialsRepository.EntityExists(id);
+        }
     }
 }

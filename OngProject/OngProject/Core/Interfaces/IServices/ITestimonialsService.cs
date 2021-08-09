@@ -8,5 +8,7 @@ namespace OngProject.Core.Interfaces.IServices
 {
     public interface ITestimonialsService
     {
+        public Task<bool> Delete(int id);
+        public bool EntityExist(int id);
     }
 }
