@@ -31,7 +31,7 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.GetById(Id);
         }
-        public async Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto)
+        public async Task<CategoryModel> Post(CategoryCreateDto categoryCreateDto)
         {
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
@@ -41,8 +41,6 @@ namespace OngProject.Core.Services
 
             return category;
         }
-
-
 
         public async Task<bool> Delete(int Id)
         {
@@ -57,7 +55,7 @@ namespace OngProject.Core.Services
             }
             return true;
         }
-        public async Task<CategoryModel> Put([FromForm] CategoryCreateDto updateCategoryDto, int id)
+        public async Task<CategoryModel> Put(CategoryCreateDto updateCategoryDto, int id)
         {
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(updateCategoryDto);

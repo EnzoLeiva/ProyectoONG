@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OngProject.Controllers
@@ -23,8 +23,30 @@ namespace OngProject.Controllers
         [HttpGet]
         public async Task<IEnumerable<MemberModel>> GetMembers()
         {
-            return await _memberService.GetMembers();
-           
+            return await _memberService.GetMembers();           
+        }
+
+        [Authorize]
+        [HttpPost]
+
+        public async Task<IActionResult> Post([FromForm] MemberCreateDto memberCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            else
+            {
+                try
+                {
+                    var response = await _memberService.Post(memberCreateDto);
+
+                    return CreatedAtAction("POST", response);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e);
+                }
+            }            
+
         }
 
 
