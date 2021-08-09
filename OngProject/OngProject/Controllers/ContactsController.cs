@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class ContactsController : ControllerBase
@@ -19,12 +21,12 @@ namespace OngProject.Controllers
         {
             _contactsService = contactsService;
         }
-        [Route("api/contacts")]
+
+        [Route("/contacts")]
         [HttpGet]
         public async Task<IEnumerable<ContactsModel>> GetMembers()
         {
             return await _contactsService.GetContacts();
-
         }
     }
 }
