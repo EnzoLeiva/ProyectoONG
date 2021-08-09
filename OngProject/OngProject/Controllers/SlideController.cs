@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OngProject.Core.DTOs;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-
+    [Authorize(Roles = "Admin")]
     [Route("/slides")]
     [ApiController]
     public class SlideController : ControllerBase
@@ -43,8 +44,6 @@ namespace OngProject.Controllers
             }
         }
 
-
     }
-
 
 }
