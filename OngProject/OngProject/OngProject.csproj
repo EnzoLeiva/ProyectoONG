@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Data\Migrations\" />
     <Folder Include="app_data\" />
   </ItemGroup>
 
