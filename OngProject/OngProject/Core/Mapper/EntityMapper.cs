@@ -103,5 +103,22 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public MemberModel FromMemberCreateDtoToMember(MemberCreateDto memberCreateDto)
+        {
+            if (memberCreateDto == null)
+            {
+                return null;
+            }
+            return new MemberModel
+            {
+                Name = memberCreateDto.Name,
+                FacebookUrl = memberCreateDto.FacebookUrl,
+                InstagramUrl = memberCreateDto.InstagramUrl,
+                LinkedinUrl = memberCreateDto.LinkedinUrl,
+                Image = memberCreateDto.Image,
+                Description = memberCreateDto.Description
+            };
+        }
+
     }
 }
