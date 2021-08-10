@@ -38,9 +38,15 @@ namespace OngProject.Core.Services
             return newsDto;
         }
 
-        public Task Insert(NewsModel newsModel)
+        public async Task<NewsModel> Post(NewsDto newsCreateDto)
         {
-            return _unitOfWork.NewsRepository.Insert(newsModel);
+            var mapper = new EntityMapper();
+            var news = mapper.FromNewsDtoToNews(newsCreateDto);
+
+            await _unitOfWork.NewsRepository.Insert(news);
+            await _unitOfWork.SaveChangesAsync();
+
+            return news;
         }
 
         public Task Update(NewsModel newsModel)

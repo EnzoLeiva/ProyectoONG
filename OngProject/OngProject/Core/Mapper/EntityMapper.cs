@@ -120,5 +120,21 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public NewsModel FromNewsDtoToNews(NewsDto newsCreateDto)
+        {
+            if (newsCreateDto == null)
+            {
+                return null;
+            }
+            return new NewsModel
+            {
+                Name = newsCreateDto.Name,
+                Content = newsCreateDto.Content,
+                Image = "news_" + newsCreateDto.Image,
+                CategoryId = newsCreateDto.CategoryId
+
+            };
+        }
+
     }
 }

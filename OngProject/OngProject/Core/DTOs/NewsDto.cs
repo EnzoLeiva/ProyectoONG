@@ -17,5 +17,7 @@ namespace OngProject.Core.DTOs
         [Required]
         [MaxLength(255)]
         public string Image { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
     }
 }
