@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
@@ -12,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Authorize (Roles = "Admin")]
     [Route("/comments")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -26,6 +26,7 @@ namespace OngProject.Controllers
             _iCommentService = iCommentService;
             _iUnitOfWork = iUnitOfWork;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IEnumerable<CommentDto>> GetAllComment()
         {
@@ -36,6 +37,32 @@ namespace OngProject.Controllers
         public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int id_post)
         {
            return await _iCommentService.GetCommentsByPost(id_post);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (_iCommentService.EntityExists(id))
+            {
+                if (!await _iCommentService.ValidateCreatorOrAdminAsync(User, id))
+                {
+                    return Forbid();
+                }
+
+                bool response = await _iCommentService.Delete(id);
+
+                if (response == true)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                }
+
+            }
+            else
+                return NotFound();
         }
 
     }
