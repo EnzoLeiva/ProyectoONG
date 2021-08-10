@@ -9,8 +9,6 @@ namespace OngProject.Core.DTOs
     public class NewsDto
     {
         [Required]
-        public int Id { get; set; }
-        [Required]
         [MaxLength(255)]
         public string Name { get; set; }
         [Required]

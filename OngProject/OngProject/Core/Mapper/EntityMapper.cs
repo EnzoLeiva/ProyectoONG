@@ -131,7 +131,7 @@ namespace OngProject.Core.Mapper
                 Name = newsCreateDto.Name,
                 Content = newsCreateDto.Content,
                 Image = "news_" + newsCreateDto.Image,
-                CategoryId = newsCreateDto.CategoryId,
+                CategoryId = newsCreateDto.CategoryId
 
             };
         }
