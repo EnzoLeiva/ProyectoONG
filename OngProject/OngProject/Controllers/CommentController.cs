@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Authorize (Roles = "Admin")]
     [Route("/comments")]
     [ApiController]
     public class CommentController : ControllerBase
@@ -27,6 +26,7 @@ namespace OngProject.Controllers
             _iCommentService = iCommentService;
             _iUnitOfWork = iUnitOfWork;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IEnumerable<CommentDto>> GetAllComment()
         {
