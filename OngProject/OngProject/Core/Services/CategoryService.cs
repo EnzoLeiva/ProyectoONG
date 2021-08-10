@@ -31,7 +31,7 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.GetById(Id);
         }
-        public async Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto)
+        public async Task<CategoryModel> Post(CategoryCreateDto categoryCreateDto)
         {
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
