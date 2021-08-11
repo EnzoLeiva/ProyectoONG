@@ -152,5 +152,17 @@ namespace OngProject.Core.Mapper
                 roleId = user.roleId
             };
         }
+        public TestimonialsModel FromCreateTestimonialsDtoToTestimonials(CreateTestimonialsDto testimonialsCreateDto)
+        {
+            if (testimonialsCreateDto == null)
+            {
+                return null;
+            }
+            return new TestimonialsModel
+            {
+                Name = testimonialsCreateDto.Name,
+                Content = testimonialsCreateDto.Content
+            };
+        }
     }
 }
