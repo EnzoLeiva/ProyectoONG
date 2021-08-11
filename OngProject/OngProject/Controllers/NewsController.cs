@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Data;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
@@ -25,6 +25,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
