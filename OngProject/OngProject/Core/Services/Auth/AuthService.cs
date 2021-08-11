@@ -104,6 +104,20 @@ namespace OngProject.Core.Services.Auth
             return tokenHandler.WriteToken(token);
         }
 
-       
+        public int GetUserId(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            var stringSplit = token.Split(' ');
+
+            var Token = handler.ReadJwtToken(stringSplit[1]);
+
+            var claims = Token.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault();
+
+            var id = int.Parse(claims.Value);
+
+            return (int)id;
+        }
+
     }
 }

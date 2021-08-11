@@ -28,7 +28,24 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
-        [AllowAnonymous]
+        [Authorize]
+        [HttpGet("/auth/me")]
+        public async Task<ActionResult<UserInfoDto>> GetUserData()
+        {
+            try
+            {
+                string authToken = Request.Headers["Authorization"];
+                int userId = _auth.GetUserId(authToken);
+                UserInfoDto userModeldto = await _userService.GetUserById(userId);
+
+                return Ok(userModeldto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost("/auth/register")]
         public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
         {
@@ -45,24 +62,23 @@ namespace OngProject.Controllers
             {
                 return BadRequest(e.Message);
             }
-
+           
 
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
-        [AllowAnonymous]
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
-            var user = await this._auth.login(request);
+             var user = await this._auth.login(request);
 
-            if (user == null)
+            if(user == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
-
+             return Ok(user);
+            
         }
 
         [Authorize]
@@ -84,6 +100,7 @@ namespace OngProject.Controllers
             }
         }
 
+        
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {
