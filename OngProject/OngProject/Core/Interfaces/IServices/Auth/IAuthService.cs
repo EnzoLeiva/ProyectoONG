@@ -13,5 +13,6 @@ namespace OngProject.Core.Services.Auth
         public Task<UserDto> register(RegisterDTO register);
         public Task<UserDto> login(LoginDTO login);
         public string GetToken(UserModel user);
+        public int GetUserId(string token);
     }
 }
