@@ -41,6 +41,21 @@ namespace OngProject.Core.Mapper
             return newsDto;
         }
 
+        internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+        {
+            if (contactsCreateDto == null)
+            {
+                return null;
+            }
+            return new ContactsModel
+            {
+                Name = contactsCreateDto.Name,
+                Email = contactsCreateDto.Email,
+                Phone = contactsCreateDto.Phone,
+                Message = contactsCreateDto.Message,
+            };
+        }
+
         public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
         {
             var organizationDto = new OrganizationDto()
