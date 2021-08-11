@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
@@ -25,6 +26,24 @@ namespace OngProject.Controllers
         {
             this._userService = userService;
             this._auth = auth;
+        }
+
+        [Authorize]
+        [HttpGet("/auth/me")]
+        public async Task<ActionResult<UserInfoDto>> GetUserData()
+        {
+            try
+            {
+                string authToken = Request.Headers["Authorization"];
+                int userId = _auth.GetUserId(authToken);
+                UserInfoDto userModeldto = await _userService.GetUserById(userId);
+
+                return Ok(userModeldto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("/auth/register")]

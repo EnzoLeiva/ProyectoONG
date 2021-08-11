@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using OngProject.Core.DTOs;
+using OngProject.Core.Mapper;
 
 
 namespace OngProject.Core.Services
@@ -47,6 +48,13 @@ namespace OngProject.Core.Services
             return await _unitOfWork.UserRepository.GetAll();
         }
 
-     
+        public async Task<UserInfoDto> GetUserById(int Id)
+        {
+            UserModel user = await _unitOfWork.UserRepository.GetById(Id);
+            EntityMapper mapper = new EntityMapper();
+            UserInfoDto userInfoDto = mapper.FromUserModelToUserInfoDto(user);
+
+            return userInfoDto;
+        }
     }
 }

@@ -136,5 +136,21 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public UserInfoDto FromUserModelToUserInfoDto(UserModel user)
+        {
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserInfoDto
+            {
+                firstName = user.firstName,
+                lastName = user.lastName,
+                email = user.email,
+                photo = user.photo,
+                roleId = user.roleId
+            };
+        }
     }
 }
