@@ -10,7 +10,7 @@ namespace OngProject.Core.Interfaces.IServices
     public interface ITestimonialsService
     {
         public Task<bool> Delete(int id);
-        public Task<TestimonialsModel> Post(CreateTestimonialsDto newsCreateDto);
+        public Task<TestimonialsModel> Post(CreateTestimonialsDto testimonialsCreateDto);
         public bool EntityExist(int id);
     }
 }
