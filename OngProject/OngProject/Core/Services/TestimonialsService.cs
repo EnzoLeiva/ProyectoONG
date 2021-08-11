@@ -1,5 +1,7 @@
-﻿using OngProject.Core.Interfaces.IServices;
+﻿using OngProject.Core.DTOs;
+using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
+using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,17 @@ namespace OngProject.Core.Services
                 return false;
             }
             return true;
+        }
+
+        public async Task<TestimonialsModel> Post(CreateTestimonialsDto testimonialsCreateDto)
+        {
+            var mapper = new EntityMapper();
+            var testimonials = mapper.FromCreateTestimonialsDtoToTestimonials(testimonialsCreateDto);
+
+            await _unitOfWork.TestimonialsRepository.Insert(testimonials);
+            await _unitOfWork.SaveChangesAsync();
+
+            return testimonials;
         }
 
         public bool EntityExist(int id)
