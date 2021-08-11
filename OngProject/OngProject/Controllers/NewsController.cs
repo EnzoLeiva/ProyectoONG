@@ -27,6 +27,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
