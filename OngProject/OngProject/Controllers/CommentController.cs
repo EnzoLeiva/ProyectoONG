@@ -26,6 +26,7 @@ namespace OngProject.Controllers
             _iCommentService = iCommentService;
             _iUnitOfWork = iUnitOfWork;
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IEnumerable<CommentDto>> GetAllComment()
@@ -33,12 +34,14 @@ namespace OngProject.Controllers
             return await _iCommentService.GetAllComments();
         }
 
+        [Authorize]
         [HttpGet("/posts/{id_post}/comments")]
         public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int id_post)
         {
            return await _iCommentService.GetCommentsByPost(id_post);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

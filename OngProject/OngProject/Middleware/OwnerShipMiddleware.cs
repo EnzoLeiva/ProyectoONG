@@ -24,7 +24,11 @@ namespace OngProject.Middleware
 
                 var rol = context.User.IsInRole("Admin");
 
-                if (splittedPath[2] == id || rol)
+                if (splittedPath.Length < 3)
+                {
+                    await _next.Invoke(context);
+                }
+                else if (splittedPath[2] == id || rol)
                 {
                     await _next.Invoke(context);
                 }

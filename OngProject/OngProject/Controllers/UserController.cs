@@ -62,7 +62,7 @@ namespace OngProject.Controllers
             {
                 return BadRequest(e.Message);
             }
-           
+
 
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
@@ -70,15 +70,15 @@ namespace OngProject.Controllers
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
-             var user = await this._auth.login(request);
+            var user = await this._auth.login(request);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-             return Ok(user);
-            
+            return Ok(user);
+
         }
 
         [Authorize]
@@ -100,7 +100,7 @@ namespace OngProject.Controllers
             }
         }
 
-        
+        [Authorize(Roles ="Admin")]
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {
