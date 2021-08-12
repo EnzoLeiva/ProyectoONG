@@ -20,12 +20,13 @@ namespace OngProject.Core.Services.AWS
 
         public async Task<String> Save(string fileName, IFormFile image)
         {
-            AwsManagerResponse response = await _s3AwsHelper.AwsUploadFile(fileName, image);
-            if (response.Code != 200)
+            AwsManagerResponse responseAws = await _s3AwsHelper.AwsUploadFile(fileName, image);
+            if (String.IsNullOrEmpty(responseAws.Errors))
             {
                 return null;
             }
-            return response.Url;
+
+            return responseAws.Url;
         }
 
         public async Task<bool> Delete(string name)
