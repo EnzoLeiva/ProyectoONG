@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/organizations")]
     public class OrganizationController : ControllerBase

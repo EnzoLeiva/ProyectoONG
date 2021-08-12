@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices.SendEmail;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class SendEmailController : ControllerBase

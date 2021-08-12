@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize]
     [Route("/comments")]
     [ApiController]
     public class CommentController : ControllerBase
