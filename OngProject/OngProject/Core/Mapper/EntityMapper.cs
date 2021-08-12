@@ -79,12 +79,17 @@ namespace OngProject.Core.Mapper
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
+            string photo = null;
+            if(register.photo!=null)
+             photo = GetNameImage("user");
+
             var user = new UserModel()
             {
                 firstName = register.firstName,
                 lastName = register.lastName,
                 email = register.email,
-                password = register.password
+                password = register.password,
+                photo = photo
             };
 
             return user;
@@ -96,11 +101,14 @@ namespace OngProject.Core.Mapper
                 return null;
             }
 
-           
+            string image = null;
+            if (categoryCreateDto.Image != null)
+                image = GetNameImage("category");
+
             return new CategoryModel
             {
                 Description = categoryCreateDto.Description,
-                Image = GetNameImage("category"),
+                Image = image,
                 Name = categoryCreateDto.Name,
             };
         }
@@ -111,7 +119,10 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
-            
+
+            string image = null;
+            if (memberCreateDto.Image != null)
+                image = GetNameImage("member");
 
             return new MemberModel
             {
@@ -119,7 +130,7 @@ namespace OngProject.Core.Mapper
                 FacebookUrl = memberCreateDto.FacebookUrl,
                 InstagramUrl = memberCreateDto.InstagramUrl,
                 LinkedinUrl = memberCreateDto.LinkedinUrl,
-                Image = GetNameImage("member"),
+                Image = image,
                 Description = memberCreateDto.Description
             };
         }
