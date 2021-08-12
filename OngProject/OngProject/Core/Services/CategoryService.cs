@@ -16,7 +16,7 @@ namespace OngProject.Core.Services
     public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private IImagenService _imagenService;
+        private readonly IImagenService _imagenService;
 
         public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
@@ -40,7 +40,8 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
 
-            await _imagenService.Save(category.Image, categoryCreateDto.Image);
+            if (categoryCreateDto.Image != null)
+                await _imagenService.Save(category.Image, categoryCreateDto.Image);
 
             await _unitOfWork.CategoryRepository.Insert(category);       
             await _unitOfWork.SaveChangesAsync();
