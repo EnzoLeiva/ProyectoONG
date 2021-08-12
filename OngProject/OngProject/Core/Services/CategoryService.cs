@@ -10,6 +10,7 @@ using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using OngProject.Infrastructure;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
 
 namespace OngProject.Core.Services
 {
@@ -40,9 +41,8 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
 
-            if (categoryCreateDto.Image != null)
-                await _imagenService.Save(category.Image, categoryCreateDto.Image);
-
+            
+            await _imagenService.Save(category.Image, categoryCreateDto.Image);
             await _unitOfWork.CategoryRepository.Insert(category);       
             await _unitOfWork.SaveChangesAsync();
 

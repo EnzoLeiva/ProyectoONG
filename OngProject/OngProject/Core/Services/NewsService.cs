@@ -9,6 +9,7 @@ using OngProject.Core.Models;
 using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
 
 namespace OngProject.Core.Services
 {
@@ -59,9 +60,8 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var news = mapper.FromNewsDtoToNews(newsCreateDto);
 
-            if (newsCreateDto.Image != null)
-                await _imagenService.Save(news.Image, newsCreateDto.Image);
-
+            
+            await _imagenService.Save(news.Image, newsCreateDto.Image);
             await _unitOfWork.NewsRepository.Insert(news);
             await _unitOfWork.SaveChangesAsync();
 
@@ -70,6 +70,7 @@ namespace OngProject.Core.Services
 
         public Task Update(NewsModel newsModel)
         {
+
             return _unitOfWork.NewsRepository.Update(newsModel);
 
         }
