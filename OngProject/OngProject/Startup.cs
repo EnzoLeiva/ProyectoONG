@@ -11,10 +11,6 @@ using OngProject.Core.Services;
 using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
 using System.Text;
 using Amazon.S3;
@@ -23,6 +19,8 @@ using Microsoft.IdentityModel.Tokens;
 using OngProject.Core.Services.Auth;
 using OngProject.Core.Interfaces.IServices.SendEmail;
 using OngProject.Core.Services.SendEmail;
+using OngProject.Core.Helper;
+using OngProject.Middleware;
 
 namespace OngProject
 {
@@ -105,6 +103,8 @@ namespace OngProject
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<OwnerShipMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
