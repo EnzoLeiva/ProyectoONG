@@ -29,18 +29,18 @@ namespace OngProject.Core.Mapper
             return commentDto;
         }
 
-        public NewsDto FromNewsToNewsDto(NewsModel news)
-        {
-            var newsDto = new NewsDto()
-            {
-                Name = news.Name,
-                Image = news.Image,
-                Content = news.Content
-            };
+        /* public NewsDto FromNewsToNewsDto(NewsModel news)
+         {
+             var newsDto = new NewsDto()
+             {
+                 Name = news.Name,
+                 Image = news.Image, // no se puede convertir string a IFormFile
+                 Content = news.Content
+             };
 
-            return newsDto;
-        }
-
+             return newsDto;
+         }
+        */
         internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
         {
             if (contactsCreateDto == null)
