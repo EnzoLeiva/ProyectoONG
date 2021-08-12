@@ -8,6 +8,7 @@ namespace OngProject.Core.Interfaces.IServices.AWS
 {
     public interface IImagenService
     {
-        public Task<String> saveImage(IFormFile image);
+        public Task<String> Save(string fileName, IFormFile image);
+        public Task<bool> Delete(string path);
     }
 }

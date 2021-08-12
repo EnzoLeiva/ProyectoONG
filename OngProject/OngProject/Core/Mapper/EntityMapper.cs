@@ -95,10 +95,12 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+           
             return new CategoryModel
             {
                 Description = categoryCreateDto.Description,
-                Image = "category_" + categoryCreateDto.Name,
+                Image = GetNameImage("category"),
                 Name = categoryCreateDto.Name,
             };
         }
@@ -109,15 +111,28 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+            
+
             return new MemberModel
             {
                 Name = memberCreateDto.Name,
                 FacebookUrl = memberCreateDto.FacebookUrl,
                 InstagramUrl = memberCreateDto.InstagramUrl,
                 LinkedinUrl = memberCreateDto.LinkedinUrl,
-                Image = memberCreateDto.Image,
+                Image = GetNameImage("member"),
                 Description = memberCreateDto.Description
             };
+        }
+
+        public string GetNameImage(string nameModel)
+        {
+            string image = DateTime.Now.ToString();
+            image = image.Replace(":", "");
+            image = image.Replace("/", "");
+            image = image.Replace(" ", "");
+            image = nameModel+"_" + image;
+
+            return image;
         }
 
     }

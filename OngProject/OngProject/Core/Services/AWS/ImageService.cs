@@ -18,9 +18,9 @@ namespace OngProject.Core.Services.AWS
             _s3AwsHelper = new S3AwsHelper();
         }
 
-        public async Task<String> saveImage(IFormFile image)
+        public async Task<String> Save(string fileName, IFormFile image)
         {
-            AwsManagerResponse response = await _s3AwsHelper.AwsUploadFile(image.FileName, image);
+            AwsManagerResponse response = await _s3AwsHelper.AwsUploadFile(fileName, image);
             if (response.Code != 200)
             {
                 return null;
@@ -28,10 +28,15 @@ namespace OngProject.Core.Services.AWS
             return response.Url;
         }
 
-        /*
-         *  CategoryModel category = await GetById(Id);
-                AwsManagerResponse responseAws = await _s3AwsHelper.AwsFileDelete(category.Image);
-                if (responseAws.Code != 200)
-                    return false;*/
+        public async Task<bool> Delete(string name)
+        {
+          
+            AwsManagerResponse responseAws = await _s3AwsHelper.AwsFileDelete(name);
+            if (!String.IsNullOrEmpty(responseAws.Errors))
+                return false;
+
+            return true;
+        }
+       
     }
 }
