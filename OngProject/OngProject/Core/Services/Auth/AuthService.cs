@@ -13,6 +13,7 @@ using OngProject.Core.Mapper;
 using OngProject.Core.DTOs;
 using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Interfaces.IServices.SendEmail;
 
 namespace OngProject.Core.Services.Auth
 {
@@ -22,13 +23,15 @@ namespace OngProject.Core.Services.Auth
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
         private readonly IImagenService _imagenService;
+        private readonly ISendEmailService _sendEmailService;
 
-        public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration, IImagenService imagenService)
+        public AuthService(IUnitOfWork unitOfWork, IConfiguration configuration, IImagenService imagenService, ISendEmailService sendEmailService)
         {
             this._unitOfWork = unitOfWork;
             this._configuration = configuration;
             this._imagenService = imagenService;
-           
+            _sendEmailService = sendEmailService;
+
         }
 
         public async Task<UserDto> register( RegisterDTO register)
@@ -52,6 +55,9 @@ namespace OngProject.Core.Services.Auth
                         await _imagenService.Save(user.photo, register.photo);
                     await _unitOfWork.UserRepository.Insert(user);
                     await _unitOfWork.SaveChangesAsync();
+
+                    //Send Registration Email
+                    bool response = await _sendEmailService.SendRegisterEmail(user.email);
 
                     if (user != null)
                     {
