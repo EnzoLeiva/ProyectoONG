@@ -23,7 +23,6 @@ namespace OngProject.Core.DTOs
         public string LinkedinUrl { get; set; }
 
         [Required]
-        [MaxLength(255)]
         public IFormFile Image { get; set; }
 
         [MaxLength(255)]
