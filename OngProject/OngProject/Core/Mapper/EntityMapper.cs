@@ -41,7 +41,7 @@ namespace OngProject.Core.Mapper
             return newsDto;
         }
 
-        internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+        public ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
         {
             if (contactsCreateDto == null)
             {
@@ -90,6 +90,22 @@ namespace OngProject.Core.Mapper
             };
 
             return userDto;
+        }
+
+        public CommentModel FromCommentCreateDtoToComment(CommentCreateDto commentCreateDto)
+        {
+
+            if (commentCreateDto == null)
+            {
+                return null;
+            }
+
+            return new CommentModel
+            {
+                User_id = commentCreateDto.User_id,
+                post_id = commentCreateDto.post_id,
+                Body = commentCreateDto.Body,
+            };
         }
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
