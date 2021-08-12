@@ -71,6 +71,25 @@ namespace OngProject.Core.Mapper
             return organizationDto;
         }
 
+        public ActivitiesModel FromActivitiesCreateDtoToActivities(ActivitiesCreateDto activitiesCreateDto)
+        {
+            if (activitiesCreateDto == null)
+            {
+                return null;
+            }
+
+            string image = null;
+            if (activitiesCreateDto.Image != null)
+                image = GetNameImage("activities");
+
+            return new ActivitiesModel
+            {
+                Name = activitiesCreateDto.Name,
+                Image = image,
+                Content = activitiesCreateDto.Content,
+            };
+        }
+
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
         {
             var categoryDto = new CategoryDto()
