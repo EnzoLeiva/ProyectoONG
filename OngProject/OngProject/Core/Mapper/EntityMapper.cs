@@ -94,12 +94,17 @@ namespace OngProject.Core.Mapper
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
+            string photo = null;
+            if(register.photo!=null)
+             photo = GetNameImage("user");
+
             var user = new UserModel()
             {
                 firstName = register.firstName,
                 lastName = register.lastName,
                 email = register.email,
-                password = register.password
+                password = register.password,
+                photo = photo
             };
 
             return user;
@@ -110,10 +115,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (categoryCreateDto.Image != null)
+                image = GetNameImage("category");
+
             return new CategoryModel
             {
                 Description = categoryCreateDto.Description,
-                Image = "category_" + categoryCreateDto.Name,
+                Image = image,
                 Name = categoryCreateDto.Name,
             };
         }
@@ -124,13 +134,18 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (memberCreateDto.Image != null)
+                image = GetNameImage("member");
+
             return new MemberModel
             {
                 Name = memberCreateDto.Name,
                 FacebookUrl = memberCreateDto.FacebookUrl,
                 InstagramUrl = memberCreateDto.InstagramUrl,
                 LinkedinUrl = memberCreateDto.LinkedinUrl,
-                Image = memberCreateDto.Image,
+                Image = image,
                 Description = memberCreateDto.Description
             };
         }
@@ -179,5 +194,16 @@ namespace OngProject.Core.Mapper
                 Content = testimonialsCreateDto.Content
             };
         }
+        public string GetNameImage(string nameModel)
+        {
+            string image = DateTime.Now.ToString();
+            image = image.Replace(":", "");
+            image = image.Replace("/", "");
+            image = image.Replace(" ", "");
+            image = nameModel+"_" + image;
+
+            return image;
+        }
+
     }
 }

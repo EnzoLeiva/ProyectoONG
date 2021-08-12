@@ -15,6 +15,8 @@ namespace OngProject.Core.DTOs
         [Required]
         [DataType(DataType.Text)]
         public string Description { get; set; }
+        
+        [Required]
         public IFormFile Image { get; set; }
     }
 }
