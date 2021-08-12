@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
@@ -82,6 +81,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize]
         [HttpDelete("/users/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -100,7 +100,7 @@ namespace OngProject.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles ="Admin")]
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {
