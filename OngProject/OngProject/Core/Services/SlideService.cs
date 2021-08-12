@@ -1,5 +1,6 @@
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
+using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
@@ -14,16 +15,21 @@ namespace OngProject.Core.Services
     public class SlideService : ISlideService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IImagenService _imagenService;
 
-        public SlideService(IUnitOfWork unitOfWork)
+        public SlideService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
         }
 
         public async Task<bool> Delete(int id) 
         {
             try
             {
+               SlideModel slide = await GetById(id);
+               await _imagenService.Delete(slide.ImageUrl);
+
                await _unitOfWork.SlideRepository.Delete(id);
                await _unitOfWork.SaveChangesAsync();
             }
