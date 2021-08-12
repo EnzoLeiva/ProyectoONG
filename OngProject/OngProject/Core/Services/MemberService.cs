@@ -48,8 +48,7 @@ namespace OngProject.Core.Services
             try
             {
                 MemberModel member = await GetById(Id);
-                if (!string.IsNullOrEmpty(member.Image))
-                    await _imagenService.Delete(member.Image);
+                await _imagenService.Delete(member.Image);
 
                 await _unitOfWork.MemberRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();

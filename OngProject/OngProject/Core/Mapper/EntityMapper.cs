@@ -156,11 +156,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+            string image = null;
+            if (newsCreateDto.Image != null)
+                image = GetNameImage("news");
+
             return new NewsModel
             {
                 Name = newsCreateDto.Name,
                 Content = newsCreateDto.Content,
-                Image = "news_" + newsCreateDto.Image,
+                Image =image,
                 CategoryId = newsCreateDto.CategoryId
 
             };

@@ -8,22 +8,30 @@ using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
 using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
+using OngProject.Core.Interfaces.IServices.AWS;
 
 namespace OngProject.Core.Services
 {
     public class NewsService : INewsService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IImagenService _imagenService;
 
-        public NewsService(IUnitOfWork unitOfWork)
+        public NewsService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
         }
 
         public async Task<bool> Delete(int id)
         {
             try
             {
+                NewsModel news =  await GetById(id);
+                bool result = await _imagenService.Delete(news.Image);
+                if (!result) // if there is an error in AWS service to delete the image
+                   return false;
+
                 await _unitOfWork.NewsRepository.Delete(id);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -39,18 +47,20 @@ namespace OngProject.Core.Services
             return _unitOfWork.NewsRepository.GetAll();
         }
 
-        public async Task<NewsDto> GetById(int id)
+        public async Task<NewsModel> GetById(int id)
         {
-            var mapper = new EntityMapper();
+           
             var news = await _unitOfWork.NewsRepository.GetById(id);
-            var newsDto = mapper.FromNewsToNewsDto(news);
-            return newsDto;
+            return news;
         }
 
         public async Task<NewsModel> Post(NewsDto newsCreateDto)
         {
             var mapper = new EntityMapper();
             var news = mapper.FromNewsDtoToNews(newsCreateDto);
+
+            if (newsCreateDto.Image != null)
+                await _imagenService.Save(news.Image, newsCreateDto.Image);
 
             await _unitOfWork.NewsRepository.Insert(news);
             await _unitOfWork.SaveChangesAsync();
