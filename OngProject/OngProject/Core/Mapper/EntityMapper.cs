@@ -41,6 +41,21 @@ namespace OngProject.Core.Mapper
             return newsDto;
         }
 
+        internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+        {
+            if (contactsCreateDto == null)
+            {
+                return null;
+            }
+            return new ContactsModel
+            {
+                Name = contactsCreateDto.Name,
+                Email = contactsCreateDto.Email,
+                Phone = contactsCreateDto.Phone,
+                Message = contactsCreateDto.Message,
+            };
+        }
+
         public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
         {
             var organizationDto = new OrganizationDto()
@@ -79,12 +94,17 @@ namespace OngProject.Core.Mapper
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
+            string photo = null;
+            if(register.photo!=null)
+             photo = GetNameImage("user");
+
             var user = new UserModel()
             {
                 firstName = register.firstName,
                 lastName = register.lastName,
                 email = register.email,
-                password = register.password
+                password = register.password,
+                photo = photo
             };
 
             return user;
@@ -95,10 +115,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (categoryCreateDto.Image != null)
+                image = GetNameImage("category");
+
             return new CategoryModel
             {
                 Description = categoryCreateDto.Description,
-                Image = "category_" + categoryCreateDto.Name,
+                Image = image,
                 Name = categoryCreateDto.Name,
             };
         }
@@ -109,13 +134,18 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (memberCreateDto.Image != null)
+                image = GetNameImage("member");
+
             return new MemberModel
             {
                 Name = memberCreateDto.Name,
                 FacebookUrl = memberCreateDto.FacebookUrl,
                 InstagramUrl = memberCreateDto.InstagramUrl,
                 LinkedinUrl = memberCreateDto.LinkedinUrl,
-                Image = memberCreateDto.Image,
+                Image = image,
                 Description = memberCreateDto.Description
             };
         }
@@ -134,6 +164,45 @@ namespace OngProject.Core.Mapper
                 CategoryId = newsCreateDto.CategoryId
 
             };
+        }
+
+        public UserInfoDto FromUserModelToUserInfoDto(UserModel user)
+        {
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserInfoDto
+            {
+                firstName = user.firstName,
+                lastName = user.lastName,
+                email = user.email,
+                photo = user.photo,
+                roleId = user.roleId
+            };
+        }
+        public TestimonialsModel FromCreateTestimonialsDtoToTestimonials(CreateTestimonialsDto testimonialsCreateDto)
+        {
+            if (testimonialsCreateDto == null)
+            {
+                return null;
+            }
+            return new TestimonialsModel
+            {
+                Name = testimonialsCreateDto.Name,
+                Content = testimonialsCreateDto.Content
+            };
+        }
+        public string GetNameImage(string nameModel)
+        {
+            string image = DateTime.Now.ToString();
+            image = image.Replace(":", "");
+            image = image.Replace("/", "");
+            image = image.Replace(" ", "");
+            image = nameModel+"_" + image;
+
+            return image;
         }
 
         public SlideInfoDto FromSlideToSlideInfoDto(SlideModel slide)

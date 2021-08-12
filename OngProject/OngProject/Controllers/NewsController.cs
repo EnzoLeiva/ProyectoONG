@@ -27,6 +27,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -53,6 +54,22 @@ namespace OngProject.Controllers
                 return BadRequest(e);
             }
 
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (_inewsService.NewsExists(id))
+            {
+                bool result = await _inewsService.Delete(id);
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest(StatusCodes.Status500InternalServerError);
+            }
+            else
+                return NotFound();
         }
     }
 }

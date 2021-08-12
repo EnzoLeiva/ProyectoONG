@@ -20,9 +20,18 @@ namespace OngProject.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            return _unitOfWork.NewsRepository.Delete(id);
+            try
+            {
+                await _unitOfWork.NewsRepository.Delete(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         public Task<IEnumerable<NewsModel>> GetAll()

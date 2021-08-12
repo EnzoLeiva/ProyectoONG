@@ -58,7 +58,7 @@ namespace OngProject.Infrastructure.Data
                     {
                         Id = i,
                         Name = "Activity " + i,
-                        Image = "Image from activity " + i,
+                        Image = "ImageActivities" + i + ".jpg",
                         Content = "Content from activity " + i,
                         CreatedAt = DateTime.Now
                     }
@@ -95,7 +95,7 @@ namespace OngProject.Infrastructure.Data
                         lastName = i < 11 ? "AdminUser " + i : "RegularUser " + i,
                         email = "mail" + i + "@Mail.com",
                         password = i < 11 ? UserModel.ComputeSha256Hash("Admin123") : UserModel.ComputeSha256Hash("User123"),
-                        photo = "Test.jpg",
+                        photo = "TestUsers" + i + ".jpg",
                         roleId = i < 11 ? 1 : 2,
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -116,7 +116,7 @@ namespace OngProject.Infrastructure.Data
                         Id = i,
                         Name = "new's name ",
                         Content = "Content " + i + " Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                        Image = "image " + i,
+                        Image = "imageNews" + i + ".jpg",
                         CategoryId = i,
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -136,7 +136,7 @@ namespace OngProject.Infrastructure.Data
                                Id = j,
                                Name = "new's name ",
                                Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                               Image = "image ",
+                               Image = "imageNews" + j + ".jpg",
                                CategoryId = i,
                                CreatedAt = DateTime.Now,
                                IsDeleted = false
@@ -158,7 +158,7 @@ namespace OngProject.Infrastructure.Data
                         Id = i,
                         Name = "name " + i,
                         Description = "Descripcion " + i + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                        Image = "image " + i,
+                        Image = "imageCategories" + i + ".jpg",
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
                     }
@@ -178,7 +178,7 @@ namespace OngProject.Infrastructure.Data
                         FacebookUrl = "https://facebook.com/member" + i,
                         InstagramUrl = "https://instagram/member" + i,
                         LinkedinUrl = "https://Linkedin/member" + i,
-                        Image = "image " + i,
+                        Image = "imageMembers" + i + ".jpg",
                         Description = "Descripcion" + i + "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -196,7 +196,7 @@ namespace OngProject.Infrastructure.Data
                     {
                         Id = i,
                         Name = "name " + i,
-                        Image = "image" + i,
+                        Image = "imageTestimonials" + i + ".jpg",
                         Content = "Content" + i + "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -230,26 +230,23 @@ namespace OngProject.Infrastructure.Data
 
         public void SeedOrganization(ModelBuilder modelBuilder)
         {
-            Random rPhone = new Random();
 
-            for (int i = 1; i < 11; i++)
-            {
-                modelBuilder.Entity<OrganizationModel>().HasData(
-                   new OrganizationModel
-                   {
-                       Id = i,
-                       Name = "organizacion" + i,
-                       Image = "image" + i,
-                       Adress = "Adress " + i + i + i,
-                       Phone = rPhone.Next(11111111, 99999999),
-                       Email = "email" + i + "@gmail.com",
-                       WelcomeText = "texto welcome to visit" + i,
-                       AboutUsText = "text about us" + i,
-                       FacebookUrl = "https://facebook.com/organization" + i,
-                       CreatedAt = DateTime.Now,
-                       IsDeleted = false
-                   });
-            }
+            modelBuilder.Entity<OrganizationModel>().HasData(
+               new OrganizationModel
+               {
+                   Id = 1,
+                   Name = "Somos Más",
+                   Image = "imageOrganization.jpg",
+                   Adress = "Catamarca 1585 , CP: 1585",
+                   Phone = 1128559685,
+                   Email = "somomasong@gmail.com",
+                   WelcomeText = "Bienvenidos a nuestro sitio web",
+                   AboutUsText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                   FacebookUrl = "https://facebook.com/organization",
+                   CreatedAt = DateTime.Now,
+                   IsDeleted = false
+               });
+
         }
         private void SeedSlides(ModelBuilder modelBuilder)
         {
@@ -259,7 +256,7 @@ namespace OngProject.Infrastructure.Data
                     new SlideModel
                     {
                         Id = i,
-                        ImageUrl = "imagen " + i,
+                        ImageUrl = "imagenSlides" + i + ".jpg",
                         Order = i,
                         Text = "sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
                         OrganizationId = i.ToString(),
