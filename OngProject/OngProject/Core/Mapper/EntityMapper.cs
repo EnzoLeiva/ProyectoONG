@@ -135,6 +135,50 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public NewsModel FromNewsDtoToNews(NewsDto newsCreateDto)
+        {
+            if (newsCreateDto == null)
+            {
+                return null;
+            }
+            return new NewsModel
+            {
+                Name = newsCreateDto.Name,
+                Content = newsCreateDto.Content,
+                Image = "news_" + newsCreateDto.Image,
+                CategoryId = newsCreateDto.CategoryId
+
+            };
+        }
+
+        public UserInfoDto FromUserModelToUserInfoDto(UserModel user)
+        {
+            if (user == null)
+            {
+                return null;
+            }
+
+            return new UserInfoDto
+            {
+                firstName = user.firstName,
+                lastName = user.lastName,
+                email = user.email,
+                photo = user.photo,
+                roleId = user.roleId
+            };
+        }
+        public TestimonialsModel FromCreateTestimonialsDtoToTestimonials(CreateTestimonialsDto testimonialsCreateDto)
+        {
+            if (testimonialsCreateDto == null)
+            {
+                return null;
+            }
+            return new TestimonialsModel
+            {
+                Name = testimonialsCreateDto.Name,
+                Content = testimonialsCreateDto.Content
+            };
+        }
         public string GetNameImage(string nameModel)
         {
             string image = DateTime.Now.ToString();

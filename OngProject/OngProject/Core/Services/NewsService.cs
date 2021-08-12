@@ -20,9 +20,18 @@ namespace OngProject.Core.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            return _unitOfWork.NewsRepository.Delete(id);
+            try
+            {
+                await _unitOfWork.NewsRepository.Delete(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         public Task<IEnumerable<NewsModel>> GetAll()
@@ -38,9 +47,15 @@ namespace OngProject.Core.Services
             return newsDto;
         }
 
-        public Task Insert(NewsModel newsModel)
+        public async Task<NewsModel> Post(NewsDto newsCreateDto)
         {
-            return _unitOfWork.NewsRepository.Insert(newsModel);
+            var mapper = new EntityMapper();
+            var news = mapper.FromNewsDtoToNews(newsCreateDto);
+
+            await _unitOfWork.NewsRepository.Insert(news);
+            await _unitOfWork.SaveChangesAsync();
+
+            return news;
         }
 
         public Task Update(NewsModel newsModel)

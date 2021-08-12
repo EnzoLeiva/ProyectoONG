@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.DTOs.Auth;
@@ -12,10 +13,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
-    
+
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -25,6 +27,24 @@ namespace OngProject.Controllers
         {
             this._userService = userService;
             this._auth = auth;
+        }
+
+        [Authorize]
+        [HttpGet("/auth/me")]
+        public async Task<ActionResult<UserInfoDto>> GetUserData()
+        {
+            try
+            {
+                string authToken = Request.Headers["Authorization"];
+                int userId = _auth.GetUserId(authToken);
+                UserInfoDto userModeldto = await _userService.GetUserById(userId);
+
+                return Ok(userModeldto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("/auth/register")]
@@ -43,7 +63,7 @@ namespace OngProject.Controllers
             {
                 return BadRequest(e.Message);
             }
-           
+
 
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
@@ -51,15 +71,15 @@ namespace OngProject.Controllers
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
-             var user = await this._auth.login(request);
+            var user = await this._auth.login(request);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-             return Ok(user);
-            
+            return Ok(user);
+
         }
 
         [HttpDelete("/users/{id}")]
@@ -80,7 +100,7 @@ namespace OngProject.Controllers
             }
         }
 
-        
+        [Authorize(Roles = "Admin")]
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {

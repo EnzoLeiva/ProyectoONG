@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,24 @@ namespace OngProject.Controllers
                 return NotFound();
             }
         }
-        
+        [Authorize (Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm] CreateTestimonialsDto testimonialsCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var response = await _testimonialsService.Post(testimonialsCreateDto);
+
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
+
     }
 }
