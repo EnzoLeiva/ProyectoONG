@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("/organizations")]
     public class OrganizationController : ControllerBase
@@ -22,7 +24,8 @@ namespace OngProject.Controllers
         [HttpGet("public/{id}")]
         public async Task<OrganizationDto> GetById(int id)
         {
-           return await _organizationService.GetById(id);
+           return await _organizationService.GetOrganizationWithSlides (id);
         }
+
     }
 }
