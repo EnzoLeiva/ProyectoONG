@@ -41,7 +41,7 @@ namespace OngProject.Core.Mapper
              return newsDto;
          }
         */
-        internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+        public ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
         {
             if (contactsCreateDto == null)
             {
@@ -71,6 +71,25 @@ namespace OngProject.Core.Mapper
             return organizationDto;
         }
 
+        public ActivitiesModel FromActivitiesCreateDtoToActivities(ActivitiesCreateDto activitiesCreateDto)
+        {
+            if (activitiesCreateDto == null)
+            {
+                return null;
+            }
+
+            string image = null;
+            if (activitiesCreateDto.Image != null)
+                image = GetNameImage("activities");
+
+            return new ActivitiesModel
+            {
+                Name = activitiesCreateDto.Name,
+                Image = image,
+                Content = activitiesCreateDto.Content,
+            };
+        }
+
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
         {
             var categoryDto = new CategoryDto()
@@ -90,6 +109,22 @@ namespace OngProject.Core.Mapper
             };
 
             return userDto;
+        }
+
+        public CommentModel FromCommentCreateDtoToComment(CommentCreateDto commentCreateDto)
+        {
+
+            if (commentCreateDto == null)
+            {
+                return null;
+            }
+
+            return new CommentModel
+            {
+                User_id = commentCreateDto.User_id,
+                post_id = commentCreateDto.post_id,
+                Body = commentCreateDto.Body,
+            };
         }
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
