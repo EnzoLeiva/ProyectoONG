@@ -28,8 +28,10 @@ namespace OngProject.Core.Services
             try
             {
                SlideModel slide = await GetById(id);
-               await _imagenService.Delete(slide.ImageUrl);
-
+                if (!string.IsNullOrEmpty(slide.ImageUrl))
+                {
+                    await _imagenService.Delete(slide.ImageUrl);
+                }
                await _unitOfWork.SlideRepository.Delete(id);
                await _unitOfWork.SaveChangesAsync();
             }
