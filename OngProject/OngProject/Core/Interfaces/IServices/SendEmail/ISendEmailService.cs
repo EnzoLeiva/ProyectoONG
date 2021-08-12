@@ -8,5 +8,6 @@ namespace OngProject.Core.Interfaces.IServices.SendEmail
     public interface ISendEmailService
     {
         public Task<bool> send(string email);
+        public Task<bool> SendRegisterEmail(string toEmail);
     }
 }

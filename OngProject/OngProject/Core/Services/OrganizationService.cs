@@ -56,5 +56,14 @@ namespace OngProject.Core.Services
 
         }
 
+        public async Task<OrganizationDto> GetFirst()
+        {
+            var mapper = new EntityMapper();
+            IEnumerable<OrganizationModel> ongList = await _unitOfWork.OrganizationRepository.GetAll();
+            OrganizationModel ong = ongList.First();
+            OrganizationDto ongDto = mapper.FromOrganizationToOrganizationDto(ong);
+            return ongDto;
+        }
+
     }
 }
