@@ -26,5 +26,35 @@ namespace OngProject.Core.Services
             var organizationDto = mapper.FromOrganizationToOrganizationDto(organization);
             return organizationDto;
         }
+
+        public async Task<OrganizationDto> GetOrganizationWithSlides (int id)
+        {
+            var mapper = new EntityMapper();
+            var organization = await _unitOfWork.OrganizationRepository.GetById(id);
+
+            string organizationId = id.ToString();
+
+            var slides = await _unitOfWork.SlideRepository.GetAll();
+
+            List<SlideInfoDto> slidesInfoList = new List<SlideInfoDto>();
+
+            foreach(SlideModel s in slides)
+            {
+                if(s.OrganizationId == organizationId)
+                {
+                    var item = mapper.FromSlideToSlideInfoDto(s);
+                    slidesInfoList.Add(item);
+                }
+            }
+
+            slidesInfoList.OrderBy(s => s.Order);
+
+            var organizationDto = mapper.FromOrganizationToOrganizationDtoWithSlides(organization, slidesInfoList);
+
+            return organizationDto;
+
+
+        }
+
     }
 }

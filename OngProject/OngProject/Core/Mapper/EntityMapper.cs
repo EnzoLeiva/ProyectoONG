@@ -205,5 +205,37 @@ namespace OngProject.Core.Mapper
             return image;
         }
 
+        public SlideInfoDto FromSlideToSlideInfoDto(SlideModel slide)
+        {
+            var slideInfoDto = new SlideInfoDto()
+            {
+                ImageUrl = slide.ImageUrl,
+                Text = slide.Text,
+                Order = slide.Order
+            };
+
+            return slideInfoDto;
+        }
+
+        public OrganizationDto FromOrganizationToOrganizationDtoWithSlides(OrganizationModel organization, List<SlideInfoDto> slides)
+        {
+            if(organization == null)
+            {
+                return null;
+            }
+            var organizationDto = new OrganizationDto()
+            {
+                Name = organization.Name,
+                Image = organization.Image,
+                Phone = organization.Phone,
+                FacebookUrl = organization.FacebookUrl,
+                LinkedinUrl = organization.LinkedinUrl,
+                InstagramUrl = organization.InstagramUrl,
+                Slides = slides,
+            };
+
+            return organizationDto;
+        }
+
     }
 }
