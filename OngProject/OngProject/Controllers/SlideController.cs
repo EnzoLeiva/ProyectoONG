@@ -7,6 +7,7 @@ using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using OngProject.Infrastructure.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,6 +46,24 @@ namespace OngProject.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm] SlideDto slideCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var response = await _slideService.Post(slideCreateDto);
+
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]

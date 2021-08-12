@@ -164,5 +164,18 @@ namespace OngProject.Core.Mapper
                 Content = testimonialsCreateDto.Content
             };
         }
+
+        public SlideModel FromSlideDtoToSlide(SlideDto slideCreateDto)
+        {
+            if (slideCreateDto == null)
+            {
+                return null;
+            }
+            return new SlideModel
+            {
+                ImageUrl = slideCreateDto.ImageUrl,
+                Order = slideCreateDto.Order
+            };
+        }
     }
 }
