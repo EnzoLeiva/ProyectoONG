@@ -41,11 +41,16 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
 
-            
-            await _imagenService.Save(category.Image, categoryCreateDto.Image);
-            await _unitOfWork.CategoryRepository.Insert(category);       
-            await _unitOfWork.SaveChangesAsync();
-
+            try
+            {
+                await _imagenService.Save(category.Image, categoryCreateDto.Image);
+                await _unitOfWork.CategoryRepository.Insert(category);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return category;
         }

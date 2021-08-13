@@ -49,11 +49,17 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var activities = mapper.FromActivitiesCreateDtoToActivities(activitiesCreateDto);
 
-            if (activitiesCreateDto.Image != null)
+            try
+            {
                 await _imagenService.Save(activities.Image, activitiesCreateDto.Image);
 
-            await _unitOfWork.ActivitiesRepository.Insert(activities);
-            await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.ActivitiesRepository.Insert(activities);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return activities;
         }
 

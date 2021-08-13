@@ -55,11 +55,16 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var news = mapper.FromNewsDtoToNews(newsCreateDto);
 
-            
-            await _imagenService.Save(news.Image, newsCreateDto.Image);
-            await _unitOfWork.NewsRepository.Insert(news);
-            await _unitOfWork.SaveChangesAsync();
-
+            try
+            {
+                await _imagenService.Save(news.Image, newsCreateDto.Image);
+                await _unitOfWork.NewsRepository.Insert(news);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return news;
         }
 
