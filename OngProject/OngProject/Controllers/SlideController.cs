@@ -48,7 +48,7 @@ namespace OngProject.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] SlideDto slideCreateDto)
+        public async Task<IActionResult> Post([FromBody] SlideDto slideCreateDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();

@@ -174,7 +174,8 @@ namespace OngProject.Core.Mapper
             return new SlideModel
             {
                 ImageUrl = slideCreateDto.ImageUrl,
-                Order = slideCreateDto.Order
+                Order = slideCreateDto.Order,
+                Text = slideCreateDto.Text
             };
         }
     }
