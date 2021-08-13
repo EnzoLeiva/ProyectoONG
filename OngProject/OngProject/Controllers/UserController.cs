@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
