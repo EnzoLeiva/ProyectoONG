@@ -1,4 +1,5 @@
 ﻿using OngProject.Core.DTOs;
+using OngProject.Core.Helper;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Interfaces.IUnitOfWork;
@@ -31,8 +32,9 @@ namespace OngProject.Core.Services
         {
             var mapper = new EntityMapper();
             var member = mapper.FromMemberCreateDtoToMember(memberCreateDto);
-
+            
             await _imagenService.Save(member.Image, memberCreateDto.Image);
+
             await _unitOfWork.MemberRepository.Insert(member);
             await _unitOfWork.SaveChangesAsync();
 
@@ -47,10 +49,6 @@ namespace OngProject.Core.Services
         {
             try
             {
-                MemberModel member = await GetById(Id);
-                if (!string.IsNullOrEmpty(member.Image))
-                    await _imagenService.Delete(member.Image);
-
                 await _unitOfWork.MemberRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }
