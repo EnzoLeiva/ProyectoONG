@@ -20,18 +20,24 @@ namespace OngProject.Core.Services.AWS
 
         public async Task<String> Save(string fileName, IFormFile image)
         {
-            if (image != null && ValidateFiles.ValidateImage(image))
+            AwsManagerResponse responseAws;
+            if (image != null)
             {
-                AwsManagerResponse responseAws = await _s3AwsHelper.AwsUploadFile(fileName, image);
-                if (String.IsNullOrEmpty(responseAws.Errors))
+                if (ValidateFiles.ValidateImage(image))
                 {
-                    return null;
-                }
+                    responseAws = await _s3AwsHelper.AwsUploadFile(fileName, image);
+                    if (!String.IsNullOrEmpty(responseAws.Errors))
+                    {
+                        throw new Exception("Error en al guardar imagen. Detalle:" + responseAws.Errors);
+                    }
 
-                return responseAws.Url;
+                    return responseAws.Url;
+                }
+                else
+                    throw new Exception("Extensión de imagen no válida. Debe ser jpg, png o jpeg.");
             }
             else
-                return null;
+                throw new Exception("Error, no existe imagen.");
         }
 
         public async Task<bool> Delete(string name)

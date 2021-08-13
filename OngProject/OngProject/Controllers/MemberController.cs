@@ -45,7 +45,7 @@ namespace OngProject.Controllers
                 }
                 catch (Exception e)
                 {
-                    return BadRequest(e);
+                    return BadRequest(e.Message);
                 }
             }            
 
