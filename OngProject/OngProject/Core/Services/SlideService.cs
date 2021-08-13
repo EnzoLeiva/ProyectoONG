@@ -61,7 +61,7 @@ namespace OngProject.Core.Services
         {
             var mapper = new EntityMapper();
             var slide = mapper.FromSlideDtoToSlide(slideCreateDto);
-            byte[] bytesFile = Convert.FromBase64String(slideCreateDto.ImageBase64);
+            byte[] bytesFile = Convert.FromBase64String(slideCreateDto.ImageUrl);
             ValidateFiles validate = new ValidateFiles();
             string fileExtension = validate.GetImageExtensionFromFile(bytesFile);
             string uniqueName = "slide_" + DateTime.Now.ToString().Replace(",", "").Replace("/", "").Replace(" ", "");
