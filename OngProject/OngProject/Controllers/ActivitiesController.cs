@@ -1,7 +1,7 @@
 
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Services;
