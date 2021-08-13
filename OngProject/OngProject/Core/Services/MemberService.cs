@@ -32,11 +32,17 @@ namespace OngProject.Core.Services
         {
             var mapper = new EntityMapper();
             var member = mapper.FromMemberCreateDtoToMember(memberCreateDto);
-            
-            await _imagenService.Save(member.Image, memberCreateDto.Image);
 
-            await _unitOfWork.MemberRepository.Insert(member);
-            await _unitOfWork.SaveChangesAsync();
+            try
+            {
+                await _imagenService.Save(member.Image, memberCreateDto.Image);
+                await _unitOfWork.MemberRepository.Insert(member);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return member;
         }
