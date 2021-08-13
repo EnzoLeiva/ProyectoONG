@@ -5,6 +5,7 @@ using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
+using OngProject.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace OngProject.Controllers
         [HttpGet("/posts/{id_post}/comments")]
         public async Task<IEnumerable<CommentDto>> GetCommentsByPost(int id_post)
         {
-           return await _iCommentService.GetCommentsByPost(id_post);
+            return await _iCommentService.GetCommentsByPost(id_post);
         }
 
         [Authorize(Roles = "Admin")]
@@ -69,5 +70,21 @@ namespace OngProject.Controllers
                 return NotFound();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm] CommentCreateDto commentCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var response = await _iCommentService.Post(commentCreateDto);
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
     }
 }

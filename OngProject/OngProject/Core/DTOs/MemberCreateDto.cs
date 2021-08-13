@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,8 +23,7 @@ namespace OngProject.Core.DTOs
         public string LinkedinUrl { get; set; }
 
         [Required]
-        [MaxLength(255)]
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }

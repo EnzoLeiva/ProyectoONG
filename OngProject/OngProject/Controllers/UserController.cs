@@ -47,7 +47,7 @@ namespace OngProject.Controllers
         }
 
         [HttpPost("/auth/register")]
-        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
+        public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
         {
             try
             {

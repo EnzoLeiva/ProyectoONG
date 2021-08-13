@@ -24,7 +24,8 @@ namespace OngProject.Controllers
         [HttpGet("public/{id}")]
         public async Task<OrganizationDto> GetById(int id)
         {
-           return await _organizationService.GetById(id);
+           return await _organizationService.GetOrganizationWithSlides (id);
         }
+
     }
 }

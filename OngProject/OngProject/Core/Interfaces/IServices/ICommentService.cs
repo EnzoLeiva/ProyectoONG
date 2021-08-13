@@ -1,4 +1,5 @@
 ﻿using OngProject.Core.DTOs;
+using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<bool> ValidateCreatorOrAdminAsync(ClaimsPrincipal user, int id);
         public Task<bool> Delete(int Id);
         public bool EntityExists(int id);
+        public Task<CommentModel> Post(CommentCreateDto commentCreateDto);
     }
 }
