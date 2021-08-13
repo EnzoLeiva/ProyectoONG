@@ -59,11 +59,14 @@ namespace OngProject.Core.Services
 
         public async Task<SlideModel> Post(SlideDto slideCreateDto)
         {
-            var mapper = new EntityMapper();
-            var slide = mapper.FromSlideDtoToSlide(slideCreateDto);
+            if (slideCreateDto.Order == null)
+            {
+                var slideList = await _unitOfWork.SlideRepository.GetAll();
+                var elem = slideList.Last();
+                slideCreateDto.Order = elem.Order + 1;
+            }
             byte[] bytesFile = Convert.FromBase64String(slideCreateDto.ImageUrl);
-            ValidateFiles validate = new ValidateFiles();
-            string fileExtension = validate.GetImageExtensionFromFile(bytesFile);
+            string fileExtension = ValidateFiles.GetImageExtensionFromFile(bytesFile);
             string uniqueName = "slide_" + DateTime.Now.ToString().Replace(",", "").Replace("/", "").Replace(" ", "");
             FormFileData formFileData = new()
             {
@@ -74,16 +77,17 @@ namespace OngProject.Core.Services
             IFormFile ImageFormFile = ConvertFile.BinaryToFormFile(bytesFile, formFileData);
             S3AwsHelper s3Helper = new();
             var result = await s3Helper.AwsUploadFile(uniqueName, ImageFormFile);
-            if (slideCreateDto.Order == 0)
+            if (result.Code == 200)
             {
-                var slideList = await _unitOfWork.SlideRepository.GetAll();
-                var elem = slideList.Last();
-                slideCreateDto.Order = elem.Order;
+                slideCreateDto.ImageUrl = result.Url;
+                EntityMapper mapper = new();
+                SlideModel slide = mapper.FromSlideDtoToSlide(slideCreateDto);
+                await _unitOfWork.SlideRepository.Insert(slide);
+                await _unitOfWork.SaveChangesAsync();
+                return slide;
             }
-            await _unitOfWork.SlideRepository.Insert(slide);
-            await _unitOfWork.SaveChangesAsync();
-
-            return slide;
+            else
+                throw new Exception(result.Errors);
         }
     }
 }
