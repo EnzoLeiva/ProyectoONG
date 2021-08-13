@@ -13,11 +13,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
-
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -29,7 +28,6 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
-        [Authorize]
         [HttpGet("/auth/me")]
         public async Task<ActionResult<UserInfoDto>> GetUserData()
         {
@@ -47,8 +45,9 @@ namespace OngProject.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("/auth/register")]
-        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
+        public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
         {
             try
             {
@@ -68,6 +67,7 @@ namespace OngProject.Controllers
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
+        [AllowAnonymous]
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
@@ -82,6 +82,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize]
         [HttpDelete("/users/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -100,7 +101,7 @@ namespace OngProject.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles ="Admin")]
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {

@@ -29,16 +29,31 @@ namespace OngProject.Core.Mapper
             return commentDto;
         }
 
-        public NewsDto FromNewsToNewsDto(NewsModel news)
-        {
-            var newsDto = new NewsDto()
-            {
-                Name = news.Name,
-                Image = news.Image,
-                Content = news.Content
-            };
+        /* public NewsDto FromNewsToNewsDto(NewsModel news)
+         {
+             var newsDto = new NewsDto()
+             {
+                 Name = news.Name,
+                 Image = news.Image, // no se puede convertir string a IFormFile
+                 Content = news.Content
+             };
 
-            return newsDto;
+             return newsDto;
+         }
+        */
+        public ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+        {
+            if (contactsCreateDto == null)
+            {
+                return null;
+            }
+            return new ContactsModel
+            {
+                Name = contactsCreateDto.Name,
+                Email = contactsCreateDto.Email,
+                Phone = contactsCreateDto.Phone,
+                Message = contactsCreateDto.Message,
+            };
         }
 
         public OrganizationDto FromOrganizationToOrganizationDto(OrganizationModel organization)
@@ -54,6 +69,25 @@ namespace OngProject.Core.Mapper
             };
 
             return organizationDto;
+        }
+
+        public ActivitiesModel FromActivitiesCreateDtoToActivities(ActivitiesCreateDto activitiesCreateDto)
+        {
+            if (activitiesCreateDto == null)
+            {
+                return null;
+            }
+
+            string image = null;
+            if (activitiesCreateDto.Image != null)
+                image = GetNameImage("activities");
+
+            return new ActivitiesModel
+            {
+                Name = activitiesCreateDto.Name,
+                Image = image,
+                Content = activitiesCreateDto.Content,
+            };
         }
 
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
@@ -77,14 +111,35 @@ namespace OngProject.Core.Mapper
             return userDto;
         }
 
+        public CommentModel FromCommentCreateDtoToComment(CommentCreateDto commentCreateDto)
+        {
+
+            if (commentCreateDto == null)
+            {
+                return null;
+            }
+
+            return new CommentModel
+            {
+                User_id = commentCreateDto.User_id,
+                post_id = commentCreateDto.post_id,
+                Body = commentCreateDto.Body,
+            };
+        }
+
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
+            string photo = null;
+            if(register.photo!=null)
+             photo = GetNameImage("user");
+
             var user = new UserModel()
             {
                 firstName = register.firstName,
                 lastName = register.lastName,
                 email = register.email,
-                password = register.password
+                password = register.password,
+                photo = photo
             };
 
             return user;
@@ -95,10 +150,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (categoryCreateDto.Image != null)
+                image = GetNameImage("category");
+
             return new CategoryModel
             {
                 Description = categoryCreateDto.Description,
-                Image = "category_" + categoryCreateDto.Name,
+                Image = image,
                 Name = categoryCreateDto.Name,
             };
         }
@@ -109,13 +169,18 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+
+            string image = null;
+            if (memberCreateDto.Image != null)
+                image = GetNameImage("member");
+
             return new MemberModel
             {
                 Name = memberCreateDto.Name,
                 FacebookUrl = memberCreateDto.FacebookUrl,
                 InstagramUrl = memberCreateDto.InstagramUrl,
                 LinkedinUrl = memberCreateDto.LinkedinUrl,
-                Image = memberCreateDto.Image,
+                Image = image,
                 Description = memberCreateDto.Description
             };
         }
@@ -126,11 +191,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+            string image = null;
+            if (newsCreateDto.Image != null)
+                image = GetNameImage("news");
+
             return new NewsModel
             {
                 Name = newsCreateDto.Name,
                 Content = newsCreateDto.Content,
-                Image = "news_" + newsCreateDto.Image,
+                Image =image,
                 CategoryId = newsCreateDto.CategoryId
 
             };
@@ -164,19 +233,48 @@ namespace OngProject.Core.Mapper
                 Content = testimonialsCreateDto.Content
             };
         }
-
-        public SlideModel FromSlideDtoToSlide(SlideDto slideCreateDto)
+        public string GetNameImage(string nameModel)
         {
-            if (slideCreateDto == null)
+            string image = DateTime.Now.ToString();
+            image = image.Replace(":", "");
+            image = image.Replace("/", "");
+            image = image.Replace(" ", "");
+            image = nameModel+"_" + image;
+
+            return image;
+        }
+
+        public SlideInfoDto FromSlideToSlideInfoDto(SlideModel slide)
+        {
+            var slideInfoDto = new SlideInfoDto()
+            {
+                ImageUrl = slide.ImageUrl,
+                Text = slide.Text,
+                Order = slide.Order
+            };
+
+            return slideInfoDto;
+        }
+
+        public OrganizationDto FromOrganizationToOrganizationDtoWithSlides(OrganizationModel organization, List<SlideInfoDto> slides)
+        {
+            if(organization == null)
             {
                 return null;
             }
-            return new SlideModel
+            var organizationDto = new OrganizationDto()
             {
-                ImageUrl = slideCreateDto.ImageUrl,
-                Order = slideCreateDto.Order,
-                Text = slideCreateDto.Text
+                Name = organization.Name,
+                Image = organization.Image,
+                Phone = organization.Phone,
+                FacebookUrl = organization.FacebookUrl,
+                LinkedinUrl = organization.LinkedinUrl,
+                InstagramUrl = organization.InstagramUrl,
+                Slides = slides,
             };
+
+            return organizationDto;
         }
+
     }
 }

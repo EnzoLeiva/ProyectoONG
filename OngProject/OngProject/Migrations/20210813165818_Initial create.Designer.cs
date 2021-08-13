@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OngProject.Infrastructure.Data;
 
-namespace OngProject.Data.Migrations
+namespace OngProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210813165818_Initial create")]
+    partial class Initialcreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 1,
                             Content = "Content from activity 1",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 78, DateTimeKind.Local).AddTicks(5734),
-                            Image = "Image from activity 1",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 477, DateTimeKind.Local).AddTicks(6238),
+                            Image = "ImageActivities1.jpg",
                             IsDeleted = false,
                             Name = "Activity 1"
                         },
@@ -63,8 +65,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 2,
                             Content = "Content from activity 2",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7267),
-                            Image = "Image from activity 2",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4286),
+                            Image = "ImageActivities2.jpg",
                             IsDeleted = false,
                             Name = "Activity 2"
                         },
@@ -72,8 +74,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 3,
                             Content = "Content from activity 3",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7449),
-                            Image = "Image from activity 3",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4512),
+                            Image = "ImageActivities3.jpg",
                             IsDeleted = false,
                             Name = "Activity 3"
                         },
@@ -81,8 +83,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 4,
                             Content = "Content from activity 4",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7475),
-                            Image = "Image from activity 4",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4539),
+                            Image = "ImageActivities4.jpg",
                             IsDeleted = false,
                             Name = "Activity 4"
                         },
@@ -90,8 +92,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 5,
                             Content = "Content from activity 5",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7498),
-                            Image = "Image from activity 5",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4561),
+                            Image = "ImageActivities5.jpg",
                             IsDeleted = false,
                             Name = "Activity 5"
                         },
@@ -99,8 +101,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 6,
                             Content = "Content from activity 6",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7528),
-                            Image = "Image from activity 6",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4591),
+                            Image = "ImageActivities6.jpg",
                             IsDeleted = false,
                             Name = "Activity 6"
                         },
@@ -108,8 +110,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 7,
                             Content = "Content from activity 7",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7548),
-                            Image = "Image from activity 7",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4612),
+                            Image = "ImageActivities7.jpg",
                             IsDeleted = false,
                             Name = "Activity 7"
                         },
@@ -117,8 +119,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 8,
                             Content = "Content from activity 8",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7568),
-                            Image = "Image from activity 8",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4632),
+                            Image = "ImageActivities8.jpg",
                             IsDeleted = false,
                             Name = "Activity 8"
                         },
@@ -126,8 +128,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 9,
                             Content = "Content from activity 9",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7588),
-                            Image = "Image from activity 9",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4795),
+                            Image = "ImageActivities9.jpg",
                             IsDeleted = false,
                             Name = "Activity 9"
                         },
@@ -135,8 +137,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 10,
                             Content = "Content from activity 10",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 84, DateTimeKind.Local).AddTicks(7611),
-                            Image = "Image from activity 10",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 482, DateTimeKind.Local).AddTicks(4825),
+                            Image = "ImageActivities10.jpg",
                             IsDeleted = false,
                             Name = "Activity 10"
                         });
@@ -178,90 +180,90 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(6738),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9089),
                             Description = "Descripcion 1Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 1",
+                            Image = "imageCategories1.jpg",
                             IsDeleted = false,
                             Name = "name 1"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7151),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9307),
                             Description = "Descripcion 2Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 2",
+                            Image = "imageCategories2.jpg",
                             IsDeleted = false,
                             Name = "name 2"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7353),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9339),
                             Description = "Descripcion 3Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 3",
+                            Image = "imageCategories3.jpg",
                             IsDeleted = false,
                             Name = "name 3"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7417),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9440),
                             Description = "Descripcion 4Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 4",
+                            Image = "imageCategories4.jpg",
                             IsDeleted = false,
                             Name = "name 4"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7450),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9467),
                             Description = "Descripcion 5Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 5",
+                            Image = "imageCategories5.jpg",
                             IsDeleted = false,
                             Name = "name 5"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7509),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9492),
                             Description = "Descripcion 6Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 6",
+                            Image = "imageCategories6.jpg",
                             IsDeleted = false,
                             Name = "name 6"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7591),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9514),
                             Description = "Descripcion 7Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 7",
+                            Image = "imageCategories7.jpg",
                             IsDeleted = false,
                             Name = "name 7"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7661),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9535),
                             Description = "Descripcion 8Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 8",
+                            Image = "imageCategories8.jpg",
                             IsDeleted = false,
                             Name = "name 8"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7695),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9555),
                             Description = "Descripcion 9Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 9",
+                            Image = "imageCategories9.jpg",
                             IsDeleted = false,
                             Name = "name 9"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 103, DateTimeKind.Local).AddTicks(7772),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(9600),
                             Description = "Descripcion 10Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                            Image = "image 10",
+                            Image = "imageCategories10.jpg",
                             IsDeleted = false,
                             Name = "name 10"
                         });
@@ -299,7 +301,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 1,
                             Body = "body of post_id=1",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1463),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2641),
                             IsDeleted = false,
                             User_id = 1,
                             post_id = 1
@@ -308,7 +310,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 2,
                             Body = "body of post_id=1",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1714),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2859),
                             IsDeleted = false,
                             User_id = 1,
                             post_id = 1
@@ -317,7 +319,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 3,
                             Body = "body of post_id=1",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1745),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2888),
                             IsDeleted = false,
                             User_id = 1,
                             post_id = 1
@@ -326,7 +328,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 4,
                             Body = "body of post_id=2",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1768),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2909),
                             IsDeleted = false,
                             User_id = 2,
                             post_id = 2
@@ -335,7 +337,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 5,
                             Body = "body of post_id=2",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1789),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2929),
                             IsDeleted = false,
                             User_id = 2,
                             post_id = 2
@@ -344,7 +346,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 6,
                             Body = "body of post_id=2",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1813),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2954),
                             IsDeleted = false,
                             User_id = 2,
                             post_id = 2
@@ -353,7 +355,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 7,
                             Body = "body of post_id=3",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1833),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2975),
                             IsDeleted = false,
                             User_id = 3,
                             post_id = 3
@@ -362,7 +364,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 8,
                             Body = "body of post_id=3",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1854),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(2994),
                             IsDeleted = false,
                             User_id = 3,
                             post_id = 3
@@ -371,7 +373,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 9,
                             Body = "body of post_id=3",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1874),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3013),
                             IsDeleted = false,
                             User_id = 3,
                             post_id = 3
@@ -380,7 +382,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 10,
                             Body = "body of post_id=4",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1896),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3034),
                             IsDeleted = false,
                             User_id = 4,
                             post_id = 4
@@ -389,7 +391,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 11,
                             Body = "body of post_id=4",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(1916),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3053),
                             IsDeleted = false,
                             User_id = 4,
                             post_id = 4
@@ -398,7 +400,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 12,
                             Body = "body of post_id=4",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2240),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3073),
                             IsDeleted = false,
                             User_id = 4,
                             post_id = 4
@@ -407,7 +409,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 13,
                             Body = "body of post_id=5",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2272),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3092),
                             IsDeleted = false,
                             User_id = 5,
                             post_id = 5
@@ -416,7 +418,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 14,
                             Body = "body of post_id=5",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2292),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3112),
                             IsDeleted = false,
                             User_id = 5,
                             post_id = 5
@@ -425,7 +427,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 15,
                             Body = "body of post_id=5",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2312),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3130),
                             IsDeleted = false,
                             User_id = 5,
                             post_id = 5
@@ -434,7 +436,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 16,
                             Body = "body of post_id=6",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2333),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3233),
                             IsDeleted = false,
                             User_id = 6,
                             post_id = 6
@@ -443,7 +445,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 17,
                             Body = "body of post_id=6",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2353),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3258),
                             IsDeleted = false,
                             User_id = 6,
                             post_id = 6
@@ -452,7 +454,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 18,
                             Body = "body of post_id=6",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2377),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3279),
                             IsDeleted = false,
                             User_id = 6,
                             post_id = 6
@@ -461,7 +463,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 19,
                             Body = "body of post_id=7",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2398),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3299),
                             IsDeleted = false,
                             User_id = 7,
                             post_id = 7
@@ -470,7 +472,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 20,
                             Body = "body of post_id=7",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2418),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3318),
                             IsDeleted = false,
                             User_id = 7,
                             post_id = 7
@@ -479,7 +481,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 21,
                             Body = "body of post_id=7",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2439),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3336),
                             IsDeleted = false,
                             User_id = 7,
                             post_id = 7
@@ -488,7 +490,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 22,
                             Body = "body of post_id=8",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2459),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3355),
                             IsDeleted = false,
                             User_id = 8,
                             post_id = 8
@@ -497,7 +499,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 23,
                             Body = "body of post_id=8",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2479),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3374),
                             IsDeleted = false,
                             User_id = 8,
                             post_id = 8
@@ -506,7 +508,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 24,
                             Body = "body of post_id=8",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2500),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3393),
                             IsDeleted = false,
                             User_id = 8,
                             post_id = 8
@@ -515,7 +517,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 25,
                             Body = "body of post_id=9",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2521),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3412),
                             IsDeleted = false,
                             User_id = 9,
                             post_id = 9
@@ -524,7 +526,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 26,
                             Body = "body of post_id=9",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2541),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3430),
                             IsDeleted = false,
                             User_id = 9,
                             post_id = 9
@@ -533,7 +535,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 27,
                             Body = "body of post_id=9",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2562),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3450),
                             IsDeleted = false,
                             User_id = 9,
                             post_id = 9
@@ -542,7 +544,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 28,
                             Body = "body of post_id=10",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2584),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3470),
                             IsDeleted = false,
                             User_id = 10,
                             post_id = 10
@@ -551,7 +553,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 29,
                             Body = "body of post_id=10",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2604),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3489),
                             IsDeleted = false,
                             User_id = 10,
                             post_id = 10
@@ -560,7 +562,7 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 30,
                             Body = "body of post_id=10",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(2624),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(3508),
                             IsDeleted = false,
                             User_id = 10,
                             post_id = 10
@@ -605,102 +607,102 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(1683),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3136),
                             Email = "email1gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message1",
                             Name = "Contact 1",
-                            Phone = 27843668
+                            Phone = 30938102
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(1989),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3376),
                             Email = "email2gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message2",
                             Name = "Contact 2",
-                            Phone = 14217134
+                            Phone = 34458897
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2071),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3408),
                             Email = "email3gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message3",
                             Name = "Contact 3",
-                            Phone = 24096475
+                            Phone = 40899064
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2094),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3562),
                             Email = "email4gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message4",
                             Name = "Contact 4",
-                            Phone = 51075563
+                            Phone = 67923064
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2115),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3586),
                             Email = "email5gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message5",
                             Name = "Contact 5",
-                            Phone = 78199484
+                            Phone = 77967949
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2142),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3612),
                             Email = "email6gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message6",
                             Name = "Contact 6",
-                            Phone = 25783295
+                            Phone = 85024485
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2162),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3633),
                             Email = "email7gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message7",
                             Name = "Contact 7",
-                            Phone = 32762388
+                            Phone = 42460468
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2183),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3653),
                             Email = "email8gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message8",
                             Name = "Contact 8",
-                            Phone = 32675654
+                            Phone = 42721509
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2202),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3674),
                             Email = "email9gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message9",
                             Name = "Contact 9",
-                            Phone = 14536519
+                            Phone = 23867933
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(2226),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(3698),
                             Email = "email10gmail.com",
                             IsDeleted = false,
                             Message = "Message Message Message Message10",
                             Name = "Contact 10",
-                            Phone = 87717780
+                            Phone = 16605473
                         });
                 });
 
@@ -751,10 +753,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(8076),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4364),
                             Description = "Descripcion1Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member1",
-                            Image = "image 1",
+                            Image = "imageMembers1.jpg",
                             InstagramUrl = "https://instagram/member1",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member1",
@@ -763,10 +765,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(8830),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4595),
                             Description = "Descripcion2Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member2",
-                            Image = "image 2",
+                            Image = "imageMembers2.jpg",
                             InstagramUrl = "https://instagram/member2",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member2",
@@ -775,10 +777,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(8890),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4629),
                             Description = "Descripcion3Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member3",
-                            Image = "image 3",
+                            Image = "imageMembers3.jpg",
                             InstagramUrl = "https://instagram/member3",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member3",
@@ -787,10 +789,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(8929),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4655),
                             Description = "Descripcion4Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member4",
-                            Image = "image 4",
+                            Image = "imageMembers4.jpg",
                             InstagramUrl = "https://instagram/member4",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member4",
@@ -799,10 +801,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(8964),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4679),
                             Description = "Descripcion5Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member5",
-                            Image = "image 5",
+                            Image = "imageMembers5.jpg",
                             InstagramUrl = "https://instagram/member5",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member5",
@@ -811,10 +813,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(9113),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4705),
                             Description = "Descripcion6Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member6",
-                            Image = "image 6",
+                            Image = "imageMembers6.jpg",
                             InstagramUrl = "https://instagram/member6",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member6",
@@ -823,10 +825,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(9161),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4803),
                             Description = "Descripcion7Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member7",
-                            Image = "image 7",
+                            Image = "imageMembers7.jpg",
                             InstagramUrl = "https://instagram/member7",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member7",
@@ -835,10 +837,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(9198),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4829),
                             Description = "Descripcion8Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member8",
-                            Image = "image 8",
+                            Image = "imageMembers8.jpg",
                             InstagramUrl = "https://instagram/member8",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member8",
@@ -847,10 +849,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(9232),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4851),
                             Description = "Descripcion9Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member9",
-                            Image = "image 9",
+                            Image = "imageMembers9.jpg",
                             InstagramUrl = "https://instagram/member9",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member9",
@@ -859,10 +861,10 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 102, DateTimeKind.Local).AddTicks(9272),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 502, DateTimeKind.Local).AddTicks(4877),
                             Description = "Descripcion10Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                             FacebookUrl = "https://facebook.com/member10",
-                            Image = "image 10",
+                            Image = "imageMembers10.jpg",
                             InstagramUrl = "https://instagram/member10",
                             IsDeleted = false,
                             LinkedinUrl = "https://Linkedin/member10",
@@ -913,8 +915,8 @@ namespace OngProject.Data.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Content = "Content 1 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(4465),
-                            Image = "image 1",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(5682),
+                            Image = "imageNews1.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -923,8 +925,8 @@ namespace OngProject.Data.Migrations
                             Id = 2,
                             CategoryId = 2,
                             Content = "Content 2 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(4904),
-                            Image = "image 2",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(5921),
+                            Image = "imageNews2.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -933,8 +935,8 @@ namespace OngProject.Data.Migrations
                             Id = 3,
                             CategoryId = 3,
                             Content = "Content 3 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(4941),
-                            Image = "image 3",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6027),
+                            Image = "imageNews3.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -943,8 +945,8 @@ namespace OngProject.Data.Migrations
                             Id = 4,
                             CategoryId = 4,
                             Content = "Content 4 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(4965),
-                            Image = "image 4",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6056),
+                            Image = "imageNews4.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -953,8 +955,8 @@ namespace OngProject.Data.Migrations
                             Id = 5,
                             CategoryId = 5,
                             Content = "Content 5 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(4988),
-                            Image = "image 5",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6079),
+                            Image = "imageNews5.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -963,8 +965,8 @@ namespace OngProject.Data.Migrations
                             Id = 6,
                             CategoryId = 6,
                             Content = "Content 6 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5014),
-                            Image = "image 6",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6104),
+                            Image = "imageNews6.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -973,8 +975,8 @@ namespace OngProject.Data.Migrations
                             Id = 7,
                             CategoryId = 7,
                             Content = "Content 7 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5037),
-                            Image = "image 7",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6126),
+                            Image = "imageNews7.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -983,8 +985,8 @@ namespace OngProject.Data.Migrations
                             Id = 8,
                             CategoryId = 8,
                             Content = "Content 8 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5059),
-                            Image = "image 8",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6148),
+                            Image = "imageNews8.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -993,8 +995,8 @@ namespace OngProject.Data.Migrations
                             Id = 9,
                             CategoryId = 9,
                             Content = "Content 9 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5081),
-                            Image = "image 9",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6170),
+                            Image = "imageNews9.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -1003,8 +1005,8 @@ namespace OngProject.Data.Migrations
                             Id = 10,
                             CategoryId = 10,
                             Content = "Content 10 Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5106),
-                            Image = "image 10",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6196),
+                            Image = "imageNews10.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -1013,8 +1015,8 @@ namespace OngProject.Data.Migrations
                             Id = 11,
                             CategoryId = 1,
                             Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5128),
-                            Image = "image ",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6220),
+                            Image = "imageNews11.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -1023,8 +1025,8 @@ namespace OngProject.Data.Migrations
                             Id = 12,
                             CategoryId = 2,
                             Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5209),
-                            Image = "image ",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6243),
+                            Image = "imageNews12.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -1033,8 +1035,8 @@ namespace OngProject.Data.Migrations
                             Id = 14,
                             CategoryId = 1,
                             Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5231),
-                            Image = "image ",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6368),
+                            Image = "imageNews14.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         },
@@ -1043,8 +1045,8 @@ namespace OngProject.Data.Migrations
                             Id = 15,
                             CategoryId = 2,
                             Content = "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 104, DateTimeKind.Local).AddTicks(5250),
-                            Image = "image ",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 503, DateTimeKind.Local).AddTicks(6396),
+                            Image = "imageNews15.jpg",
                             IsDeleted = false,
                             Name = "new's name "
                         });
@@ -1115,142 +1117,16 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AboutUsText = "text about us1",
-                            Adress = "Adress 111",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(2684),
-                            Email = "email1@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization1",
-                            Image = "image1",
+                            AboutUsText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                            Adress = "Catamarca 1585 , CP: 1585",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 504, DateTimeKind.Local).AddTicks(1803),
+                            Email = "somomasong@gmail.com",
+                            FacebookUrl = "https://facebook.com/organization",
+                            Image = "imageOrganization.jpg",
                             IsDeleted = false,
-                            Name = "organizacion1",
-                            Phone = 84546122,
-                            WelcomeText = "texto welcome to visit1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AboutUsText = "text about us2",
-                            Adress = "Adress 222",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(2935),
-                            Email = "email2@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization2",
-                            Image = "image2",
-                            IsDeleted = false,
-                            Name = "organizacion2",
-                            Phone = 98644092,
-                            WelcomeText = "texto welcome to visit2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AboutUsText = "text about us3",
-                            Adress = "Adress 333",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(2969),
-                            Email = "email3@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization3",
-                            Image = "image3",
-                            IsDeleted = false,
-                            Name = "organizacion3",
-                            Phone = 57050465,
-                            WelcomeText = "texto welcome to visit3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AboutUsText = "text about us4",
-                            Adress = "Adress 444",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(2994),
-                            Email = "email4@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization4",
-                            Image = "image4",
-                            IsDeleted = false,
-                            Name = "organizacion4",
-                            Phone = 29950874,
-                            WelcomeText = "texto welcome to visit4"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AboutUsText = "text about us5",
-                            Adress = "Adress 555",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3019),
-                            Email = "email5@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization5",
-                            Image = "image5",
-                            IsDeleted = false,
-                            Name = "organizacion5",
-                            Phone = 89660613,
-                            WelcomeText = "texto welcome to visit5"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AboutUsText = "text about us6",
-                            Adress = "Adress 666",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3047),
-                            Email = "email6@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization6",
-                            Image = "image6",
-                            IsDeleted = false,
-                            Name = "organizacion6",
-                            Phone = 46941046,
-                            WelcomeText = "texto welcome to visit6"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AboutUsText = "text about us7",
-                            Adress = "Adress 777",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3072),
-                            Email = "email7@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization7",
-                            Image = "image7",
-                            IsDeleted = false,
-                            Name = "organizacion7",
-                            Phone = 49801704,
-                            WelcomeText = "texto welcome to visit7"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AboutUsText = "text about us8",
-                            Adress = "Adress 888",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3271),
-                            Email = "email8@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization8",
-                            Image = "image8",
-                            IsDeleted = false,
-                            Name = "organizacion8",
-                            Phone = 25090800,
-                            WelcomeText = "texto welcome to visit8"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AboutUsText = "text about us9",
-                            Adress = "Adress 999",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3306),
-                            Email = "email9@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization9",
-                            Image = "image9",
-                            IsDeleted = false,
-                            Name = "organizacion9",
-                            Phone = 75096814,
-                            WelcomeText = "texto welcome to visit9"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AboutUsText = "text about us10",
-                            Adress = "Adress 101010",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 105, DateTimeKind.Local).AddTicks(3333),
-                            Email = "email10@gmail.com",
-                            FacebookUrl = "https://facebook.com/organization10",
-                            Image = "image10",
-                            IsDeleted = false,
-                            Name = "organizacion10",
-                            Phone = 77616420,
-                            WelcomeText = "texto welcome to visit10"
+                            Name = "Somos Más",
+                            Phone = 1128559685,
+                            WelcomeText = "Bienvenidos a nuestro sitio web"
                         });
                 });
 
@@ -1284,7 +1160,7 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 85, DateTimeKind.Local).AddTicks(2752),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 483, DateTimeKind.Local).AddTicks(1472),
                             Description = "Admin User",
                             IsDeleted = false,
                             Name = "Admin"
@@ -1292,7 +1168,7 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 85, DateTimeKind.Local).AddTicks(3014),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 483, DateTimeKind.Local).AddTicks(1748),
                             Description = "Standard User",
                             IsDeleted = false,
                             Name = "Standard"
@@ -1337,8 +1213,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(6613),
-                            ImageUrl = "imagen 1",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8104),
+                            ImageUrl = "imagenSlides1.jpg",
                             IsDeleted = false,
                             Order = 1,
                             OrganizationId = "1",
@@ -1347,8 +1223,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(6860),
-                            ImageUrl = "imagen 2",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8433),
+                            ImageUrl = "imagenSlides2.jpg",
                             IsDeleted = false,
                             Order = 2,
                             OrganizationId = "2",
@@ -1357,8 +1233,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(6891),
-                            ImageUrl = "imagen 3",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8464),
+                            ImageUrl = "imagenSlides3.jpg",
                             IsDeleted = false,
                             Order = 3,
                             OrganizationId = "3",
@@ -1367,8 +1243,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(6911),
-                            ImageUrl = "imagen 4",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8486),
+                            ImageUrl = "imagenSlides4.jpg",
                             IsDeleted = false,
                             Order = 4,
                             OrganizationId = "4",
@@ -1377,8 +1253,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7098),
-                            ImageUrl = "imagen 5",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8506),
+                            ImageUrl = "imagenSlides5.jpg",
                             IsDeleted = false,
                             Order = 5,
                             OrganizationId = "5",
@@ -1387,8 +1263,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7122),
-                            ImageUrl = "imagen 6",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8531),
+                            ImageUrl = "imagenSlides6.jpg",
                             IsDeleted = false,
                             Order = 6,
                             OrganizationId = "6",
@@ -1397,8 +1273,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7142),
-                            ImageUrl = "imagen 7",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8550),
+                            ImageUrl = "imagenSlides7.jpg",
                             IsDeleted = false,
                             Order = 7,
                             OrganizationId = "7",
@@ -1407,8 +1283,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7161),
-                            ImageUrl = "imagen 8",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8649),
+                            ImageUrl = "imagenSlides8.jpg",
                             IsDeleted = false,
                             Order = 8,
                             OrganizationId = "8",
@@ -1417,8 +1293,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7180),
-                            ImageUrl = "imagen 9",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8675),
+                            ImageUrl = "imagenSlides9.jpg",
                             IsDeleted = false,
                             Order = 9,
                             OrganizationId = "9",
@@ -1427,8 +1303,8 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 100, DateTimeKind.Local).AddTicks(7202),
-                            ImageUrl = "imagen 10",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 500, DateTimeKind.Local).AddTicks(8699),
+                            ImageUrl = "imagenSlides10.jpg",
                             IsDeleted = false,
                             Order = 10,
                             OrganizationId = "10",
@@ -1471,8 +1347,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 1,
                             Content = "Content1Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7192),
-                            Image = "image1",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8003),
+                            Image = "imageTestimonials1.jpg",
                             IsDeleted = false,
                             Name = "name 1"
                         },
@@ -1480,8 +1356,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 2,
                             Content = "Content2Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7439),
-                            Image = "image2",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8300),
+                            Image = "imageTestimonials2.jpg",
                             IsDeleted = false,
                             Name = "name 2"
                         },
@@ -1489,8 +1365,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 3,
                             Content = "Content3Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7469),
-                            Image = "image3",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8333),
+                            Image = "imageTestimonials3.jpg",
                             IsDeleted = false,
                             Name = "name 3"
                         },
@@ -1498,8 +1374,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 4,
                             Content = "Content4Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7491),
-                            Image = "image4",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8356),
+                            Image = "imageTestimonials4.jpg",
                             IsDeleted = false,
                             Name = "name 4"
                         },
@@ -1507,8 +1383,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 5,
                             Content = "Content5Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7512),
-                            Image = "image5",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8378),
+                            Image = "imageTestimonials5.jpg",
                             IsDeleted = false,
                             Name = "name 5"
                         },
@@ -1516,8 +1392,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 6,
                             Content = "Content6Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7536),
-                            Image = "image6",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8402),
+                            Image = "imageTestimonials6.jpg",
                             IsDeleted = false,
                             Name = "name 6"
                         },
@@ -1525,8 +1401,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 7,
                             Content = "Content7Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7559),
-                            Image = "image7",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8424),
+                            Image = "imageTestimonials7.jpg",
                             IsDeleted = false,
                             Name = "name 7"
                         },
@@ -1534,8 +1410,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 8,
                             Content = "Content8Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7580),
-                            Image = "image8",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8444),
+                            Image = "imageTestimonials8.jpg",
                             IsDeleted = false,
                             Name = "name 8"
                         },
@@ -1543,8 +1419,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 9,
                             Content = "Content9Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7702),
-                            Image = "image9",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8465),
+                            Image = "imageTestimonials9.jpg",
                             IsDeleted = false,
                             Name = "name 9"
                         },
@@ -1552,8 +1428,8 @@ namespace OngProject.Data.Migrations
                         {
                             Id = 10,
                             Content = "Content10Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 101, DateTimeKind.Local).AddTicks(7730),
-                            Image = "image10",
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 501, DateTimeKind.Local).AddTicks(8555),
+                            Image = "imageTestimonials10.jpg",
                             IsDeleted = false,
                             Name = "name 10"
                         });
@@ -1612,241 +1488,241 @@ namespace OngProject.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(7488),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(4015),
                             IsDeleted = false,
                             email = "mail1@Mail.com",
                             firstName = "User 1",
                             lastName = "AdminUser 1",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers1.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8480),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5103),
                             IsDeleted = false,
                             email = "mail2@Mail.com",
                             firstName = "User 2",
                             lastName = "AdminUser 2",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers2.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8698),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5234),
                             IsDeleted = false,
                             email = "mail3@Mail.com",
                             firstName = "User 3",
                             lastName = "AdminUser 3",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers3.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8774),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5308),
                             IsDeleted = false,
                             email = "mail4@Mail.com",
                             firstName = "User 4",
                             lastName = "AdminUser 4",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers4.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8839),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5373),
                             IsDeleted = false,
                             email = "mail5@Mail.com",
                             firstName = "User 5",
                             lastName = "AdminUser 5",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers5.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8920),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5540),
                             IsDeleted = false,
                             email = "mail6@Mail.com",
                             firstName = "User 6",
                             lastName = "AdminUser 6",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers6.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(8985),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5606),
                             IsDeleted = false,
                             email = "mail7@Mail.com",
                             firstName = "User 7",
                             lastName = "AdminUser 7",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers7.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9211),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5670),
                             IsDeleted = false,
                             email = "mail8@Mail.com",
                             firstName = "User 8",
                             lastName = "AdminUser 8",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers8.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9282),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5798),
                             IsDeleted = false,
                             email = "mail9@Mail.com",
                             firstName = "User 9",
                             lastName = "AdminUser 9",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers9.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 10,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9350),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5871),
                             IsDeleted = false,
                             email = "mail10@Mail.com",
                             firstName = "User 10",
                             lastName = "AdminUser 10",
                             password = "3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2",
-                            photo = "Test.jpg",
+                            photo = "TestUsers10.jpg",
                             roleId = 1
                         },
                         new
                         {
                             Id = 11,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9487),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(5938),
                             IsDeleted = false,
                             email = "mail11@Mail.com",
                             firstName = "User 11",
                             lastName = "RegularUser 11",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers11.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 12,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9557),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6066),
                             IsDeleted = false,
                             email = "mail12@Mail.com",
                             firstName = "User 12",
                             lastName = "RegularUser 12",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers12.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 13,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9620),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6134),
                             IsDeleted = false,
                             email = "mail13@Mail.com",
                             firstName = "User 13",
                             lastName = "RegularUser 13",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers13.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 14,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9744),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6197),
                             IsDeleted = false,
                             email = "mail14@Mail.com",
                             firstName = "User 14",
                             lastName = "RegularUser 14",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers14.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 15,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9811),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6322),
                             IsDeleted = false,
                             email = "mail15@Mail.com",
                             firstName = "User 15",
                             lastName = "RegularUser 15",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers15.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 16,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9873),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6388),
                             IsDeleted = false,
                             email = "mail16@Mail.com",
                             firstName = "User 16",
                             lastName = "RegularUser 16",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers16.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 17,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 98, DateTimeKind.Local).AddTicks(9933),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6452),
                             IsDeleted = false,
                             email = "mail17@Mail.com",
                             firstName = "User 17",
                             lastName = "RegularUser 17",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers17.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 18,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 99, DateTimeKind.Local).AddTicks(62),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6604),
                             IsDeleted = false,
                             email = "mail18@Mail.com",
                             firstName = "User 18",
                             lastName = "RegularUser 18",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers18.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 19,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 99, DateTimeKind.Local).AddTicks(128),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6672),
                             IsDeleted = false,
                             email = "mail19@Mail.com",
                             firstName = "User 19",
                             lastName = "RegularUser 19",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers19.jpg",
                             roleId = 2
                         },
                         new
                         {
                             Id = 20,
-                            CreatedAt = new DateTime(2021, 8, 9, 10, 48, 8, 99, DateTimeKind.Local).AddTicks(189),
+                            CreatedAt = new DateTime(2021, 8, 13, 13, 58, 17, 499, DateTimeKind.Local).AddTicks(6735),
                             IsDeleted = false,
                             email = "mail20@Mail.com",
                             firstName = "User 20",
                             lastName = "RegularUser 20",
                             password = "a61a8adf60038792a2cb88e670b20540a9d6c2ca204ab754fc768950e79e7d36",
-                            photo = "Test.jpg",
+                            photo = "TestUsers20.jpg",
                             roleId = 2
                         });
                 });

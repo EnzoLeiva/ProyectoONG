@@ -11,10 +11,6 @@ using OngProject.Core.Services;
 using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
 using System.Text;
 using Amazon.S3;
@@ -23,6 +19,10 @@ using Microsoft.IdentityModel.Tokens;
 using OngProject.Core.Services.Auth;
 using OngProject.Core.Interfaces.IServices.SendEmail;
 using OngProject.Core.Services.SendEmail;
+using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Services.AWS;
+using OngProject.Core.Helper;
+using OngProject.Middleware;
 
 namespace OngProject
 {
@@ -86,6 +86,7 @@ namespace OngProject
             services.AddTransient<IAuthService, AuthService>();
             services.AddAWSService<IAmazonS3>();
             services.AddTransient<ISendEmailService, SendEmailService>();
+            services.AddTransient<IImagenService, ImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -105,6 +106,8 @@ namespace OngProject
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<OwnerShipMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

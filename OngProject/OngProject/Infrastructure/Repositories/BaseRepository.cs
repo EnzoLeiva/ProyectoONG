@@ -35,7 +35,7 @@ namespace OngProject.Infrastructure.Repositories
         {
             IQueryable<UserModel> query = _context.Users.Include(u => u.RoleModel);
 
-            var user = await query.Where(x => x.email.ToUpper() == email.ToUpper()).FirstOrDefaultAsync();
+            var user = await query.Where(x => x.email.ToUpper() == email.ToUpper() && x.IsDeleted == false).FirstOrDefaultAsync();
 
             return user;
         }
