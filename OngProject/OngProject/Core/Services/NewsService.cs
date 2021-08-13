@@ -28,11 +28,6 @@ namespace OngProject.Core.Services
         {
             try
             {
-                NewsModel news =  await GetById(id);
-                bool result = await _imagenService.Delete(news.Image);
-                if (!result) // if there is an error in AWS service to delete the image
-                   return false;
-
                 await _unitOfWork.NewsRepository.Delete(id);
                 await _unitOfWork.SaveChangesAsync();
             }

@@ -49,9 +49,6 @@ namespace OngProject.Core.Services
         {
             try
             {
-                MemberModel member = await GetById(Id);
-
-                await _imagenService.Delete(member.Image);
                 await _unitOfWork.MemberRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }

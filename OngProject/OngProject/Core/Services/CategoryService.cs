@@ -55,11 +55,7 @@ namespace OngProject.Core.Services
         {
             try
             {
-                CategoryModel category = await GetById(Id);
-                bool result = await _imagenService.Delete(category.Image);
-                if (!result) // if there is an error in AWS service to delete the image
-                  return false;
-               
+                
                 await _unitOfWork.CategoryRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }

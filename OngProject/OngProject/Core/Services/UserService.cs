@@ -28,12 +28,7 @@ namespace OngProject.Core.Services
         {
 
             try
-            {
-                UserInfoDto user = await GetUserById(Id);
-                bool result = await _imagenService.Delete(user.photo);
-                if (!result) // if there is an error in AWS service to delete the image
-                    return false;
-              
+            {           
                 await _unitOfWork.UserRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
                 
