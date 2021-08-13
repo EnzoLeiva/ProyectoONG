@@ -62,7 +62,8 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var slide = mapper.FromSlideDtoToSlide(slideCreateDto);
             byte[] bytesFile = Convert.FromBase64String(slideCreateDto.ImageBase64);
-            string fileExtension = ValidateFiles.GetImageExtensionFromFile(bytesFile);
+            ValidateFiles validate = new ValidateFiles();
+            string fileExtension = validate.GetImageExtensionFromFile(bytesFile);
             string uniqueName = "slide_" + DateTime.Now.ToString().Replace(",", "").Replace("/", "").Replace(" ", "");
             FormFileData formFileData = new()
             {
@@ -70,9 +71,15 @@ namespace OngProject.Core.Services
                 ContentType = "Image/" + fileExtension.Replace(".", ""),
                 Name = null
             };
-            IFormFile ImageFormFile = ConvertFiles.BinaryToFormFile(bytesFile, formFileData);
+            IFormFile ImageFormFile = ConvertFile.BinaryToFormFile(bytesFile, formFileData);
             S3AwsHelper s3Helper = new();
             var result = await s3Helper.AwsUploadFile(uniqueName, ImageFormFile);
+            if (slideCreateDto.Order == 0)
+            {
+                var slideList = await _unitOfWork.SlideRepository.GetAll();
+                var elem = slideList.Last();
+                slideCreateDto.Order = elem.Order;
+            }
             await _unitOfWork.SlideRepository.Insert(slide);
             await _unitOfWork.SaveChangesAsync();
 
