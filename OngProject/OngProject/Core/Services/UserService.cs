@@ -6,8 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using OngProject.Core.DTOs;
+using OngProject.Core.Mapper;
+using OngProject.Core.Interfaces.IServices.AWS;
 
 namespace OngProject.Core.Services
 {
@@ -15,16 +16,19 @@ namespace OngProject.Core.Services
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUnitOfWork unitOfWork)
+        private readonly IImagenService _imagenService;
+
+        public UserService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
         }
 
         public async Task<bool> DeleteUser(int Id)
         {
 
             try
-            {
+            {           
                 await _unitOfWork.UserRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
                 
@@ -47,6 +51,13 @@ namespace OngProject.Core.Services
             return await _unitOfWork.UserRepository.GetAll();
         }
 
-     
+        public async Task<UserInfoDto> GetUserById(int Id)
+        {
+            UserModel user = await _unitOfWork.UserRepository.GetById(Id);
+            EntityMapper mapper = new EntityMapper();
+            UserInfoDto userInfoDto = mapper.FromUserModelToUserInfoDto(user);
+
+            return userInfoDto;
+        }
     }
 }

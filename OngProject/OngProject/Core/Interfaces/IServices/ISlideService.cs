@@ -12,5 +12,7 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<IEnumerable<SlideDto>> GetAll();
         public Task<SlideModel> GetById(int Id);
         public bool EntityExists(int id);
+        public Task<bool> Delete(int id);
+        public Task<SlideModel> Post(SlideDto slideCreateDto);
     }
 }

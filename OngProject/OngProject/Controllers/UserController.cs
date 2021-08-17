@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
 using OngProject.Core.DTOs.Auth;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -27,8 +28,26 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
+        [HttpGet("/auth/me")]
+        public async Task<ActionResult<UserInfoDto>> GetUserData()
+        {
+            try
+            {
+                string authToken = Request.Headers["Authorization"];
+                int userId = _auth.GetUserId(authToken);
+                UserInfoDto userModeldto = await _userService.GetUserById(userId);
+
+                return Ok(userModeldto);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpPost("/auth/register")]
-        public async Task<ActionResult<UserDto>> Register([FromBody] RegisterDTO request)
+        public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
         {
             try
             {
@@ -43,25 +62,27 @@ namespace OngProject.Controllers
             {
                 return BadRequest(e.Message);
             }
-           
+
 
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
+        [AllowAnonymous]
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
-             var user = await this._auth.login(request);
+            var user = await this._auth.login(request);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-             return Ok(user);
-            
+            return Ok(user);
+
         }
 
+        [Authorize]
         [HttpDelete("/users/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -80,7 +101,7 @@ namespace OngProject.Controllers
             }
         }
 
-        
+        [Authorize(Roles ="Admin")]
         [HttpGet("/users")]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {

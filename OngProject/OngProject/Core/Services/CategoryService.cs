@@ -9,17 +9,22 @@ using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using OngProject.Infrastructure;
+using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
 
 namespace OngProject.Core.Services
 {
     public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IImagenService _imagenService;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
         }
+
         public async Task<IEnumerable<CategoryDto>> GetAll()
         {
             var mapper = new EntityMapper();
@@ -31,23 +36,31 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.CategoryRepository.GetById(Id);
         }
-        public async Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto)
+        public async Task<CategoryModel> Post(CategoryCreateDto categoryCreateDto)
         {
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
 
-            await _unitOfWork.CategoryRepository.Insert(category);
-            await _unitOfWork.SaveChangesAsync();
+            try
+            {
+                await _imagenService.Save(category.Image, categoryCreateDto.Image);
+                await _unitOfWork.CategoryRepository.Insert(category);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return category;
         }
 
-
-
+       
         public async Task<bool> Delete(int Id)
         {
             try
             {
+                
                 await _unitOfWork.CategoryRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -57,13 +70,14 @@ namespace OngProject.Core.Services
             }
             return true;
         }
-        public async Task<CategoryModel> Put([FromForm] CategoryCreateDto updateCategoryDto, int id)
+        public async Task<CategoryModel> Put(CategoryCreateDto updateCategoryDto, int id)
         {
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(updateCategoryDto);
 
             category.Id = id;
 
+            await _imagenService.Save(category.Image, updateCategoryDto.Image);
             await _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
 

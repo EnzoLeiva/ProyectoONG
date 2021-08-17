@@ -7,17 +7,25 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.DTOs
 {
-    public class NewsDto
+    public class MemberCreateDto
     {
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
-        [Required]
-        [MaxLength(65535)]
-        public string Content { get; set; }
+
+        [MaxLength(255)]
+        public string FacebookUrl { get; set; }
+
+        [MaxLength(255)]
+        public string InstagramUrl { get; set; }
+
+        [MaxLength(255)]
+        public string LinkedinUrl { get; set; }
+
         [Required]
         public IFormFile Image { get; set; }
-        [Required]
-        public int CategoryId { get; set; }
+
+        [MaxLength(255)]
+        public string Description { get; set; }
     }
 }

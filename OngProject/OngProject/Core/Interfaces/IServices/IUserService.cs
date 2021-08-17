@@ -12,5 +12,6 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<bool> DeleteUser(int Id);
         public Task<IEnumerable<UserModel>> GetUsers();
         public bool UserExists(int Id);
+        public Task<UserInfoDto> GetUserById(int Id);
     }
 }

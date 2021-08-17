@@ -14,5 +14,7 @@ namespace OngProject.Core.DTOs
         public string FacebookUrl { get; set; }
         public string LinkedinUrl { get; set; }
         public string InstagramUrl { get; set; }
+
+        public List<SlideInfoDto> Slides { get; set; }
     }
 }

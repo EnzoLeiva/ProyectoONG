@@ -8,21 +8,34 @@ using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
 using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
+using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
 
 namespace OngProject.Core.Services
 {
     public class NewsService : INewsService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IImagenService _imagenService;
 
-        public NewsService(IUnitOfWork unitOfWork)
+        public NewsService(IUnitOfWork unitOfWork, IImagenService imagenService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
         }
 
-        public Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            return _unitOfWork.NewsRepository.Delete(id);
+            try
+            {
+                await _unitOfWork.NewsRepository.Delete(id);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         public Task<IEnumerable<NewsModel>> GetAll()
@@ -30,21 +43,34 @@ namespace OngProject.Core.Services
             return _unitOfWork.NewsRepository.GetAll();
         }
 
-        public async Task<NewsDto> GetById(int id)
+        public async Task<NewsModel> GetById(int id)
         {
-            var mapper = new EntityMapper();
+           
             var news = await _unitOfWork.NewsRepository.GetById(id);
-            var newsDto = mapper.FromNewsToNewsDto(news);
-            return newsDto;
+            return news;
         }
 
-        public Task Insert(NewsModel newsModel)
+        public async Task<NewsModel> Post(NewsDto newsCreateDto)
         {
-            return _unitOfWork.NewsRepository.Insert(newsModel);
+            var mapper = new EntityMapper();
+            var news = mapper.FromNewsDtoToNews(newsCreateDto);
+
+            try
+            {
+                await _imagenService.Save(news.Image, newsCreateDto.Image);
+                await _unitOfWork.NewsRepository.Insert(news);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return news;
         }
 
         public Task Update(NewsModel newsModel)
         {
+
             return _unitOfWork.NewsRepository.Update(newsModel);
 
         }

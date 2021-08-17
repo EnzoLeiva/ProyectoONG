@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Data;
-
+using OngProject.Core.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OngProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("/news")]
     [ApiController]
     public class NewsController : ControllerBase
@@ -25,6 +27,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -33,6 +36,40 @@ namespace OngProject.Controllers
 
             var response = await _inewsService.GetById(id);
             return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromForm] NewsDto newsCreateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                var response = await _inewsService.Post(newsCreateDto);
+
+                return CreatedAtAction("POST", response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (_inewsService.NewsExists(id))
+            {
+                bool result = await _inewsService.Delete(id);
+                if (result)
+                    return Ok();
+                else
+                    return BadRequest(StatusCodes.Status500InternalServerError);
+            }
+            else
+                return NotFound();
         }
     }
 }
