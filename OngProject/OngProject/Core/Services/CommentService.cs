@@ -55,7 +55,7 @@ namespace OngProject.Core.Services
         }
         public bool EntityExists(int id)
         {
-            return _unitOfWork.CategoryRepository.EntityExists(id);
+            return _unitOfWork.CommentRepository.EntityExists(id);
         }
         public async Task<bool> ValidateCreatorOrAdminAsync(ClaimsPrincipal user, int id)
         {
