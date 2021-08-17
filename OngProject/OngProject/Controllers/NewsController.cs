@@ -78,19 +78,7 @@ namespace OngProject.Controllers
         [HttpGet]
         public async Task<ResponsePagination<GenericPagination<NewsModel>>> GetAll(int page = 1, int sizeByPage = 10)
         {
-
-            IEnumerable<NewsModel> data = await _inewsService.GetAll();
-            GenericPagination<NewsModel> objGenericPagination = GenericPagination<NewsModel>.Create(data, page, sizeByPage);
-            ResponsePagination<GenericPagination<NewsModel>> response = new ResponsePagination<GenericPagination<NewsModel>>(objGenericPagination);
-            response.CurrentPage = objGenericPagination.CurrentPage;
-            response.HasNextPage = objGenericPagination.HasNextPage;
-            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
-            response.PageSize = objGenericPagination.PageSize;
-            response.TotalPages = objGenericPagination.TotalPages;
-            response.TotalRecords = objGenericPagination.TotalRecords;
-            response.Data = objGenericPagination;
-        
-            return response;
+             return await _inewsService.GetAll(page, sizeByPage);
         }
     }
 }

@@ -10,6 +10,8 @@ using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
 using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Helper;
+using OngProject.Core.Helper.Pagination;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 
 namespace OngProject.Core.Services
 {
@@ -17,11 +19,13 @@ namespace OngProject.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImagenService _imagenService;
+        private readonly IUriPaginationService _uriPaginationService;
 
-        public NewsService(IUnitOfWork unitOfWork, IImagenService imagenService)
+        public NewsService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
             _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
         }
 
         public async Task<bool> Delete(int id)
@@ -38,9 +42,43 @@ namespace OngProject.Core.Services
             return true;
         }
 
-        public async Task<IEnumerable<NewsModel>> GetAll()
+        public async Task<ResponsePagination<GenericPagination<NewsModel>>> GetAll(int page, int sizeByPage)
         {
-            return await _unitOfWork.NewsRepository.GetAll();
+            string nextRoute=null, previousRoute = null;
+            IEnumerable<NewsModel> data = await _unitOfWork.NewsRepository.GetAll();
+            GenericPagination<NewsModel> objGenericPagination = GenericPagination<NewsModel>.Create(data, page, sizeByPage);
+            ResponsePagination<GenericPagination<NewsModel>> response = new ResponsePagination<GenericPagination<NewsModel>>(objGenericPagination);
+            response.CurrentPage = objGenericPagination.CurrentPage;
+            response.HasNextPage = objGenericPagination.HasNextPage;
+            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
+            response.PageSize = objGenericPagination.PageSize;
+            response.TotalPages = objGenericPagination.TotalPages;
+            response.TotalRecords = objGenericPagination.TotalRecords;
+            response.Data = objGenericPagination;
+
+            if (response.HasNextPage)
+            {
+                nextRoute = $"/news?page={(page + 1)}";
+                response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
+            }
+            else
+            {
+                response.NextPageUrl = null;
+            }  
+
+            if (response.HasPreviousPage)
+            {
+                previousRoute = $"/news?page={(page - 1)}";
+                response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
+            }
+            else
+            {
+                response.PreviousPageUrl = null;
+            }
+
+            
+            
+            return response;
         }
 
         public async Task<NewsModel> GetById(int id)
