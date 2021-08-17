@@ -38,9 +38,9 @@ namespace OngProject.Core.Services
             return true;
         }
 
-        public Task<IEnumerable<NewsModel>> GetAll()
+        public async Task<IEnumerable<NewsModel>> GetAll()
         {
-            return _unitOfWork.NewsRepository.GetAll();
+            return await _unitOfWork.NewsRepository.GetAll();
         }
 
         public async Task<NewsModel> GetById(int id)
