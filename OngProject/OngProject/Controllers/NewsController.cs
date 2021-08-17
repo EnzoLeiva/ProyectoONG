@@ -9,6 +9,8 @@ using OngProject.Core.Interfaces;
 using OngProject.Infrastructure.Data;
 using OngProject.Core.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using OngProject.Core.Models;
+using OngProject.Core.Helper.Pagination;
 
 namespace OngProject.Controllers
 {
@@ -70,6 +72,13 @@ namespace OngProject.Controllers
             }
             else
                 return NotFound();
+        }
+
+
+        [HttpGet]
+        public async Task<ResponsePagination<GenericPagination<NewsModel>>> GetAll(int page = 1, int sizeByPage = 10)
+        {
+             return await _inewsService.GetAll(page, sizeByPage);
         }
     }
 }

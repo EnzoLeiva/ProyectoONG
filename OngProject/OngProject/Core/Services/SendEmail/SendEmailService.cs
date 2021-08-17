@@ -44,8 +44,8 @@ namespace OngProject.Core.Services.SendEmail
             var apiKey = _configuration["SENDGRID_API_KEY:Key"];
             string html = File.ReadAllText("./Templates/email_template.html");
 
-            html = html.Replace("{mail_title}", _configuration["SENDGRID_API_KEY:WelcomeMessage"]);
-            html = html.Replace("{mail_body}", _configuration["SENDGRID_API_KEY:ContactMessage"]);
+            html = html.Replace("{mail_title}", _configuration["SENDGRID_API_KEY:ContactMessage"]);
+            html = html.Replace("{mail_body}", _configuration["SENDGRID_API_KEY:ContactBodyMessage"]);
             
 
             var client = new SendGridClient(apiKey);

@@ -43,7 +43,7 @@ namespace OngProject.Core.Services
 
             try
             {
-                await _imagenService.Save(category.Image, categoryCreateDto.Image);
+                category.Image = await _imagenService.Save(category.Image, categoryCreateDto.Image);
                 await _unitOfWork.CategoryRepository.Insert(category);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -77,7 +77,7 @@ namespace OngProject.Core.Services
 
             category.Id = id;
 
-            await _imagenService.Save(category.Image, updateCategoryDto.Image);
+            category.Image = await _imagenService.Save(category.Image, updateCategoryDto.Image);
             await _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
 
