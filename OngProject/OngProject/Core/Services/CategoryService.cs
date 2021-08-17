@@ -11,6 +11,8 @@ using OngProject.Core.Models;
 using OngProject.Infrastructure;
 using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Helper;
+using OngProject.Core.Helper.Pagination;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 
 namespace OngProject.Core.Services
 {
@@ -18,19 +20,54 @@ namespace OngProject.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImagenService _imagenService;
+        private readonly IUriPaginationService _uriPaginationService;
 
-        public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService)
+        public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
             _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAll()
+        public async Task<ResponsePagination<GenericPagination<CategoryDto>>> GetAll(int page, int sizeByPage)
         {
+            string nextRoute = null, previousRoute = null;
+            IEnumerable<CategoryModel> data = await _unitOfWork.CategoryRepository.GetAll();
+
             var mapper = new EntityMapper();
-            var categories = await _unitOfWork.CategoryRepository.GetAll();
-            var categoriesDto = categories.Select(c => mapper.FromCategoryToCategoryDto(c)).ToList();
-            return categoriesDto;
+            var categoriesDto = data.Select(c => mapper.FromCategoryToCategoryDto(c)).ToList();
+
+            GenericPagination<CategoryDto> objGenericPagination = GenericPagination<CategoryDto>.Create(categoriesDto, page, sizeByPage);
+            ResponsePagination<GenericPagination<CategoryDto>> response = new ResponsePagination<GenericPagination<CategoryDto>>(objGenericPagination);
+            response.CurrentPage = objGenericPagination.CurrentPage;
+            response.HasNextPage = objGenericPagination.HasNextPage;
+            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
+            response.PageSize = objGenericPagination.PageSize;
+            response.TotalPages = objGenericPagination.TotalPages;
+            response.TotalRecords = objGenericPagination.TotalRecords;
+            response.Data = objGenericPagination;
+
+            if (response.HasNextPage)
+            {
+                nextRoute = $"/categories?page={(page + 1)}";
+                response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
+            }
+            else
+            {
+                response.NextPageUrl = null;
+            }
+
+            if (response.HasPreviousPage)
+            {
+                previousRoute = $"/categories?page={(page - 1)}";
+                response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
+            }
+            else
+            {
+                response.PreviousPageUrl = null;
+            }
+
+            return response;
         }
         public Task<CategoryModel> GetById(int Id)
         {
