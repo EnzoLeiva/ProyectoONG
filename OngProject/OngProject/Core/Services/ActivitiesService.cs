@@ -51,8 +51,8 @@ namespace OngProject.Core.Services
 
             try
             {
-                await _imagenService.Save(activities.Image, activitiesCreateDto.Image);
-
+                activities.Image = await _imagenService.Save(activities.Image, activitiesCreateDto.Image);
+               
                 await _unitOfWork.ActivitiesRepository.Insert(activities);
                 await _unitOfWork.SaveChangesAsync();
             }

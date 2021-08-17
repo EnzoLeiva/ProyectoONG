@@ -57,7 +57,7 @@ namespace OngProject.Core.Services
 
             try
             {
-                await _imagenService.Save(news.Image, newsCreateDto.Image);
+                news.Image = await _imagenService.Save(news.Image, newsCreateDto.Image);
                 await _unitOfWork.NewsRepository.Insert(news);
                 await _unitOfWork.SaveChangesAsync();
             }

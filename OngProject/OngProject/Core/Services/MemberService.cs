@@ -35,7 +35,7 @@ namespace OngProject.Core.Services
 
             try
             {
-                await _imagenService.Save(member.Image, memberCreateDto.Image);
+                member.Image = await _imagenService.Save(member.Image, memberCreateDto.Image);
                 await _unitOfWork.MemberRepository.Insert(member);
                 await _unitOfWork.SaveChangesAsync();
             }
