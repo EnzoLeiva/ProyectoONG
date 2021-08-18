@@ -10,6 +10,9 @@ using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using OngProject.Infrastructure;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
+using OngProject.Core.Helper.Pagination;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 
 namespace OngProject.Core.Services
 {
@@ -17,19 +20,54 @@ namespace OngProject.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImagenService _imagenService;
+        private readonly IUriPaginationService _uriPaginationService;
 
-        public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService)
+        public CategoryService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
             _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAll()
+        public async Task<ResponsePagination<GenericPagination<CategoryDto>>> GetAll(int page, int sizeByPage)
         {
+            string nextRoute = null, previousRoute = null;
+            IEnumerable<CategoryModel> data = await _unitOfWork.CategoryRepository.GetAll();
+
             var mapper = new EntityMapper();
-            var categories = await _unitOfWork.CategoryRepository.GetAll();
-            var categoriesDto = categories.Select(c => mapper.FromCategoryToCategoryDto(c)).ToList();
-            return categoriesDto;
+            var categoriesDto = data.Select(c => mapper.FromCategoryToCategoryDto(c)).ToList();
+
+            GenericPagination<CategoryDto> objGenericPagination = GenericPagination<CategoryDto>.Create(categoriesDto, page, sizeByPage);
+            ResponsePagination<GenericPagination<CategoryDto>> response = new ResponsePagination<GenericPagination<CategoryDto>>(objGenericPagination);
+            response.CurrentPage = objGenericPagination.CurrentPage;
+            response.HasNextPage = objGenericPagination.HasNextPage;
+            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
+            response.PageSize = objGenericPagination.PageSize;
+            response.TotalPages = objGenericPagination.TotalPages;
+            response.TotalRecords = objGenericPagination.TotalRecords;
+            response.Data = objGenericPagination;
+
+            if (response.HasNextPage)
+            {
+                nextRoute = $"/categories?page={(page + 1)}";
+                response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
+            }
+            else
+            {
+                response.NextPageUrl = null;
+            }
+
+            if (response.HasPreviousPage)
+            {
+                previousRoute = $"/categories?page={(page - 1)}";
+                response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
+            }
+            else
+            {
+                response.PreviousPageUrl = null;
+            }
+
+            return response;
         }
         public Task<CategoryModel> GetById(int Id)
         {
@@ -40,12 +78,16 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var category = mapper.FromCategoryCreateDtoToCategory(categoryCreateDto);
 
-            if (categoryCreateDto.Image != null)
-                await _imagenService.Save(category.Image, categoryCreateDto.Image);
-
-            await _unitOfWork.CategoryRepository.Insert(category);       
-            await _unitOfWork.SaveChangesAsync();
-
+            try
+            {
+                category.Image = await _imagenService.Save(category.Image, categoryCreateDto.Image);
+                await _unitOfWork.CategoryRepository.Insert(category);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
 
             return category;
         }
@@ -55,13 +97,7 @@ namespace OngProject.Core.Services
         {
             try
             {
-                CategoryModel category = await GetById(Id);
-                if (!string.IsNullOrEmpty(category.Image))
-                {
-                    bool result = await _imagenService.Delete(category.Image);
-                    if (!result) // if there is an error in AWS service to delete the image
-                        return false;
-                }
+                
                 await _unitOfWork.CategoryRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -78,7 +114,7 @@ namespace OngProject.Core.Services
 
             category.Id = id;
 
-            await _imagenService.Save(category.Image, updateCategoryDto.Image);
+            category.Image = await _imagenService.Save(category.Image, updateCategoryDto.Image);
             await _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
 

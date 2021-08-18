@@ -7,17 +7,13 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.DTOs
 {
-    public class NewsDto
+    public class CommentCreateDto
     {
         [Required]
-        [MaxLength(255)]
-        public string Name { get; set; }
+        public int User_id { get; set; }
         [Required]
-        [MaxLength(65535)]
-        public string Content { get; set; }
+        public int post_id { get; set; }
         [Required]
-        public IFormFile Image { get; set; }
-        [Required]
-        public int CategoryId { get; set; }
+        public string Body { get; set; }
     }
 }

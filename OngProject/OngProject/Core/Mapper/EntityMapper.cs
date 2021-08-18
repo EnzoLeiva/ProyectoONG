@@ -29,19 +29,19 @@ namespace OngProject.Core.Mapper
             return commentDto;
         }
 
-        public NewsDto FromNewsToNewsDto(NewsModel news)
-        {
-            var newsDto = new NewsDto()
-            {
-                Name = news.Name,
-                Image = news.Image,
-                Content = news.Content
-            };
+        /* public NewsDto FromNewsToNewsDto(NewsModel news)
+         {
+             var newsDto = new NewsDto()
+             {
+                 Name = news.Name,
+                 Image = news.Image, // no se puede convertir string a IFormFile
+                 Content = news.Content
+             };
 
-            return newsDto;
-        }
-
-        internal ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
+             return newsDto;
+         }
+        */
+        public ContactsModel FromContactsCreateDtoToContacts(ContactsCreateDto contactsCreateDto)
         {
             if (contactsCreateDto == null)
             {
@@ -71,6 +71,25 @@ namespace OngProject.Core.Mapper
             return organizationDto;
         }
 
+        public ActivitiesModel FromActivitiesCreateDtoToActivities(ActivitiesCreateDto activitiesCreateDto)
+        {
+            if (activitiesCreateDto == null)
+            {
+                return null;
+            }
+
+            string image = null;
+            if (activitiesCreateDto.Image != null)
+                image = GetNameImage("activities");
+
+            return new ActivitiesModel
+            {
+                Name = activitiesCreateDto.Name,
+                Image = image,
+                Content = activitiesCreateDto.Content,
+            };
+        }
+
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
         {
             var categoryDto = new CategoryDto()
@@ -90,6 +109,22 @@ namespace OngProject.Core.Mapper
             };
 
             return userDto;
+        }
+
+        public CommentModel FromCommentCreateDtoToComment(CommentCreateDto commentCreateDto)
+        {
+
+            if (commentCreateDto == null)
+            {
+                return null;
+            }
+
+            return new CommentModel
+            {
+                User_id = commentCreateDto.User_id,
+                post_id = commentCreateDto.post_id,
+                Body = commentCreateDto.Body,
+            };
         }
 
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
@@ -156,11 +191,15 @@ namespace OngProject.Core.Mapper
             {
                 return null;
             }
+            string image = null;
+            if (newsCreateDto.Image != null)
+                image = GetNameImage("news");
+
             return new NewsModel
             {
                 Name = newsCreateDto.Name,
                 Content = newsCreateDto.Content,
-                Image = "news_" + newsCreateDto.Image,
+                Image =image,
                 CategoryId = newsCreateDto.CategoryId
 
             };
@@ -235,6 +274,22 @@ namespace OngProject.Core.Mapper
             };
 
             return organizationDto;
+        }
+
+        public SlideModel FromSlideDtoToSlide(SlideDto slideCreateDto)
+
+        {
+            if (slideCreateDto == null)
+            {
+
+                return null;
+            }
+            return new SlideModel
+            {
+                ImageUrl = slideCreateDto.ImageUrl,
+                Order = slideCreateDto.Order,
+                Text = slideCreateDto.Text
+            };
         }
 
     }

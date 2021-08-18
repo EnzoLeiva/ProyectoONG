@@ -14,6 +14,7 @@ using OngProject.Core.DTOs;
 using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Interfaces.IServices.SendEmail;
+using OngProject.Core.Helper;
 
 namespace OngProject.Core.Services.Auth
 {
@@ -51,8 +52,9 @@ namespace OngProject.Core.Services.Auth
                     var user = mapper.FromRegisterDtoToUser(register);
                     user.RoleModel = await _unitOfWork.RoleRepository.GetById(2);
 
-                    if(register.photo!=null)
-                        await _imagenService.Save(user.photo, register.photo);
+                   
+                    await _imagenService.Save(user.photo, register.photo);
+
                     await _unitOfWork.UserRepository.Insert(user);
                     await _unitOfWork.SaveChangesAsync();
 
@@ -70,7 +72,7 @@ namespace OngProject.Core.Services.Auth
                 }
                 catch (Exception e)
                 {
-                    return null;
+                    throw new Exception(e.Message);
                 }
             }
              

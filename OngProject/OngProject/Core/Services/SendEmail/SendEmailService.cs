@@ -39,6 +39,25 @@ namespace OngProject.Core.Services.SendEmail
           
         }
 
+        public async Task<bool> SendContatcsEmail(string email)
+        {
+            var apiKey = _configuration["SENDGRID_API_KEY:Key"];
+            string html = File.ReadAllText("./Templates/email_template.html");
+
+            html = html.Replace("{mail_title}", _configuration["SENDGRID_API_KEY:ContactMessage"]);
+            html = html.Replace("{mail_body}", _configuration["SENDGRID_API_KEY:ContactBodyMessage"]);
+            
+
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(_configuration["SENDGRID_API_KEY:FromEmail"]);
+            var to = new EmailAddress(email);
+            string subject = _configuration["SENDGRID_API_KEY:WeolcomeSubject"];
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, "", html);
+            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+
+            return response.IsSuccessStatusCode;
+        }
+
         public async Task<bool> SendRegisterEmail(string toEmail)
         {
             var organization = await _organizationService.GetFirst();

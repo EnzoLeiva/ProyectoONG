@@ -26,9 +26,6 @@ namespace OngProject.Core.Services
         {
             try
             {
-                TestimonialsModel testimonials = await GetById(id);
-                await _imagenService.Delete(testimonials.Image);
-
                 await _unitOfWork.TestimonialsRepository.Delete(id);
                 await _unitOfWork.SaveChangesAsync();
             }

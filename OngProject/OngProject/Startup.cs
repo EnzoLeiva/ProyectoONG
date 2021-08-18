@@ -24,6 +24,9 @@ using OngProject.Core.Services.AWS;
 using OngProject.Core.Helper;
 using OngProject.Middleware;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
+using OngProject.Core.Services.UriPagination;
 
 namespace OngProject
 {
@@ -92,6 +95,15 @@ namespace OngProject
                         new List<string>()
                     }
                 });
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IUriPaginationService>(provider =>
+            {
+                var accesor = provider.GetRequiredService<IHttpContextAccessor>();
+                var request = accesor.HttpContext.Request;
+                var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriPaginationService(absoluteUri);
             });
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));

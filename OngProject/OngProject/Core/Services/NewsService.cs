@@ -8,16 +8,24 @@ using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
 using OngProject.Core.DTOs;
 using OngProject.Core.Mapper;
+using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Helper;
+using OngProject.Core.Helper.Pagination;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 
 namespace OngProject.Core.Services
 {
     public class NewsService : INewsService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IImagenService _imagenService;
+        private readonly IUriPaginationService _uriPaginationService;
 
-        public NewsService(IUnitOfWork unitOfWork)
+        public NewsService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
+            _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
         }
 
         public async Task<bool> Delete(int id)
@@ -34,17 +42,50 @@ namespace OngProject.Core.Services
             return true;
         }
 
-        public Task<IEnumerable<NewsModel>> GetAll()
+        public async Task<ResponsePagination<GenericPagination<NewsModel>>> GetAll(int page, int sizeByPage)
         {
-            return _unitOfWork.NewsRepository.GetAll();
+            string nextRoute=null, previousRoute = null;
+            IEnumerable<NewsModel> data = await _unitOfWork.NewsRepository.GetAll();
+            GenericPagination<NewsModel> objGenericPagination = GenericPagination<NewsModel>.Create(data, page, sizeByPage);
+            ResponsePagination<GenericPagination<NewsModel>> response = new ResponsePagination<GenericPagination<NewsModel>>(objGenericPagination);
+            response.CurrentPage = objGenericPagination.CurrentPage;
+            response.HasNextPage = objGenericPagination.HasNextPage;
+            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
+            response.PageSize = objGenericPagination.PageSize;
+            response.TotalPages = objGenericPagination.TotalPages;
+            response.TotalRecords = objGenericPagination.TotalRecords;
+            response.Data = objGenericPagination;
+
+            if (response.HasNextPage)
+            {
+                nextRoute = $"/news?page={(page + 1)}";
+                response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
+            }
+            else
+            {
+                response.NextPageUrl = null;
+            }  
+
+            if (response.HasPreviousPage)
+            {
+                previousRoute = $"/news?page={(page - 1)}";
+                response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
+            }
+            else
+            {
+                response.PreviousPageUrl = null;
+            }
+
+            
+            
+            return response;
         }
 
-        public async Task<NewsDto> GetById(int id)
+        public async Task<NewsModel> GetById(int id)
         {
-            var mapper = new EntityMapper();
+           
             var news = await _unitOfWork.NewsRepository.GetById(id);
-            var newsDto = mapper.FromNewsToNewsDto(news);
-            return newsDto;
+            return news;
         }
 
         public async Task<NewsModel> Post(NewsDto newsCreateDto)
@@ -52,14 +93,22 @@ namespace OngProject.Core.Services
             var mapper = new EntityMapper();
             var news = mapper.FromNewsDtoToNews(newsCreateDto);
 
-            await _unitOfWork.NewsRepository.Insert(news);
-            await _unitOfWork.SaveChangesAsync();
-
+            try
+            {
+                news.Image = await _imagenService.Save(news.Image, newsCreateDto.Image);
+                await _unitOfWork.NewsRepository.Insert(news);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return news;
         }
 
         public Task Update(NewsModel newsModel)
         {
+
             return _unitOfWork.NewsRepository.Update(newsModel);
 
         }

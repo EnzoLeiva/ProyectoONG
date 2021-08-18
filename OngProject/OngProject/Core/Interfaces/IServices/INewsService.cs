@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OngProject.Core.DTOs;
+using OngProject.Core.Helper.Pagination;
 using OngProject.Core.Models;
 
 namespace OngProject.Core.Interfaces.IServices
 {
     public interface INewsService
     {
-        public Task<IEnumerable<NewsModel>> GetAll();
+        public Task<ResponsePagination<GenericPagination<NewsModel>>> GetAll(int page, int sizeByPage);
 
-        public Task<NewsDto> GetById(int id);
+        public Task<NewsModel> GetById(int id);
 
         public Task<NewsModel> Post(NewsDto newsCreateDto);
 

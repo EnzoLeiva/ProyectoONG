@@ -2,6 +2,7 @@
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Mapper;
+using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace OngProject.Core.Services
         }
         public bool EntityExists(int id)
         {
-            return _unitOfWork.CategoryRepository.EntityExists(id);
+            return _unitOfWork.CommentRepository.EntityExists(id);
         }
         public async Task<bool> ValidateCreatorOrAdminAsync(ClaimsPrincipal user, int id)
         {
@@ -69,6 +70,15 @@ namespace OngProject.Core.Services
                 return true;
             }
             return false;
+        }
+
+        public async Task<CommentModel> Post(CommentCreateDto commentCreateDto)
+        {
+            var mapper = new EntityMapper();
+            var comment = mapper.FromCommentCreateDtoToComment(commentCreateDto);
+            await _unitOfWork.CommentRepository.Insert(comment);
+            await _unitOfWork.SaveChangesAsync();
+            return comment;
         }
     }
 }

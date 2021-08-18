@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
+using OngProject.Core.Helper.Pagination;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
@@ -57,9 +58,9 @@ namespace OngProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CategoryDto>> GetAll()
+        public async Task<ResponsePagination<GenericPagination<CategoryDto>>> GetAll(int page = 1, int sizeByPage = 10)
         {
-            return await _iCategoryService.GetAll();
+            return await _iCategoryService.GetAll(page, sizeByPage);
         }
 
         [HttpPost]
@@ -76,7 +77,7 @@ namespace OngProject.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(e.Message);
             }
 
         }

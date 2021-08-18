@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-
+    [Authorize]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -28,7 +28,6 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
-        [Authorize]
         [HttpGet("/auth/me")]
         public async Task<ActionResult<UserInfoDto>> GetUserData()
         {
@@ -46,6 +45,7 @@ namespace OngProject.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost("/auth/register")]
         public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
         {
@@ -67,6 +67,7 @@ namespace OngProject.Controllers
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
+        [AllowAnonymous]
         [HttpPost("/auth/login")]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
