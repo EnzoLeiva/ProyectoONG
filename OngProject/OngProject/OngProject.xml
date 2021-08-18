@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OngProject</name>
+    </assembly>
+    <members>
+        <member name="M:OngProject.Controllers.UserController.Register(OngProject.Core.DTOs.Auth.RegisterDTO)">
+             <summary>
+             Registration of new users to the system
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /auth/register
+                 {
+                    "firstName": "Administrador",
+                    "lastName": "Sistema",
+                    "email": "mailAdmin@gmail.com",
+                    "password": "123456"
+                 }
+             </remarks>
+             <returns>A new user created with their access token</returns>
+             <response code="200">Returns the newly created user</response>
+             <response code="400">Bad Request</response> 
+        </member>
+        <member name="M:OngProject.Controllers.UserController.Login(OngProject.Core.Services.Auth.LoginDTO)">
+             <summary>
+             Login and return access token
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /auth/login
+                 {
+                    "email": "mail1@Mail.com",
+                    "password": "Admin123"
+                 }
+             </remarks>
+             <returns>A user with their access token</returns>
+             <response code="200">returns a user with his access token</response>
+             <response code="404">Not found user</response> 
+        </member>
+    </members>
+</doc>

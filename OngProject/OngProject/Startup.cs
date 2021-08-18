@@ -27,6 +27,9 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 using OngProject.Core.Services.UriPagination;
+using System;
+using System.Reflection;
+using System.IO;
 
 namespace OngProject
 {
@@ -71,17 +74,17 @@ namespace OngProject
             });
 
             services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    In = ParameterLocation.Header,
-                    Description = "Please enter into field the word 'Bearer' following by space and JWT",
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-                {
+              {
+                  c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
+                  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                  {
+                      In = ParameterLocation.Header,
+                      Description = "Please enter into field the word 'Bearer' following by space and JWT",
+                      Name = "Authorization",
+                      Type = SecuritySchemeType.ApiKey
+                  });
+                  c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                  {
                     {
                         new OpenApiSecurityScheme {
                             Reference = new OpenApiReference {
@@ -94,8 +97,12 @@ namespace OngProject
                         },
                         new List<string>()
                     }
-                });
-            });
+                  });
+
+                  var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                  var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                  c.IncludeXmlComments(xmlPath);
+              });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IUriPaginationService>(provider =>
