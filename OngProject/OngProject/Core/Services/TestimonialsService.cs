@@ -19,10 +19,11 @@ namespace OngProject.Core.Services
         private readonly IImagenService _imagenService;
         private readonly IUriPaginationService _uriPaginationService;
 
-        public TestimonialsService(IUnitOfWork unitOfWork, IImagenService imagenService)
+        public TestimonialsService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
             _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
         }
 
         public async Task<bool> Delete(int id)
@@ -75,7 +76,7 @@ namespace OngProject.Core.Services
 
             if (response.HasNextPage)
             {
-                nextRoute = $"/categories?page={(page + 1)}";
+                nextRoute = $"/testimonials?page={(page + 1)}";
                 response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
             }
             else
@@ -85,7 +86,7 @@ namespace OngProject.Core.Services
 
             if (response.HasPreviousPage)
             {
-                previousRoute = $"/categories?page={(page - 1)}";
+                previousRoute = $"/testimonials?page={(page - 1)}";
                 response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
             }
             else
