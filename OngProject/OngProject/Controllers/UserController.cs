@@ -9,6 +9,7 @@ using OngProject.Core.Models;
 using OngProject.Core.Services;
 using OngProject.Core.Services.Auth;
 using OngProject.Infrastructure.Data;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
+    
+    [Produces("application/json")]
     [Authorize]
     [ApiController]
     public class UserController : ControllerBase
@@ -45,8 +48,28 @@ namespace OngProject.Controllers
             }
         }
 
+        // Post /auth/register
+        /// <summary>
+        /// Registration of new users to the system
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /auth/register
+        ///     {
+        ///        "firstName": "Administrador",
+        ///        "lastName": "Sistema",
+        ///        "email": "mailAdmin@gmail.com",
+        ///        "password": "123456"
+        ///     }
+        /// </remarks>
+        /// <returns>A new user created with their access token</returns>
+        /// <response code="200">Returns the newly created user</response>
+        /// <response code="400">Bad Request</response> 
         [AllowAnonymous]
         [HttpPost("/auth/register")]
+        [ProducesResponseType(typeof(UserDto), 200)]
+        [ProducesResponseType(400)]
         public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
         {
             try
@@ -67,8 +90,27 @@ namespace OngProject.Controllers
             return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
+
+        // Post /auth/login
+        /// <summary>
+        /// Login and return access token
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /auth/login
+        ///     {
+        ///        "email": "mail1@Mail.com",
+        ///        "password": "Admin123"
+        ///     }
+        /// </remarks>
+        /// <returns>A user with their access token</returns>
+        /// <response code="200">returns a user with his access token</response>
+        /// <response code="404">Not found user</response> 
         [AllowAnonymous]
         [HttpPost("/auth/login")]
+        [ProducesResponseType(typeof(UserDto), 200)]
+        [ProducesResponseType(404)]
         public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
         {
             var user = await this._auth.login(request);
