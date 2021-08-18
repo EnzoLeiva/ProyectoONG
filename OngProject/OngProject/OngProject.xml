@@ -4,6 +4,20 @@
         <name>OngProject</name>
     </assembly>
     <members>
+        <member name="T:OngProject.Controllers.UserController">
+            <summary>
+            User Controller
+            </summary>   
+        </member>
+        <member name="M:OngProject.Controllers.UserController.GetUserData">
+            <summary>
+            Obtaining my information with my access token
+            </summary>
+            <returns>return the information of the authenticated user</returns>
+            <response code="200">Returns the user information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
         <member name="M:OngProject.Controllers.UserController.Register(OngProject.Core.DTOs.Auth.RegisterDTO)">
              <summary>
              Registration of new users to the system

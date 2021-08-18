@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    
+     
     [Produces("application/json")]
     [Authorize]
     [ApiController]
@@ -31,7 +31,17 @@ namespace OngProject.Controllers
             this._auth = auth;
         }
 
+        // Get /auth/me
+        /// <summary>
+        /// Obtaining my information with my access token
+        /// </summary>
+        /// <returns>return the information of the authenticated user</returns>
+        /// <response code="200">Returns the user information</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="404">Not Found</response> 
         [HttpGet("/auth/me")]
+        [ProducesResponseType(typeof(UserInfoDto), 200)]
+        [ProducesResponseType(404)]
         public async Task<ActionResult<UserInfoDto>> GetUserData()
         {
             try
