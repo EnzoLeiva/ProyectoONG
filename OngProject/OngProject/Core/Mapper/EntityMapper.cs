@@ -292,5 +292,14 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public CreateTestimonialsDto FromTestimonialsToCreateTestimonialsDto(TestimonialsModel testimonials)
+        {
+            var testimonialsDto = new CreateTestimonialsDto()
+            {
+                Name = testimonials.Name,
+                Content = testimonials.Content
+            };
+            return testimonialsDto;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
+using OngProject.Core.Helper.Pagination;
 using OngProject.Core.Interfaces.IServices;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,12 @@ namespace OngProject.Controllers
                 return BadRequest(e);
             }
 
+        }
+
+        [HttpGet]
+        public async Task<ResponsePagination<GenericPagination<CreateTestimonialsDto>>> GetAll(int page = 1, int sizeByPage = 10)
+        {
+            return await _testimonialsService.GetAll(page, sizeByPage);
         }
 
     }
