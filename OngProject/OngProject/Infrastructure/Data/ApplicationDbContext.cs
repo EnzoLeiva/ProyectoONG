@@ -150,7 +150,7 @@ namespace OngProject.Infrastructure.Data
         }
         public void SeedCategories(ModelBuilder modelBuilder)
         {
-            for (int i = 1; i < 11; i++)
+            for (int i = 1; i < 51; i++)
             {
                 modelBuilder.Entity<CategoryModel>().HasData(
                     new CategoryModel
