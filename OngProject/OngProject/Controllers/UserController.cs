@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-     
+    
     [Produces("application/json")]
     [Authorize]
     [ApiController]
@@ -134,8 +134,20 @@ namespace OngProject.Controllers
 
         }
 
+        // Delete /users/10
+        /// <summary>
+        /// Delete a user from the system
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>Message that a user has been successfully deleted</returns>
+        /// <response code="200">User deleted successfully</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="404">Not Found</response> 
         [Authorize]
         [HttpDelete("/users/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int id)
         {
             if (!_userService.UserExists(id))
@@ -153,8 +165,17 @@ namespace OngProject.Controllers
             }
         }
 
+        // Get /users
+        /// <summary>
+        /// Get the data of all registered users
+        /// </summary>
+        /// <returns>returns the information of authenticated users</returns>
+        /// <response code="200">Returns the users information</response>
+        /// <response code="401">Unauthorized user</response>
         [Authorize(Roles ="Admin")]
         [HttpGet("/users")]
+        [ProducesResponseType(typeof(UserModel),200)]
+        [ProducesResponseType(401)]
         public async Task<IEnumerable<UserModel>> GetUsers()
         {
             return await _userService.GetUsers();
