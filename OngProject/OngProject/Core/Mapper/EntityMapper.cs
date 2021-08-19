@@ -126,7 +126,6 @@ namespace OngProject.Core.Mapper
                 Body = commentCreateDto.Body,
             };
         }
-
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
             string photo = null;
