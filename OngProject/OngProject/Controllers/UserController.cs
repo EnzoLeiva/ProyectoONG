@@ -180,5 +180,31 @@ namespace OngProject.Controllers
         {
             return await _userService.GetUsers();
         }
+
+        [Authorize]
+        [HttpPatch("users/{id}")]
+        public async Task<IActionResult> Put(int id, [FromForm] UserUpdateDto userUpdateDto)
+        {
+            try
+            {
+                bool UserExists = _userService.UserExists(id);
+
+                if (!UserExists)
+                {
+                    return NotFound("User inexistent");
+                }
+                else
+                {
+                    var res = await _userService.Put(userUpdateDto, id);
+
+                    return Ok(res);
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

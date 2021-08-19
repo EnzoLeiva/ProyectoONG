@@ -204,6 +204,24 @@ namespace OngProject.Core.Mapper
             return member;
         }
 
+        public UserModel FromUserUpdateDtoToUser(UserUpdateDto userUpdateDto, UserModel user)
+        {
+            string photo = null;
+            if (userUpdateDto.Photo != null)
+                photo = GetNameImage("user");
+
+            if (!string.IsNullOrEmpty(userUpdateDto.FirstName))
+                user.firstName = userUpdateDto.FirstName;
+
+            if (!string.IsNullOrEmpty(userUpdateDto.LastName))
+                user.lastName = userUpdateDto.LastName;
+
+            if (!string.IsNullOrEmpty(photo))
+                user.photo = photo;
+
+            return user;
+        }
+
 
         public MemberModel FromMemberCreateDtoToMember(MemberCreateDto memberCreateDto)
         {
