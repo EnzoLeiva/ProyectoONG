@@ -4,6 +4,32 @@
         <name>OngProject</name>
     </assembly>
     <members>
+        <member name="M:OngProject.Controllers.TestimonialsController.Delete(System.Int32)">
+            <summary>
+            Soft Delete of a testimonial
+            </summary>
+            <param name="id"></param>
+            <returns>Confirmation that the testimonial has been succesfully deleted</returns>
+            <response code = "200">Confirmation of the action</response>
+            <response code = "500">Internar server Error</response>
+        </member>
+        <member name="M:OngProject.Controllers.TestimonialsController.Post(OngProject.Core.DTOs.CreateTestimonialsDto)">
+            <summary>
+            Creates and saves a new testimonial
+            </summary>
+            <param name="testimonialsCreateDto"></param>
+            <returns>Confirmation and model of the created testimonial</returns>
+            <response code = "201">Returns the model created</response>
+            <response code = "400">Bad Request</response>
+        </member>
+        <member name="M:OngProject.Controllers.TestimonialsController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Returns a paginated list of all active testimonials
+            </summary>
+            <param name="page"></param>
+            <param name="sizeByPage"></param>
+            <returns>All testimonials</returns> 
+        </member>
         <member name="M:OngProject.Controllers.UserController.GetUserData">
             <summary>
             Obtaining my information with my access token
