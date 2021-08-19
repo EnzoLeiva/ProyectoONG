@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace OngProject.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("/organizations")]
     public class OrganizationController : ControllerBase
@@ -25,6 +24,25 @@ namespace OngProject.Controllers
         public async Task<OrganizationDto> GetById(int id)
         {
            return await _organizationService.GetOrganizationWithSlides (id);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("/public")]
+        public async Task<IActionResult> Update([FromForm] OrganizationUpdateDto organizationUpdateDto)
+        {
+            try
+            {
+                {
+                    var res = await _organizationService.Update(organizationUpdateDto);
+
+                    return Ok(res);
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
     }

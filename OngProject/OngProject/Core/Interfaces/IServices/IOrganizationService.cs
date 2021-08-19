@@ -12,5 +12,6 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<OrganizationDto> GetById(int id);
         public Task<OrganizationDto> GetOrganizationWithSlides(int id);
         public Task<OrganizationDto> GetFirst();
+        public Task<OrganizationModel> Update(OrganizationUpdateDto organizationUpdateDto);
     }
 }
