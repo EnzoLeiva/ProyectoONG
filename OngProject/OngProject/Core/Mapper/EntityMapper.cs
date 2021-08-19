@@ -163,6 +163,23 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public CategoryModel FromCategoryCreateDtoUpdateToCategory(CategoryCreateDto categoryUpdateDto, CategoryModel category)
+        {
+            string image = null;
+            if (categoryUpdateDto.Image != null)
+                image = GetNameImage("category");
+
+            if (!string.IsNullOrEmpty(categoryUpdateDto.Name))
+                category.Name = categoryUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(image))
+                category.Image = image;
+
+            if (!string.IsNullOrEmpty(categoryUpdateDto.Description))
+                category.Description = categoryUpdateDto.Description;
+
+            return category;
+        }
         public MemberModel FromMemberUpdateDtoToMember(MemberUpdateDto memberUpdateDto, MemberModel member)
         {
             string image = null;
@@ -329,5 +346,19 @@ namespace OngProject.Core.Mapper
             };
             return testimonialsDto;
         }
+        public TestimonialsModel FromTestimonialsCreateDtoUpdateToTestimonials(CreateTestimonialsDto testimonialsUpdateDto, TestimonialsModel testimonials)
+        {
+
+            if (!string.IsNullOrEmpty(testimonialsUpdateDto.Name))
+                testimonials.Name = testimonialsUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(testimonialsUpdateDto.Content))
+                testimonials.Content = testimonialsUpdateDto.Content;
+
+            return testimonials;
+        }
+        
+
+
     }
 }
