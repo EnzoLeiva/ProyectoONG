@@ -13,5 +13,7 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<IEnumerable<UserModel>> GetUsers();
         public bool UserExists(int Id);
         public Task<UserInfoDto> GetUserById(int Id);
+        public Task<UserModel> Put(UserUpdateDto userUpdateDto, int id);
+
     }
 }
