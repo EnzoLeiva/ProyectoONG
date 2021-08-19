@@ -74,6 +74,30 @@ namespace OngProject.Controllers
                 return NotFound();
         }
 
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromForm] MemberUpdateDto memberUpdateDto)
+        { 
+            try
+            {
+                bool memberExists = _memberService.EntityExists(id);
 
+                if (!memberExists)
+                {
+                    return NotFound("member inexistent");
+                }
+                else
+                {
+                    var res = await _memberService.Put(memberUpdateDto, id);
+
+                    return Ok(res);
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
