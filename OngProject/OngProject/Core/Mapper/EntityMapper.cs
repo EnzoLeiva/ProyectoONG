@@ -90,6 +90,21 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public ActivitiesModel FromActivitiesUpdateDtoToActivities(ActivitiesUpdateDto activitiesUpdateDto, ActivitiesModel activity)
+        {
+            string image = null;
+            if (activitiesUpdateDto.Image != null)
+                image = GetNameImage("activity");
+
+            if (!string.IsNullOrEmpty(activitiesUpdateDto.Name))
+                activity.Name = activitiesUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(activitiesUpdateDto.Content))
+                activity.Content = activitiesUpdateDto.Content;
+
+            return activity;
+        }
+
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
         {
             var categoryDto = new CategoryDto()
