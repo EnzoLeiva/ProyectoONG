@@ -48,7 +48,8 @@ namespace OngProject.Core.Services.AWS
             }
             else
             {
-                AwsManagerResponse responseAws = await _s3AwsHelper.AwsFileDelete(name);
+                string nameImage = await _s3AwsHelper.GetKeyFromUrl(name);
+                AwsManagerResponse responseAws = await _s3AwsHelper.AwsFileDelete(nameImage);
                 if (!String.IsNullOrEmpty(responseAws.Errors))
                     return false;
 

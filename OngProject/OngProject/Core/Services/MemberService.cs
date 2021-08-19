@@ -77,11 +77,16 @@ namespace OngProject.Core.Services
             try
             {
                 MemberModel member = await _unitOfWork.MemberRepository.GetById(id);
+                string imageAnterior = member.Image;
 
                 member = mapper.FromMemberUpdateDtoToMember(memberUpdateDto, member);
 
-                if(memberUpdateDto.Image!=null)
-                    member.Image = await _imagenService.Save(member.Image, memberUpdateDto.Image);
+                if (memberUpdateDto.Image != null)
+                {
+                    await _imagenService.Delete(imageAnterior); //borra imagen anterior de amazon
+                    member.Image = await _imagenService.Save(member.Image, memberUpdateDto.Image); //actualiza con nueva
+                }
+
                 await _unitOfWork.MemberRepository.Update(member);
                 await _unitOfWork.SaveChangesAsync();
                 return member;
