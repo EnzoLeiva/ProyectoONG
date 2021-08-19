@@ -86,5 +86,31 @@ namespace OngProject.Controllers
             }
 
         }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromForm] CommentUpdateDto updateComentDto, int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+            try
+            {
+                bool commentExists = _iCommentService.EntityExists(id);
+
+                if (commentExists == false)
+                {
+                    return NotFound("The comment does not exist");
+                }
+                else
+                {
+                    CommentModel result = await _iCommentService.Update(updateComentDto, id);
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

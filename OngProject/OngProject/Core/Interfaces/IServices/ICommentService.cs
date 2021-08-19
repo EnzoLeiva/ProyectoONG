@@ -17,5 +17,7 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<bool> Delete(int Id);
         public bool EntityExists(int id);
         public Task<CommentModel> Post(CommentCreateDto commentCreateDto);
+        public Task<CommentModel> GetById(int Id);
+        public Task<CommentModel> Update(CommentUpdateDto updateComentDto, int id);
     }
 }
