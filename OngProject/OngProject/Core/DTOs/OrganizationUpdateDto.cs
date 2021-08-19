@@ -14,7 +14,7 @@ namespace OngProject.Core.DTOs
         [MaxLength(255)]
         public string Image { get; set; }
 
-        [MaxLength(20)]
+        [Range(0, 20)]
         public int Phone { get; set; }
 
         [MaxLength(255)]

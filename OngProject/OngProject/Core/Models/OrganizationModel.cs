@@ -19,7 +19,7 @@ namespace OngProject.Core.Models
         [MaxLength(255)]
         public string Adress { get; set; }
 
-        [MaxLength(20)]
+        [Range(0, 20)]
         public int Phone { get; set; }
 
         [Required]

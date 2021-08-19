@@ -27,7 +27,7 @@ namespace OngProject.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("/public")]
+        [HttpPost("public")]
         public async Task<IActionResult> Update([FromForm] OrganizationUpdateDto organizationUpdateDto)
         {
             try
