@@ -1,12 +1,15 @@
 ﻿using OngProject.Core.DTOs;
 using OngProject.Core.Helper;
+using OngProject.Core.Helper.Pagination;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Mapper;
 using OngProject.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OngProject.Core.Services
@@ -15,11 +18,55 @@ namespace OngProject.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IImagenService _imagenService;
+        private readonly IUriPaginationService _uriPaginationService;
 
-        public MemberService(IUnitOfWork unitOfWork, IImagenService imagenService)
+        public MemberService(IUnitOfWork unitOfWork, IImagenService imagenService, IUriPaginationService uriPaginationService)
         {
             _unitOfWork = unitOfWork;
             _imagenService = imagenService;
+            _uriPaginationService = uriPaginationService;
+        }
+
+
+        public async Task<ResponsePagination<GenericPagination<MemberCreateDto>>> GetAll(int page, int sizeByPage)
+        {
+            string nextRoute = null, previousRoute = null;
+            IEnumerable<MemberModel> data = await _unitOfWork.MemberRepository.GetAll();
+
+            var mapper = new EntityMapper();
+            var membersDto = data.Select(m => mapper.FromMemberToMemberCreateDto(m)).ToList();
+
+            GenericPagination<MemberCreateDto> objGenericPagination = GenericPagination<MemberCreateDto>.Create(membersDto, page, sizeByPage);
+            ResponsePagination<GenericPagination<MemberCreateDto>> response = new ResponsePagination<GenericPagination<MemberCreateDto>>(objGenericPagination);
+            response.CurrentPage = objGenericPagination.CurrentPage;
+            response.HasNextPage = objGenericPagination.HasNextPage;
+            response.HasPreviousPage = objGenericPagination.HasPreviousPage;
+            response.PageSize = objGenericPagination.PageSize;
+            response.TotalPages = objGenericPagination.TotalPages;
+            response.TotalRecords = objGenericPagination.TotalRecords;
+            response.Data = objGenericPagination;
+
+            if (response.HasNextPage)
+            {
+                nextRoute = $"/members?page={(page + 1)}";
+                response.NextPageUrl = _uriPaginationService.GetPaginationUri(page, nextRoute).ToString();
+            }
+            else
+            {
+                response.NextPageUrl = null;
+            }
+
+            if (response.HasPreviousPage)
+            {
+                previousRoute = $"/members?page={(page - 1)}";
+                response.PreviousPageUrl = _uriPaginationService.GetPaginationUri(page, previousRoute).ToString();
+            }
+            else
+            {
+                response.PreviousPageUrl = null;
+            }
+
+            return response;
         }
 
         public async Task<IEnumerable<MemberModel>> GetMembers()

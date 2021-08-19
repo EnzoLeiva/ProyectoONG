@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OngProject.Core.DTOs;
+using OngProject.Core.Helper.Pagination;
 using OngProject.Core.Interfaces;
 using OngProject.Core.Models;
 using System;
@@ -21,11 +22,11 @@ namespace OngProject.Controllers
         {
             _memberService = memberService;
         }
-        
+
         [HttpGet]
-        public async Task<IEnumerable<MemberModel>> GetMembers()
+        public async Task<ResponsePagination<GenericPagination<MemberCreateDto>>> GetAll(int page, int sizeByPage)
         {
-            return await _memberService.GetMembers();           
+            return await _memberService.GetAll(page, sizeByPage);
         }
 
         [Authorize]
