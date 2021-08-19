@@ -110,6 +110,14 @@ namespace OngProject.Core.Helper
 
         }
 
+        public async Task<string> GetKeyFromUrl(string url)
+        {
+            
+            string pattern = "https://alkemy-ong.s3.amazonaws.com/";
+
+            string key = url.Substring(pattern.Length);
+            return key;
+        }
         public async Task<AwsManagerResponse> AwsGetFileUrl(string key)
         {
             try

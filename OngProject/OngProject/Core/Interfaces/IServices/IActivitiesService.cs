@@ -12,9 +12,10 @@ namespace OngProject.Core.Interfaces.IServices
     {
         public Task<IEnumerable<ActivitiesModel>> GetAll();
         public Task<ActivitiesModel> GetById(int Id);
-        public Task Insert(ActivitiesModel categoryModel);
+        public Task Insert(ActivitiesModel activityModel);
         public Task Delete(int Id);
-        public Task Update(ActivitiesModel categoryModel);
+        public Task<ActivitiesModel> Update(ActivitiesUpdateDto updateActivityDto, int id);
         public Task<ActivitiesModel> Post(ActivitiesCreateDto activitiesCreateDto);
+
     }
 }

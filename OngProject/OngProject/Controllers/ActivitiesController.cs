@@ -41,5 +41,31 @@ namespace OngProject.Controllers
             }
 
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromForm]ActivitiesUpdateDto updateActivitiesDto, int id)
+        {
+           
+            try
+            {
+                var activityExist = await _iActivitiesService.GetById(id);
+
+                if (activityExist == null)
+                {
+                    return NotFound("Activity not found");
+                }
+                else
+                {
+                    var response = await _iActivitiesService.Update(updateActivitiesDto, id);
+                    return Ok(response);
+                }
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
