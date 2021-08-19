@@ -141,7 +141,6 @@ namespace OngProject.Core.Mapper
                 Body = commentCreateDto.Body,
             };
         }
-
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
             string photo = null;
@@ -344,7 +343,24 @@ namespace OngProject.Core.Mapper
             };
             return testimonialsDto;
         }
+        public NewsModel FromNewsUpdateDtoToNews(NewsUpdateDto newsUpdateDto, NewsModel news)
+        {
+            string image = null;
+            if (newsUpdateDto.Image != null)
+                image = GetNameImage("news");
 
+            if (!string.IsNullOrEmpty(newsUpdateDto.Name))
+                news.Name = newsUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(newsUpdateDto.Content))
+                news.Content = newsUpdateDto.Content;
+
+            if (!string.IsNullOrEmpty(image))
+                news.Image = image;
+            if (newsUpdateDto.CategoryId != 0)
+                news.CategoryId = newsUpdateDto.CategoryId;
+            return news;
+        }
         public CommentModel FromComentUpdateToComment(CommentUpdateDto commentUpdateDto, CommentModel comment)
         {
             if (commentUpdateDto.User_id != null)

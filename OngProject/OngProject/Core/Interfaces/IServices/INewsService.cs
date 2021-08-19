@@ -19,7 +19,8 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<bool> Delete(int id);
 
         public Task Update(NewsModel newsModel);
-
         public bool NewsExists(int Id);
+
+        public Task<NewsModel> Put(NewsUpdateDto newsUpdateDto, int id);
     }
 }
