@@ -181,8 +181,22 @@ namespace OngProject.Controllers
             return await _userService.GetUsers();
         }
 
+
+        // Patch /users/2
+        /// <summary>
+        /// Update a user's information
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <param name="userUpdateDto">DTO updated user information</param>
+        /// <returns>returns the updated information of a user</returns>
+        /// <response code="200">Return the user information updated</response>
+        /// <response code="401">Unauthorized user</response>
+        /// <response code="404">User inexistent</response>
         [Authorize]
         [HttpPatch("users/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> Put(int id, [FromForm] UserUpdateDto userUpdateDto)
         {
             try
