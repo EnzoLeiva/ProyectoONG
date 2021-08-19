@@ -69,5 +69,29 @@ namespace OngProject.Core.Services
         {
             return _unitOfWork.MemberRepository.EntityExists(id);
         }
+
+        public async Task<MemberModel> Put(MemberUpdateDto memberUpdateDto, int id)
+        {
+            var mapper = new EntityMapper();
+          
+            try
+            {
+                MemberModel member = await _unitOfWork.MemberRepository.GetById(id);
+
+                member = mapper.FromMemberUpdateDtoToMember(memberUpdateDto, member);
+
+                if(memberUpdateDto.Image!=null)
+                    member.Image = await _imagenService.Save(member.Image, memberUpdateDto.Image);
+                await _unitOfWork.MemberRepository.Update(member);
+                await _unitOfWork.SaveChangesAsync();
+                return member;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message); 
+            }
+           
+        }
+
     }
 }
