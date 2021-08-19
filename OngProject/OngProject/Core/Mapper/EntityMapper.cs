@@ -90,6 +90,21 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public ActivitiesModel FromActivitiesUpdateDtoToActivities(ActivitiesUpdateDto activitiesUpdateDto, ActivitiesModel activity)
+        {
+            string image = null;
+            if (activitiesUpdateDto.Image != null)
+                image = GetNameImage("activity");
+
+            if (!string.IsNullOrEmpty(activitiesUpdateDto.Name))
+                activity.Name = activitiesUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(activitiesUpdateDto.Content))
+                activity.Content = activitiesUpdateDto.Content;
+
+            return activity;
+        }
+
         public CategoryDto FromCategoryToCategoryDto(CategoryModel category)
         {
             var categoryDto = new CategoryDto()
@@ -345,6 +360,19 @@ namespace OngProject.Core.Mapper
             if (newsUpdateDto.CategoryId != 0)
                 news.CategoryId = newsUpdateDto.CategoryId;
             return news;
+        }
+        public CommentModel FromComentUpdateToComment(CommentUpdateDto commentUpdateDto, CommentModel comment)
+        {
+            if (commentUpdateDto.User_id != null)
+                comment.User_id = commentUpdateDto.User_id;
+
+            if (commentUpdateDto.post_id != null)
+                comment.post_id = commentUpdateDto.post_id;
+
+            if (commentUpdateDto.Body != null)
+                comment.Body = commentUpdateDto.Body;
+
+            return comment;
         }
     }
 }
