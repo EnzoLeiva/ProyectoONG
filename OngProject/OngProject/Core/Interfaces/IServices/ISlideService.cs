@@ -14,5 +14,6 @@ namespace OngProject.Core.Interfaces.IServices
         public bool EntityExists(int id);
         public Task<bool> Delete(int id);
         public Task<SlideModel> Post(SlideDto slideCreateDto);
+        public Task<SlideModel> Update(SlideUpdateDto slideCreateDto, int id);
     }
 }
