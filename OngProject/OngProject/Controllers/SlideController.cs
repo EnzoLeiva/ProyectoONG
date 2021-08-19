@@ -46,6 +46,7 @@ namespace OngProject.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] SlideDto slideCreateDto)
         {
@@ -64,6 +65,7 @@ namespace OngProject.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -74,18 +76,6 @@ namespace OngProject.Controllers
                     return Ok();
                 else
                     return BadRequest(StatusCodes.Status500InternalServerError);
-            }
-            else
-                return NotFound();
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromForm] SlideUpdateDto slideUpdateDto)
-        {
-            if (_slideService.EntityExists(id))
-            {
-                var slide = await _slideService.Update(slideUpdateDto, id);
-                return Ok(slide);
             }
             else
                 return NotFound();
