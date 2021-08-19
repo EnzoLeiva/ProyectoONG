@@ -12,6 +12,7 @@ namespace OngProject.Core.Interfaces
         public Task<MemberModel> Post([FromForm] MemberCreateDto memberCreateDto);
         public Task<bool> Delete(int Id);
         public bool EntityExists(int id);
+        public Task<MemberModel> Put(MemberUpdateDto memberUpdateDto, int id);
 
     }
 }
