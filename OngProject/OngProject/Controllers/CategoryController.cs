@@ -87,7 +87,9 @@ namespace OngProject.Controllers
         public async Task<IActionResult> Put([FromForm] CategoryCreateDto updateCategoryDto, int id)
         {
             if (!ModelState.IsValid)
+            {
                 return BadRequest();
+            }                
             try
             {
                 var categoryExists = await _iCategoryService.GetById(id);
@@ -102,9 +104,7 @@ namespace OngProject.Controllers
                     
                     return Ok(res);
 
-                }
-
-                
+                }                
             }
             catch (Exception e)
             {

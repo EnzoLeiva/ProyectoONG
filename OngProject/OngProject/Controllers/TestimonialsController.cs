@@ -86,6 +86,36 @@ namespace OngProject.Controllers
         /// <param name="page"></param>
         /// <param name="sizeByPage"></param>
         /// <returns>All testimonials</returns> 
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> Put([FromForm] CreateTestimonialsDto updateTestimonialsDto, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var testimonialsExists = await _testimonialsService.GetById(id);
+
+                if (testimonialsExists == null)
+                {
+                    return NotFound("testimonial inexistent");
+                }
+                else
+                {
+                    var res = await _testimonialsService.Put(updateTestimonialsDto, id);
+
+                    return Ok(res);
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [HttpGet]
         public async Task<ResponsePagination<GenericPagination<CreateTestimonialsDto>>> GetAll(int page = 1, int sizeByPage = 10)
         {

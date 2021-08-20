@@ -59,5 +59,30 @@ namespace OngProject.Core.Services
 
             return userInfoDto;
         }
+
+        public async Task<UserModel> Put(UserUpdateDto userUpdateDto, int id)
+        {
+            var mapper = new EntityMapper();
+
+            try
+            {
+                UserModel user = await _unitOfWork.UserRepository.GetById(id);
+
+                user = mapper.FromUserUpdateDtoToUser(userUpdateDto, user);
+
+                if (userUpdateDto.Photo != null)
+                    user.photo = await _imagenService.Save(user.photo, userUpdateDto.Photo);
+
+                await _unitOfWork.UserRepository.Update(user);
+                await _unitOfWork.SaveChangesAsync();
+
+                return user;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

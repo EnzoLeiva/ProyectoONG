@@ -13,9 +13,9 @@ namespace OngProject.Core.Interfaces
     {
         public Task<ResponsePagination<GenericPagination<CategoryDto>>> GetAll(int page, int sizeByPage);
         public Task<CategoryModel> GetById(int Id);
-        public Task<CategoryModel> Post([FromForm] CategoryCreateDto categoryCreateDto);
+        public Task<CategoryModel> Post(CategoryCreateDto categoryCreateDto);
         public Task<bool> Delete(int Id);
-        public Task<CategoryModel> Put([FromForm] CategoryCreateDto updateCategoryDto, int id);
+        public Task<CategoryModel> Put(CategoryCreateDto updateCategoryDto, int id);
         public bool EntityExists(int id);
     }
 }

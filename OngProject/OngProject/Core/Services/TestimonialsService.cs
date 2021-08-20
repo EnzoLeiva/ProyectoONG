@@ -56,6 +56,20 @@ namespace OngProject.Core.Services
             return testimonials;
         }
 
+        public async Task<TestimonialsModel> Put(CreateTestimonialsDto updateTestimonialsDto, int id)
+        {
+            var mapper = new EntityMapper();
+
+            TestimonialsModel testimonials = await _unitOfWork.TestimonialsRepository.GetById(id);
+
+            testimonials = mapper.FromTestimonialsCreateDtoUpdateToTestimonials(updateTestimonialsDto, testimonials);
+
+            await _unitOfWork.TestimonialsRepository.Update(testimonials);
+            await _unitOfWork.SaveChangesAsync();
+
+            return testimonials;
+        }
+
         public async Task<ResponsePagination<GenericPagination<CreateTestimonialsDto>>> GetAll(int page = 1, int sizeByPage = 10)
         {
             string nextRoute = null, previousRoute = null;

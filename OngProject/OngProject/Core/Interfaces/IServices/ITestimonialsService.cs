@@ -14,5 +14,8 @@ namespace OngProject.Core.Interfaces.IServices
         public Task<TestimonialsModel> Post(CreateTestimonialsDto testimonialsCreateDto);
         public bool EntityExist(int id);
         public Task<ResponsePagination<GenericPagination<CreateTestimonialsDto>>> GetAll(int page, int sizeByPage);
+
+        public Task<TestimonialsModel> GetById(int Id);
+        public Task<TestimonialsModel> Put(CreateTestimonialsDto updateTestimonialsDto, int id);
     }
 }

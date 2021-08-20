@@ -80,5 +80,31 @@ namespace OngProject.Controllers
         {
              return await _inewsService.GetAll(page, sizeByPage);
         }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromForm] NewsUpdateDto newsUpdateDto)
+        {
+            try
+            {
+                bool newsExists = _inewsService.NewsExists(id);
+
+                if (!newsExists)
+                {
+                    return NotFound("News Doesn't Exists");
+                }
+                else
+                {
+                    var res = await _inewsService.Put(newsUpdateDto, id);
+
+                    return Ok(res);
+
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
