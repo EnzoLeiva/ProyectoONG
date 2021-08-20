@@ -421,5 +421,28 @@ namespace OngProject.Core.Mapper
 
             return organization;
         }
+
+        public SlideModel FromSlideUpdateDtoToSlide(SlideUpdateDto slideUpdateDto, SlideModel slide)
+        {
+
+            if (slideUpdateDto.Image != null)
+
+                slide.ImageUrl = GetNameImage("slide");
+
+            if (slideUpdateDto.Order != null)
+
+                slide.Order = (int)slideUpdateDto.Order;
+
+            if (!string.IsNullOrEmpty(slideUpdateDto.Text))
+
+                slide.Text = slideUpdateDto.Text;
+
+            if (!string.IsNullOrEmpty(slideUpdateDto.OrganizationId))
+
+                slide.OrganizationId = slideUpdateDto.OrganizationId;
+
+            return slide;
+
+        }
     }
 }
