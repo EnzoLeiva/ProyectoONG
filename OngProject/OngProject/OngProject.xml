@@ -4,6 +4,69 @@
         <name>OngProject</name>
     </assembly>
     <members>
+        <member name="M:OngProject.Controllers.MemberController.GetMembers">
+            <summary>
+            Getting all Members
+            </summary>
+            <returns>return the information of all members</returns>
+            <response code="200">Returns all members information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
+        <member name="M:OngProject.Controllers.MemberController.Post(OngProject.Core.DTOs.MemberCreateDto)">
+             <summary>
+             Create Member
+             </summary>
+             <remarks>
+             Sample request:
+            
+                  POST /members
+                  {
+                     "Name": "NameExample",
+                     "FacebookUrl": "FacebookExample",
+                     "InstagramUrl": "InstragramExample",
+                     "LinkedinUrl": "LinkedinExample",
+                     "Image": FromFile,
+                     "Description": "DescriptionExample"
+                  }
+             </remarks>
+             <response code="200">Create Member</response>
+             <response code="401">Unauthorized user</response>
+             <response code="400">Bad Request</response> 
+        </member>
+        <member name="M:OngProject.Controllers.MemberController.Delete(System.Int32)">
+            <summary>
+            Delete Member
+            </summary>
+            <param name="id">Member Id</param>
+            <returns>Member could been successfully deleted</returns>
+            <response code="200">Member deleted</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:OngProject.Controllers.MemberController.Put(System.Int32,OngProject.Core.DTOs.MemberUpdateDto)">
+             <summary>
+             Update a Member by id
+             </summary>
+             <remarks>
+             Sample request:
+            
+                  POST /members
+                  {
+                     "Name": "NameExample",
+                     "FacebookUrl": "FacebookExample",
+                     "InstagramUrl": "InstragramExample",
+                     "LinkedinUrl": "LinkedinExample",
+                     "Image": FromFile,
+                     "Description": "DescriptionExample"
+                  }
+             </remarks>
+             <param name="id">Member Id</param>
+             <returns>Member could been successfully updated</returns>
+             <response code="200">Update Member by Id</response>
+             <response code="401">Unauthorized user</response>
+             <response code="404">Not Found</response> 
+        </member>
         <member name="M:OngProject.Controllers.NewsController.GetById(System.Int32)">
             <summary>
             Getting the news by id
