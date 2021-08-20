@@ -21,7 +21,7 @@ namespace OngProject.Controllers
         private readonly ICategoryService _iCategoryService;
 
         public CategoryController(ICategoryService iCategoryService)
-        {
+        { 
             _iCategoryService = iCategoryService;
         }
 
