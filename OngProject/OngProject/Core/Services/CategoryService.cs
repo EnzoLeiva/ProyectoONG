@@ -96,8 +96,7 @@ namespace OngProject.Core.Services
         public async Task<bool> Delete(int Id)
         {
             try
-            {
-                
+            {                
                 await _unitOfWork.CategoryRepository.Delete(Id);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -110,11 +109,14 @@ namespace OngProject.Core.Services
         public async Task<CategoryModel> Put(CategoryCreateDto updateCategoryDto, int id)
         {
             var mapper = new EntityMapper();
-            var category = mapper.FromCategoryCreateDtoToCategory(updateCategoryDto);
 
-            category.Id = id;
+            CategoryModel category = await _unitOfWork.CategoryRepository.GetById(id);
 
-            category.Image = await _imagenService.Save(category.Image, updateCategoryDto.Image);
+            category = mapper.FromCategoryCreateDtoUpdateToCategory(updateCategoryDto, category);
+
+            if (updateCategoryDto.Image != null)
+               category.Image = await _imagenService.Save(category.Image, updateCategoryDto.Image);
+
             await _unitOfWork.CategoryRepository.Update(category);
             await _unitOfWork.SaveChangesAsync();
 
