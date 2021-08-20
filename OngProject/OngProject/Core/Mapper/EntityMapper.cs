@@ -393,21 +393,56 @@ namespace OngProject.Core.Mapper
             return comment;
         }
 
+        public OrganizationModel FromOrganizationUpdateToOrganization(OrganizationUpdateDto organizationUpdateDto, OrganizationModel organization)
+        {
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Name))
+                organization.Name = organizationUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Image))
+                organization.Image = organizationUpdateDto.Image;         
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Email))
+                organization.Email = organizationUpdateDto.Email;
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.WelcomeText))
+                organization.WelcomeText = organizationUpdateDto.WelcomeText;
+
+            organization.Phone = organizationUpdateDto.Phone;
+
+            organization.Adress = organizationUpdateDto.Adress;
+
+            organization.FacebookUrl = organizationUpdateDto.FacebookUrl;
+
+            organization.LinkedinUrl = organizationUpdateDto.LinkedinUrl;
+
+            organization.InstagramUrl = organizationUpdateDto.InstagramUrl;
+
+            organization.AboutUsText = organizationUpdateDto.AboutUsText;
+
+            return organization;
+        }
+
         public SlideModel FromSlideUpdateDtoToSlide(SlideUpdateDto slideUpdateDto, SlideModel slide)
         {
+
             if (slideUpdateDto.Image != null)
+
                 slide.ImageUrl = GetNameImage("slide");
 
             if (slideUpdateDto.Order != null)
-                slide.Order = (int) slideUpdateDto.Order;
+
+                slide.Order = (int)slideUpdateDto.Order;
 
             if (!string.IsNullOrEmpty(slideUpdateDto.Text))
+
                 slide.Text = slideUpdateDto.Text;
 
             if (!string.IsNullOrEmpty(slideUpdateDto.OrganizationId))
+
                 slide.OrganizationId = slideUpdateDto.OrganizationId;
 
             return slide;
+
         }
-}
+    }
 }
