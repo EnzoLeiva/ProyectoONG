@@ -65,5 +65,25 @@ namespace OngProject.Core.Services
             return ongDto;
         }
 
+        public async Task<OrganizationModel> Update(OrganizationUpdateDto organizationUpdateDto)
+        {
+            var mapper = new EntityMapper();
+
+            try
+            {
+                OrganizationModel organization = await _unitOfWork.OrganizationRepository.GetById(1);
+
+                organization = mapper.FromOrganizationUpdateToOrganization(organizationUpdateDto, organization);
+
+                await _unitOfWork.OrganizationRepository.Update(organization);
+                await _unitOfWork.SaveChangesAsync();
+                return organization;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }

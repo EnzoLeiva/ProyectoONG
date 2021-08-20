@@ -112,6 +112,28 @@ namespace OngProject.Core.Services
             return _unitOfWork.NewsRepository.Update(newsModel);
 
         }
+        public async Task<NewsModel> Put(NewsUpdateDto newsUpdateDto, int id)
+        {
+            var mapper = new EntityMapper();
+
+            try
+            {
+                NewsModel news = await _unitOfWork.NewsRepository.GetById(id);
+
+                news = mapper.FromNewsUpdateDtoToNews(newsUpdateDto, news);
+
+                if (newsUpdateDto.Image != null)
+                    news.Image = await _imagenService.Save(news.Image, newsUpdateDto.Image);
+                await _unitOfWork.NewsRepository.Update(news);
+                await _unitOfWork.SaveChangesAsync();
+                return news;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
 
         public bool NewsExists(int Id)
         {
