@@ -34,6 +34,7 @@
   <ItemGroup>
     <Folder Include="app_data\" />
     <Folder Include="Infrastructure\Data\Migrations\" />
+    <Folder Include="Infrastructure\Data\Migrations\" />
   </ItemGroup>
 
 </Project>
