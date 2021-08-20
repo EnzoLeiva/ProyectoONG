@@ -4,6 +4,73 @@
         <name>OngProject</name>
     </assembly>
     <members>
+        <member name="M:OngProject.Controllers.NewsController.GetById(System.Int32)">
+            <summary>
+            Getting the news by id
+            </summary>
+            <returns>return the information of news</returns>
+            <response code="200">Returns the news information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
+        <member name="M:OngProject.Controllers.NewsController.Post(OngProject.Core.DTOs.NewsDto)">
+             <summary>
+             Create a news
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /news
+                 {
+                    "Name": "TestName",
+                    "Content": "TestContent"
+                    "Image": FromFile
+                    "CategoryId": 1
+                 }
+             </remarks>
+             <response code="200">Create a news</response>
+             <response code="401">Unauthorized user</response>
+             <response code="400">Bad Request</response> 
+        </member>
+        <member name="M:OngProject.Controllers.NewsController.Delete(System.Int32)">
+            <summary>
+            Delete a news from the system
+            </summary>
+            <param name="id">News Id</param>
+            <returns>Message that a news has been successfully deleted</returns>
+            <response code="200">News deleted successfully</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:OngProject.Controllers.NewsController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Getting all the news for pages
+            </summary>
+            <returns>return the information of news</returns>
+            <response code="200">Returns the news information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
+        <member name="M:OngProject.Controllers.NewsController.Put(System.Int32,OngProject.Core.DTOs.NewsUpdateDto)">
+             <summary>
+             Update a news for id
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 PUT /news/id
+                 {
+                    "Name": "TestName",
+                    "Content": "TestContent"
+                    "Image": FromFile
+                    "CategoryId": 1
+                 }
+             </remarks>
+             <param name="id">News Id</param>
+             <response code="200">Update a news</response>
+             <response code="401">Unauthorized user</response>
+             <response code="404">Not Found</response> 
+        </member>
         <member name="M:OngProject.Controllers.TestimonialsController.Delete(System.Int32)">
             <summary>
             Soft Delete of a testimonial
