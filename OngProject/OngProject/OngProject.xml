@@ -67,5 +67,16 @@
             <response code="200">Returns the users information</response>
             <response code="401">Unauthorized user</response>
         </member>
+        <member name="M:OngProject.Controllers.UserController.Put(System.Int32,OngProject.Core.DTOs.UserUpdateDto)">
+            <summary>
+            Update a user's information
+            </summary>
+            <param name="id">User Id</param>
+            <param name="userUpdateDto">DTO updated user information</param>
+            <returns>returns the updated information of a user</returns>
+            <response code="200">Return the user information updated</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">User inexistent</response>
+        </member>
     </members>
 </doc>
