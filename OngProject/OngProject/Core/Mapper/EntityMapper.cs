@@ -141,7 +141,6 @@ namespace OngProject.Core.Mapper
                 Body = commentCreateDto.Body,
             };
         }
-
         public UserModel FromRegisterDtoToUser(RegisterDTO register)
         {
             string photo = null;
@@ -178,6 +177,23 @@ namespace OngProject.Core.Mapper
             };
         }
 
+        public CategoryModel FromCategoryCreateDtoUpdateToCategory(CategoryCreateDto categoryUpdateDto, CategoryModel category)
+        {
+            string image = null;
+            if (categoryUpdateDto.Image != null)
+                image = GetNameImage("category");
+
+            if (!string.IsNullOrEmpty(categoryUpdateDto.Name))
+                category.Name = categoryUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(image))
+                category.Image = image;
+
+            if (!string.IsNullOrEmpty(categoryUpdateDto.Description))
+                category.Description = categoryUpdateDto.Description;
+
+            return category;
+        }
         public MemberModel FromMemberUpdateDtoToMember(MemberUpdateDto memberUpdateDto, MemberModel member)
         {
             string image = null;
@@ -203,6 +219,24 @@ namespace OngProject.Core.Mapper
                 member.Description = memberUpdateDto.Description;
 
             return member;
+        }
+
+        public UserModel FromUserUpdateDtoToUser(UserUpdateDto userUpdateDto, UserModel user)
+        {
+            string photo = null;
+            if (userUpdateDto.Photo != null)
+                photo = GetNameImage("user");
+
+            if (!string.IsNullOrEmpty(userUpdateDto.FirstName))
+                user.firstName = userUpdateDto.FirstName;
+
+            if (!string.IsNullOrEmpty(userUpdateDto.LastName))
+                user.lastName = userUpdateDto.LastName;
+
+            if (!string.IsNullOrEmpty(photo))
+                user.photo = photo;
+
+            return user;
         }
 
 
@@ -344,7 +378,24 @@ namespace OngProject.Core.Mapper
             };
             return testimonialsDto;
         }
+        public NewsModel FromNewsUpdateDtoToNews(NewsUpdateDto newsUpdateDto, NewsModel news)
+        {
+            string image = null;
+            if (newsUpdateDto.Image != null)
+                image = GetNameImage("news");
 
+            if (!string.IsNullOrEmpty(newsUpdateDto.Name))
+                news.Name = newsUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(newsUpdateDto.Content))
+                news.Content = newsUpdateDto.Content;
+
+            if (!string.IsNullOrEmpty(image))
+                news.Image = image;
+            if (newsUpdateDto.CategoryId != 0)
+                news.CategoryId = newsUpdateDto.CategoryId;
+            return news;
+        }
         public CommentModel FromComentUpdateToComment(CommentUpdateDto commentUpdateDto, CommentModel comment)
         {
             if (commentUpdateDto.User_id != null)
@@ -358,6 +409,72 @@ namespace OngProject.Core.Mapper
 
             return comment;
         }
+
+        public OrganizationModel FromOrganizationUpdateToOrganization(OrganizationUpdateDto organizationUpdateDto, OrganizationModel organization)
+        {
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Name))
+                organization.Name = organizationUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Image))
+                organization.Image = organizationUpdateDto.Image;         
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.Email))
+                organization.Email = organizationUpdateDto.Email;
+
+            if (!string.IsNullOrEmpty(organizationUpdateDto.WelcomeText))
+                organization.WelcomeText = organizationUpdateDto.WelcomeText;
+
+            organization.Phone = organizationUpdateDto.Phone;
+
+            organization.Adress = organizationUpdateDto.Adress;
+
+            organization.FacebookUrl = organizationUpdateDto.FacebookUrl;
+
+            organization.LinkedinUrl = organizationUpdateDto.LinkedinUrl;
+
+            organization.InstagramUrl = organizationUpdateDto.InstagramUrl;
+
+            organization.AboutUsText = organizationUpdateDto.AboutUsText;
+
+            return organization;
+        }
+
+        public SlideModel FromSlideUpdateDtoToSlide(SlideUpdateDto slideUpdateDto, SlideModel slide)
+        {
+
+            if (slideUpdateDto.Image != null)
+
+                slide.ImageUrl = GetNameImage("slide");
+
+            if (slideUpdateDto.Order != null)
+
+                slide.Order = (int)slideUpdateDto.Order;
+
+            if (!string.IsNullOrEmpty(slideUpdateDto.Text))
+
+                slide.Text = slideUpdateDto.Text;
+
+            if (!string.IsNullOrEmpty(slideUpdateDto.OrganizationId))
+
+                slide.OrganizationId = slideUpdateDto.OrganizationId;
+
+            return slide;
+
+        }
+        public TestimonialsModel FromTestimonialsCreateDtoUpdateToTestimonials(CreateTestimonialsDto testimonialsUpdateDto, TestimonialsModel testimonials)
+        {
+
+            if (!string.IsNullOrEmpty(testimonialsUpdateDto.Name))
+                testimonials.Name = testimonialsUpdateDto.Name;
+
+            if (!string.IsNullOrEmpty(testimonialsUpdateDto.Content))
+                testimonials.Content = testimonialsUpdateDto.Content;
+
+            return testimonials;
+        }
+        
+
+
 
         public MemberCreateDto FromMemberToMemberCreateDto(MemberModel member)
         {

@@ -27,12 +27,12 @@ namespace OngProject.Core.Services
             _imagenService = imagenService;
         }
 
-        public async Task<bool> Delete(int id) 
+        public async Task<bool> Delete(int id)
         {
             try
             {
-               await _unitOfWork.SlideRepository.Delete(id);
-               await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.SlideRepository.Delete(id);
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -91,6 +91,33 @@ namespace OngProject.Core.Services
             }
             else
                 throw new Exception(result.Errors);
+        }
+
+        public async Task<SlideModel> Update(SlideUpdateDto slideUpdateDto, int id)
+        {
+            var mapper = new EntityMapper();
+            var slide = await _unitOfWork.SlideRepository.GetById(id);
+
+            // There's a new image, delete old image
+            if (slideUpdateDto.Image != null)
+                await _imagenService.Delete(slide.ImageUrl);
+
+            slide = mapper.FromSlideUpdateDtoToSlide(slideUpdateDto, slide);
+
+            // Upload image with image name generated on mapper
+            if (slideUpdateDto.Image != null)
+                slide.ImageUrl = await _imagenService.Save(slide.ImageUrl, slideUpdateDto.Image);
+
+            // If the user don't define a new order the slide it's moved to the first place
+            if (slideUpdateDto.Order == null)
+            {
+                var slides = await _unitOfWork.SlideRepository.GetAll();
+                slide.Order = slides.Last().Order + 1;
+            }
+
+            await _unitOfWork.SlideRepository.Update(slide);
+            await _unitOfWork.SaveChangesAsync();
+            return slide;
         }
     }
 }
