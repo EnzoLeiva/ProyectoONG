@@ -122,6 +122,7 @@ namespace OngProject
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IContactsService, ContactsService>();
+            services.AddTransient<IMemberService, MemberService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();

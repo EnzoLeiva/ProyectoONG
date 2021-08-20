@@ -14,7 +14,7 @@ namespace OngProject.Core.Interfaces
         public Task<bool> Delete(int Id);
         public bool EntityExists(int id);
         public Task<MemberModel> Put(MemberUpdateDto memberUpdateDto, int id);
-        public Task<ResponsePagination<GenericPagination<MemberCreateDto>>> GetAll(int page, int sizeByPage);
+        public Task<ResponsePagination<GenericPagination<MemberGetDto>>> GetAll(int page, int sizeByPage);
 
     }
 }

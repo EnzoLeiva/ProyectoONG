@@ -476,10 +476,10 @@ namespace OngProject.Core.Mapper
 
 
 
-        public MemberCreateDto FromMemberToMemberCreateDto(MemberModel member)
+        public MemberGetDto FromMemberToMemberGetDto(MemberModel member)
         {
             string image = null;
-            MemberCreateDto memberDto = new MemberCreateDto();
+            MemberGetDto memberDto = new MemberGetDto();
 
             if (member.Image != null)
                 image = GetNameImage("member");
@@ -495,9 +495,8 @@ namespace OngProject.Core.Mapper
 
             if (!string.IsNullOrEmpty(member.LinkedinUrl))
                 memberDto.LinkedinUrl = member.LinkedinUrl;
-            /*
             if (!string.IsNullOrEmpty(member.Image))
-                memberDto.Image = member.Image;*/
+                memberDto.Image = member.Image;
 
             if (!string.IsNullOrEmpty(member.Description))
                 memberDto.Description = member.Description;

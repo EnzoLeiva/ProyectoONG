@@ -28,16 +28,16 @@ namespace OngProject.Core.Services
         }
 
 
-        public async Task<ResponsePagination<GenericPagination<MemberCreateDto>>> GetAll(int page, int sizeByPage)
+        public async Task<ResponsePagination<GenericPagination<MemberGetDto>>> GetAll(int page, int sizeByPage)
         {
             string nextRoute = null, previousRoute = null;
             IEnumerable<MemberModel> data = await _unitOfWork.MemberRepository.GetAll();
 
             var mapper = new EntityMapper();
-            var membersDto = data.Select(m => mapper.FromMemberToMemberCreateDto(m)).ToList();
+            var membersDto = data.Select(m => mapper.FromMemberToMemberGetDto(m)).ToList();
 
-            GenericPagination<MemberCreateDto> objGenericPagination = GenericPagination<MemberCreateDto>.Create(membersDto, page, sizeByPage);
-            ResponsePagination<GenericPagination<MemberCreateDto>> response = new ResponsePagination<GenericPagination<MemberCreateDto>>(objGenericPagination);
+            GenericPagination<MemberGetDto> objGenericPagination = GenericPagination<MemberGetDto>.Create(membersDto, page, sizeByPage);
+            ResponsePagination<GenericPagination<MemberGetDto>> response = new ResponsePagination<GenericPagination<MemberGetDto>>(objGenericPagination);
             response.CurrentPage = objGenericPagination.CurrentPage;
             response.HasNextPage = objGenericPagination.HasNextPage;
             response.HasPreviousPage = objGenericPagination.HasPreviousPage;
