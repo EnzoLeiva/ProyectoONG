@@ -475,5 +475,33 @@ namespace OngProject.Core.Mapper
         
 
 
+
+        public MemberGetDto FromMemberToMemberGetDto(MemberModel member)
+        {
+            string image = null;
+            MemberGetDto memberDto = new MemberGetDto();
+
+            if (member.Image != null)
+                image = GetNameImage("member");
+
+            if (!string.IsNullOrEmpty(member.Name))
+                memberDto.Name = member.Name;
+
+            if (!string.IsNullOrEmpty(member.FacebookUrl))
+                memberDto.FacebookUrl = member.FacebookUrl;
+
+            if (!string.IsNullOrEmpty(member.InstagramUrl))
+                memberDto.InstagramUrl = member.InstagramUrl;
+
+            if (!string.IsNullOrEmpty(member.LinkedinUrl))
+                memberDto.LinkedinUrl = member.LinkedinUrl;
+            if (!string.IsNullOrEmpty(member.Image))
+                memberDto.Image = member.Image;
+
+            if (!string.IsNullOrEmpty(member.Description))
+                memberDto.Description = member.Description;
+
+            return memberDto;
+        }
     }
 }

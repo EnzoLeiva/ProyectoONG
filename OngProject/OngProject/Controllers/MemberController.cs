@@ -10,6 +10,7 @@ using OngProject.Infrastructure.Data;
 using OngProject.Core.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using OngProject.Core.Models;
+using OngProject.Core.Helper.Pagination;
 
 namespace OngProject.Controllers
 {
@@ -35,9 +36,9 @@ namespace OngProject.Controllers
         /// <response code="401">Unauthorized user</response>
         /// <response code="404">Not Found</response> 
         [HttpGet]
-        public async Task<IEnumerable<MemberModel>> GetMembers()
+        public async Task<ResponsePagination<GenericPagination<MemberGetDto>>> GetAll(int page, int sizeByPage)
         {
-            return await _memberService.GetMembers();
+            return await _memberService.GetAll(page, sizeByPage);
         }
 
 
