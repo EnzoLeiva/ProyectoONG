@@ -55,7 +55,7 @@ namespace OngProject.Core.Services
         }
         public bool EntityExists(int id)
         {
-            return _unitOfWork.CategoryRepository.EntityExists(id);
+            return _unitOfWork.CommentRepository.EntityExists(id);
         }
         public async Task<bool> ValidateCreatorOrAdminAsync(ClaimsPrincipal user, int id)
         {
@@ -79,6 +79,25 @@ namespace OngProject.Core.Services
             await _unitOfWork.CommentRepository.Insert(comment);
             await _unitOfWork.SaveChangesAsync();
             return comment;
+        }
+
+        public async Task<CommentModel> Update(CommentUpdateDto updateComentDto, int id)
+        {
+            EntityMapper mapper = new EntityMapper();
+
+            CommentModel comment = await _unitOfWork.CommentRepository.GetById(id);
+
+            comment = mapper.FromComentUpdateToComment(updateComentDto, comment);
+
+            await _unitOfWork.CommentRepository.Update(comment);
+            await _unitOfWork.SaveChangesAsync();
+
+            return comment;
+        }
+
+        public async Task<CommentModel> GetById(int id)
+        {
+            return await _unitOfWork.CommentRepository.GetById(id);
         }
     }
 }

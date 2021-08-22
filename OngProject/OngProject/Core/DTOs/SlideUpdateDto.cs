@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.DTOs
 {
-    public class CategoryCreateDto
+    public class SlideUpdateDto
     {
-        [DataType(DataType.Text)]
-        public string Name { get; set; }
-        [DataType(DataType.Text)]
-        public string Description { get; set; }
         public IFormFile Image { get; set; }
+        [MaxLength(255)]
+        public string Text { get; set; }
+        [MaxLength(255)]
+        public string OrganizationId { get; set; }
+        public int? Order { get; set; }
     }
 }

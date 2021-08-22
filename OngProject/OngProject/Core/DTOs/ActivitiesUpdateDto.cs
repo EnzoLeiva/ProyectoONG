@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace OngProject.Core.DTOs
 {
-    public class CategoryCreateDto
+    public class ActivitiesUpdateDto
     {
-        [DataType(DataType.Text)]
+        [MaxLength(255)]
         public string Name { get; set; }
-        [DataType(DataType.Text)]
-        public string Description { get; set; }
+
+        
         public IFormFile Image { get; set; }
+
+        [MaxLength(255)]
+        public string Content { get; set; }
     }
 }

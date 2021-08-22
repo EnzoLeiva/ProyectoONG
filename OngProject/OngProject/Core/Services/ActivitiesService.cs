@@ -51,8 +51,8 @@ namespace OngProject.Core.Services
 
             try
             {
-                await _imagenService.Save(activities.Image, activitiesCreateDto.Image);
-
+                activities.Image = await _imagenService.Save(activities.Image, activitiesCreateDto.Image);
+               
                 await _unitOfWork.ActivitiesRepository.Insert(activities);
                 await _unitOfWork.SaveChangesAsync();
             }
@@ -63,10 +63,31 @@ namespace OngProject.Core.Services
             return activities;
         }
 
-        public Task Update(ActivitiesModel activitiesModel)
+        public async Task<ActivitiesModel> Update(ActivitiesUpdateDto updateActivityDto, int id)
         {
-            return _unitOfWork.ActivitiesRepository.Update(activitiesModel);
+            var mapper = new EntityMapper();
+
+            try
+            {
+                ActivitiesModel activity = await _unitOfWork.ActivitiesRepository.GetById(id);
+
+                activity = mapper.FromActivitiesUpdateDtoToActivities(updateActivityDto, activity);
+
+                if (updateActivityDto.Image != null)
+                    activity.Image = await _imagenService.Save(activity.Image, updateActivityDto.Image);
+
+                await _unitOfWork.ActivitiesRepository.Update(activity);
+                await _unitOfWork.SaveChangesAsync();
+
+                return activity;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
+
     }
 
 }

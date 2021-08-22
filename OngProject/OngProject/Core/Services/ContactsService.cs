@@ -35,7 +35,7 @@ namespace OngProject.Core.Services
 
             await _unitOfWork.ContactsRepository.Insert(contact);
             await _unitOfWork.SaveChangesAsync();
-            bool response = await _sendEmailService.SendRegisterEmail(contact.Email);
+            bool response = await _sendEmailService.SendContatcsEmail(contact.Email);
 
             return contact;
         }

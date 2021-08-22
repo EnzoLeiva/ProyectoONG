@@ -23,6 +23,13 @@ using OngProject.Core.Interfaces.IServices.AWS;
 using OngProject.Core.Services.AWS;
 using OngProject.Core.Helper;
 using OngProject.Middleware;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
+using OngProject.Core.Services.UriPagination;
+using System;
+using System.Reflection;
+using System.IO;
 
 namespace OngProject
 {
@@ -67,8 +74,43 @@ namespace OngProject
             });
 
             services.AddSwaggerGen(c =>
+              {
+                  c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
+                  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                  {
+                      In = ParameterLocation.Header,
+                      Description = "Please enter into field the word 'Bearer' following by space and JWT",
+                      Name = "Authorization",
+                      Type = SecuritySchemeType.ApiKey
+                  });
+                  c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                  {
+                    {
+                        new OpenApiSecurityScheme {
+                            Reference = new OpenApiReference {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                },
+                                Scheme = "oauth2",
+                                Name = "Bearer",
+                                In = ParameterLocation.Header,
+                        },
+                        new List<string>()
+                    }
+                  });
+
+                  var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                  var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                  c.IncludeXmlComments(xmlPath);
+              });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IUriPaginationService>(provider =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OngProject", Version = "v1" });
+                var accesor = provider.GetRequiredService<IHttpContextAccessor>();
+                var request = accesor.HttpContext.Request;
+                var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriPaginationService(absoluteUri);
             });
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
@@ -80,6 +122,7 @@ namespace OngProject
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICommentService, CommentService>();
             services.AddTransient<IContactsService, ContactsService>();
+            services.AddTransient<IMemberService, MemberService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<ISlideService, SlideService>();
             services.AddTransient<ITestimonialsService, TestimonialsService>();
