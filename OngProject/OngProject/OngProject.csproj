@@ -38,4 +38,10 @@
     <Folder Include="Infrastructure\Data\Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="app_data\credentials.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
