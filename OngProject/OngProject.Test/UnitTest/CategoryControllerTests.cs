@@ -46,7 +46,7 @@ namespace OngProject.Test.UnitTest
         }
 
         [TestMethod]
-        public async Task Post_Should_Create_Category_And_Return_Ok()
+        public async Task Post_Should_Create_Category_And_Return_Created()
         {
             // Arrange
             var categoryTest = new CategoryCreateDto() { 
