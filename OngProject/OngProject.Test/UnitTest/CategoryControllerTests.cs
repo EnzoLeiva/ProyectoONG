@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OngProject.Controllers;
 using OngProject.Core.DTOs;
@@ -24,17 +25,24 @@ namespace OngProject.Test.UnitTest
     [TestClass]
     public class CategoryControllerTests: BaseTests
     {
-        private readonly ApplicationDbContext _context;
-        private readonly CategoryController categoryController;
-    
-        public CategoryControllerTests()
+        private ApplicationDbContext _context;
+        private CategoryController categoryController;
+
+        [TestInitialize]
+        public void Init()
         {
             _context = MakeContext("testDb");
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
             ImageService image = new ImageService();
-            UriPaginationService pagination = new UriPaginationService(null);
+            UriPaginationService pagination = new UriPaginationService("test/");
             CategoryService service = new CategoryService(unitOfWork, image, pagination);
             categoryController = new CategoryController(service);
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _context.Database.EnsureDeleted();
         }
 
         [TestMethod]
@@ -49,9 +57,11 @@ namespace OngProject.Test.UnitTest
 
             // Act
             var actionResult = await categoryController.Post(categoryTest);
+            var objResult = _context.Categories.Count();
 
             // Assert
-            //TODO
+            Assert.AreEqual(typeof(CreatedAtActionResult), actionResult.GetType());
+            Assert.AreEqual(1, objResult);
         }
 
         [TestMethod]
@@ -74,9 +84,7 @@ namespace OngProject.Test.UnitTest
 
             // Assert
             Assert.IsNotNull(actionResult);
-
-            var CodeStatus = actionResult.GetType().GetProperty("StatusCode")?.GetValue(actionResult);
-            Assert.AreEqual(200, CodeStatus);
+            Assert.AreEqual(typeof(ObjectResult), actionResult.GetType());
 
             var value = actionResult.GetType().GetProperty("Value")?.GetValue(actionResult);
             var categoryResponse =  value as CategoryModel;
@@ -91,10 +99,8 @@ namespace OngProject.Test.UnitTest
 
             var actionResult = await categoryController.GetById(1);
 
-            var CodeStatus = actionResult.GetType().GetProperty("StatusCode")?.GetValue(actionResult);
-
             // Assert
-            Assert.AreEqual(404, CodeStatus);
+            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
 
         }
 
@@ -117,10 +123,8 @@ namespace OngProject.Test.UnitTest
             var category = _context.Categories.Single();
             var actionResult = await categoryController.Delete(category.Id);
 
-            var CodeStatus = actionResult.GetType().GetProperty("StatusCode")?.GetValue(actionResult);
-
             // Assert
-            Assert.AreEqual(200, CodeStatus);
+            Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
 
             Assert.AreEqual(true, category.IsDeleted);
 
@@ -133,10 +137,8 @@ namespace OngProject.Test.UnitTest
 
             var actionResult = await categoryController.Delete(1);
 
-            var CodeStatus = actionResult.GetType().GetProperty("StatusCode")?.GetValue(actionResult);
-
             // Assert
-            Assert.AreEqual(404, CodeStatus);
+            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
 
         }
     }
