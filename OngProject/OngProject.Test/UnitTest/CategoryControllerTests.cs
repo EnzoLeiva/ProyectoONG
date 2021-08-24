@@ -31,10 +31,10 @@ namespace OngProject.Test.UnitTest
         [TestInitialize]
         public void Init()
         {
-            _context = MakeContext("testDb");
+            _context = MakeContext("TestDB");
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
             ImageService image = new ImageService();
-            UriPaginationService pagination = new UriPaginationService("test/");
+            UriPaginationService pagination = new UriPaginationService("http://test");
             CategoryService service = new CategoryService(unitOfWork, image, pagination);
             categoryController = new CategoryController(service);
         }
@@ -139,6 +139,28 @@ namespace OngProject.Test.UnitTest
 
             // Assert
             Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
+
+        }
+
+        [TestMethod]
+        public async Task GetAll_Should_Return_List_Categories()
+        {
+
+            // Arrange
+            for (int i= 0; i < 55; i++)
+            {
+                _context.Categories.Add(new CategoryModel() { Name = "Category "+ i, Description = "This is the category "+ i, Image = "image"+i+".jpg" });
+            }
+
+            await _context.SaveChangesAsync();
+
+            // Act
+
+            var actionResult = await categoryController.GetAll();
+            var objResult = _context.Categories.Count();
+
+            // Assert
+            Assert.AreEqual(55, objResult);
 
         }
     }
