@@ -99,6 +99,59 @@ namespace OngProject.Test.UnitTest
         }
 
         [TestMethod]
+        public async Task Put_Should_Modify_Existing_Category()
+        {
+
+            // Arrange
+            var categoryTest = new CategoryModel()
+            {
+                Name = "Tests",
+                Description = "this is a category insertion test",
+                Image = null
+            };
+
+            _context.Categories.Add(categoryTest);
+            await _context.SaveChangesAsync();
+
+            var categoryDto = new CategoryCreateDto()
+            {
+                Name = "Test 1",
+                Description = "This is a category update test",
+                Image = CreateImage()
+            };
+
+            // Act
+            var actionResult = await categoryController.Put(categoryDto, categoryTest.Id);
+            var value = actionResult.GetType().GetProperty("Value")?.GetValue(actionResult);
+            var categoryResponse = value as CategoryModel;
+
+            // Assert
+            Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
+            Assert.AreEqual(categoryTest.Name, categoryResponse.Name);
+        }
+
+        [TestMethod]
+        public async Task Put_Should_NotModify_NonExistent_Category()
+        {
+
+            // Arrange
+            var categoryDto = new CategoryCreateDto()
+            {
+                Name = "Test 1",
+                Description = "This is a category update test",
+                Image = CreateImage()
+            };
+
+            // Act
+            var actionResult = await categoryController.Put(categoryDto, 1);
+            var objResult = _context.Categories.Count();
+
+            // Assert
+            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
+            Assert.AreEqual(0, objResult);
+        }
+
+        [TestMethod]
         public async Task GetById_Should_Return_category_FromTheDb()
         {
             // Arrange
