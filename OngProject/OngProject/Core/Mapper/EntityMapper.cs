@@ -503,5 +503,30 @@ namespace OngProject.Core.Mapper
 
             return memberDto;
         }
+
+        public OrganizationUpdateDto FromOrganizationToOrganizationUpdateDto(OrganizationModel organization)
+        {
+
+            if (organization == null)
+            {
+                return null;
+            }
+
+            var organizationUpdateDto = new OrganizationUpdateDto() 
+            {
+                Name = organization.Name,
+                Image = organization.Image,
+                Phone = organization.Phone,
+                Adress = organization.Adress,
+                Email = organization.Email,
+                FacebookUrl = organization.FacebookUrl,
+                LinkedinUrl = organization.LinkedinUrl,
+                InstagramUrl = organization.InstagramUrl,
+                WelcomeText = organization.WelcomeText,
+                AboutUsText = organization.AboutUsText
+            };
+
+            return organizationUpdateDto;
+        }
     }
 }
