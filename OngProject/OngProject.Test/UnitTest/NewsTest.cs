@@ -44,7 +44,7 @@ namespace OngProject.Test.UnitTest
 
         public IFormFile CreateImage()
         {
-            var stream = File.OpenRead(@"..\..\..\UnitTest\Captura1.PNG");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Captura1.PNG");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
@@ -88,9 +88,35 @@ namespace OngProject.Test.UnitTest
             Assert.AreEqual(1, objResult);
         }
 
+        [TestMethod]
+        public async Task Post_ShouldNotCreateNews_ReturnBadRequest_image_invalid()
+        {
+            //ARRANGER         
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\TextFile1.txt");
+            var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "application/text"
+            };
+
+            NewsDto newsDto = new NewsDto();
+            newsDto.Name = "informe 23/8";
+            newsDto.Content = "contenido de la novedad";
+            newsDto.Image = file;
+            newsDto.CategoryId = 1;
+
+            //ACT
+            var result = await newsController.Post(newsDto);
+            var objResult = _context.News.Count();
+
+            //ASSERT 
+            Assert.AreEqual(typeof(BadRequestObjectResult), result.GetType());
+            Assert.AreEqual(0, objResult);
+        }
+
 
         [TestMethod]
-        public async Task Post_ShouldNotCreateNews_ReturnBadRequest()
+        public async Task Post_ShouldNotCreateNews_ReturnBadRequest_image_null()
         {
             //ARRANGER
             NewsDto newsDto = new NewsDto();
@@ -171,14 +197,14 @@ namespace OngProject.Test.UnitTest
         {
             //asert
             var resultExpected = typeof(OkResult);
-            NewsModel[] data = new NewsModel[3];
+            NewsModel[] data = new NewsModel[13];
             for (int i = 0; i < data.Count(); i++)
             {
                 data[i] = InsertModelInContext();
             }
 
             //act
-            int cantResult = newsController.GetAll().Result.TotalRecords;
+            var cantResult = newsController.GetAll().Result.TotalRecords;
 
             //assert
             Assert.AreEqual(data.Count(),cantResult);   
@@ -201,6 +227,22 @@ namespace OngProject.Test.UnitTest
             //ASSERT
             Assert.AreEqual(resultExpected, result.GetType()); //return ok
             Assert.AreEqual("informe modificado 23/8", newsModelResult.Name); //return name modified
+        }
+
+        [TestMethod]
+        public async Task Put_shouldReturnNotFound()
+        {
+            //ARRANGE
+            NewsModel newsModel = InsertModelInContext();
+            NewsUpdateDto newsUpdateDto = new NewsUpdateDto();
+            newsUpdateDto.Name = "informe modificado 23/8";
+            var resultExpected = typeof(NotFoundObjectResult);
+            int id = 2000; //no existe ese id
+            //ACT
+            IActionResult result = newsController.Put(id, newsUpdateDto).Result;
+
+            //ASSERT
+            Assert.AreEqual(resultExpected, result.GetType()); 
         }
 
         [TestCleanup]
