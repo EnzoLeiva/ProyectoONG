@@ -39,9 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="app_data\credentials.ini">
+    <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
 
 </Project>
