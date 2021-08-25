@@ -18,4 +18,10 @@
     <ProjectReference Include="..\OngProject\OngProject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Templates\email_template.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
