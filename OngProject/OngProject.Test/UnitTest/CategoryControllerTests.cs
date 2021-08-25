@@ -47,7 +47,7 @@ namespace OngProject.Test.UnitTest
 
         public IFormFile CreateImage()
         {
-            var stream = File.OpenRead(@"..\..\..\UnitTest\Captura1.PNG");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Captura1.PNG");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
