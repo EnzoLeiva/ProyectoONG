@@ -45,14 +45,27 @@ namespace OngProject.Test.UnitTest
             _context.Database.EnsureDeleted();
         }
 
+        public IFormFile CreateImage()
+        {
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Captura1.PNG");
+            var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "image/png"
+            };
+
+            return file;
+        }
+
         [TestMethod]
         public async Task Post_Should_Create_Category_And_Return_Created()
         {
+
             // Arrange
             var categoryTest = new CategoryCreateDto() { 
                 Name = "Tests", 
                 Description = "this is a category insertion test", 
-                Image = null 
+                Image = CreateImage()
             };
 
             // Act
@@ -62,6 +75,27 @@ namespace OngProject.Test.UnitTest
             // Assert
             Assert.AreEqual(typeof(CreatedAtActionResult), actionResult.GetType());
             Assert.AreEqual(1, objResult);
+        }
+
+        [TestMethod]
+        public async Task Post_Should_NotCreate_Category_And_Return_BadRequest()
+        {
+
+            // Arrange
+            var categoryTest = new CategoryCreateDto()
+            {
+                Name = "Tests",
+                Description = "this is a category insertion test",
+                Image = null
+            };
+
+            // Act
+            var actionResult = await categoryController.Post(categoryTest);
+            var objResult = _context.Categories.Count();
+
+            // Assert
+            Assert.AreEqual(typeof(BadRequestObjectResult), actionResult.GetType());
+            Assert.AreEqual(0, objResult);
         }
 
         [TestMethod]
@@ -84,7 +118,7 @@ namespace OngProject.Test.UnitTest
 
             // Assert
             Assert.IsNotNull(actionResult);
-            Assert.AreEqual(typeof(ObjectResult), actionResult.GetType());
+            Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
 
             var value = actionResult.GetType().GetProperty("Value")?.GetValue(actionResult);
             var categoryResponse =  value as CategoryModel;
@@ -100,7 +134,7 @@ namespace OngProject.Test.UnitTest
             var actionResult = await categoryController.GetById(1);
 
             // Assert
-            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
+            Assert.AreEqual(typeof(NotFoundResult), actionResult.GetType());
 
         }
 
@@ -124,7 +158,7 @@ namespace OngProject.Test.UnitTest
             var actionResult = await categoryController.Delete(category.Id);
 
             // Assert
-            Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
+            Assert.AreEqual(typeof(OkResult), actionResult.GetType());
 
             Assert.AreEqual(true, category.IsDeleted);
 
@@ -138,7 +172,7 @@ namespace OngProject.Test.UnitTest
             var actionResult = await categoryController.Delete(1);
 
             // Assert
-            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
+            Assert.AreEqual(typeof(NotFoundResult), actionResult.GetType());
 
         }
 
