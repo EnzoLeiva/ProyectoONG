@@ -36,7 +36,7 @@ namespace OngProject.Test.UnitTest
             _context = MakeContext("TestsDB");
             IUnitOfWork unitofWork = new UnitOfWork(_context);
             IImagenService imageService = new ImageService();
-            IUriPaginationService uriPaginationService = new UriPaginationService("test/");
+            IUriPaginationService uriPaginationService = new UriPaginationService("http://test/");
 
             IMemberService membersService = new MemberService(unitofWork, imageService, uriPaginationService);
             membersController = new MemberController(membersService);
@@ -53,8 +53,7 @@ namespace OngProject.Test.UnitTest
         public async Task Post_ShouldCreateMember_ReturnCreatedResult()
         {
             //Arrange
-            Cleanup();
-            Init();
+            
             var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
@@ -84,8 +83,7 @@ namespace OngProject.Test.UnitTest
         public async Task Put_ShouldModifyMember_ReturnOKResult()
         {
             //Arrange
-            Cleanup();
-            Init();
+            
             var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
@@ -124,8 +122,7 @@ namespace OngProject.Test.UnitTest
         public async Task Put_ShouldntAcceptInexistentId_ReturnNotFoundResult()
         {
             //Arrange
-            Cleanup();
-            Init();
+        
             var memberUpdateDto = new MemberUpdateDto()
             {
                 Name = "testModified2",
@@ -136,7 +133,6 @@ namespace OngProject.Test.UnitTest
             var actionResult = await membersController.Put(1, memberUpdateDto);
             var objResult = _context.Members.Count();
 
-            Console.WriteLine(actionResult + " " + objResult);
             //Assert
             Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
             Assert.AreEqual(0, objResult);
@@ -146,8 +142,7 @@ namespace OngProject.Test.UnitTest
         public async Task Delete__ShouldDeleteExistentMember_ReturnOkResult()
         {
             //Arrange
-            Cleanup();
-            Init();
+          
             var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
@@ -168,6 +163,7 @@ namespace OngProject.Test.UnitTest
             await membersController.Post(memberCreateDto);
             var objResultBefore = _context.Members.Count();
             var softDelBefore = _context.Members.Find(1).IsDeleted;
+
             //Act
             var actionResult = await membersController.Delete(1);
             var objResultAfter = _context.Members.Count();
@@ -183,8 +179,6 @@ namespace OngProject.Test.UnitTest
         public async Task Delete__ShouldntDeleteInexistentMember_ReturnNotFoundResult()
         {
             //Arrange
-            Cleanup();
-            Init();
             var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
@@ -212,6 +206,52 @@ namespace OngProject.Test.UnitTest
             //Assert
             Assert.AreEqual(typeof(NotFoundResult), actionResult.GetType());
             Assert.AreEqual(1, objResult);
+        }
+
+        [TestMethod]
+        public async Task GetAll__ShouldReturnMembersDividedByPages_ReturnPaginationWithMemberGetDto()
+        {
+
+            //Arrange
+
+            for(int i = 1; i < 12; i++)
+            {
+                var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Arcade.png");
+                var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
+                {
+                    Headers = new HeaderDictionary(),
+                    ContentType = "image/png"
+                };
+
+                var memberCreateDto = new MemberCreateDto()
+                {
+                    Name = "testName"+i,
+                    FacebookUrl = "testfacebook"+i,
+                    InstagramUrl = "testinstagram1"+i,
+                    LinkedinUrl = "testlinkedin1"+i,
+                    Image = file,
+                    Description = "testdescription1"+i
+                };
+
+                await membersController.Post(memberCreateDto);
+
+            }
+
+            //Act
+            int page = 1;
+            int sizeByPage = 10;
+            var totalMembers =  _context.Members.Count();
+            var objResult = await membersController.GetAll(page, sizeByPage);
+
+            //Assert
+
+            Assert.AreEqual(page, objResult.CurrentPage);
+            Assert.AreEqual(totalMembers, objResult.TotalRecords);
+            Assert.AreEqual(sizeByPage, objResult.PageSize);
+            Assert.AreEqual(true, objResult.HasNextPage);
+            Assert.AreNotEqual(null, objResult.NextPageUrl);
+
+
         }
     }
 }
