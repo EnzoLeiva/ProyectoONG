@@ -54,7 +54,7 @@ namespace OngProject.Test.UnitTest
         {
             //Arrange
             
-            var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Image\Arcade.png");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
@@ -84,7 +84,7 @@ namespace OngProject.Test.UnitTest
         {
             //Arrange
             
-            var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Image\Arcade.png");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
@@ -143,7 +143,7 @@ namespace OngProject.Test.UnitTest
         {
             //Arrange
           
-            var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Image\Arcade.png");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
@@ -179,7 +179,7 @@ namespace OngProject.Test.UnitTest
         public async Task Delete__ShouldntDeleteInexistentMember_ReturnNotFoundResult()
         {
             //Arrange
-            var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Image\Arcade.png");
+            var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Arcade.png");
             var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
             {
                 Headers = new HeaderDictionary(),
@@ -216,7 +216,7 @@ namespace OngProject.Test.UnitTest
 
             for(int i = 1; i < 12; i++)
             {
-                var stream = File.OpenRead(@"C:\Users\chiar\OneDrive\Escritorio\t58-project\OngProject\OngProject.Test\UnitTest\Image\Arcade.png");
+                var stream = File.OpenRead(@"..\..\..\UnitTest\Image\Arcade.png");
                 var file = new FormFile(stream, 0, stream.Length, null, Path.GetFileName(stream.Name))
                 {
                     Headers = new HeaderDictionary(),
