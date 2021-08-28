@@ -14,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OngProject.Core.Helper.Pagination;
+using OngProject.Infrastructure;
 
 namespace OngProject.Controllers
 {
@@ -42,19 +44,25 @@ namespace OngProject.Controllers
         [HttpGet("/auth/me")]
         [ProducesResponseType(typeof(UserInfoDto), 200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<UserInfoDto>> GetUserData()
+        public async Task<ActionResult> GetUserData() //UserInfoDto
         {
+            GenericResult<UserInfoDto> userModeldto = new GenericResult<UserInfoDto>();
             try
             {
                 string authToken = Request.Headers["Authorization"];
                 int userId = _auth.GetUserId(authToken);
-                UserInfoDto userModeldto = await _userService.GetUserById(userId);
 
+                userModeldto.data = await _userService.GetUserById(userId);
+                userModeldto.IsSuccess = true;
+                userModeldto.Message = "Get data successfully.";
                 return Ok(userModeldto);
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                userModeldto.IsSuccess = false;
+                userModeldto.Message = "Get data failed.";
+                userModeldto.Error= e.Message;
+                return BadRequest(userModeldto);
             }
         }
 
@@ -80,24 +88,31 @@ namespace OngProject.Controllers
         [HttpPost("/auth/register")]
         [ProducesResponseType(typeof(UserDto), 200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<UserDto>> Register([FromForm] RegisterDTO request)
+        public async Task<ActionResult<GenericResult<UserDto>>> Register([FromForm] RegisterDTO request)
         {
+            GenericResult<UserDto> userDtoResult = new GenericResult<UserDto>();
             try
             {
-                var user = await this._auth.register(request);
+                userDtoResult.data = await this._auth.register(request);
 
-                if (user != null)
+                if (userDtoResult.data != null)
                 {
-                    return Ok(user);
+                    userDtoResult.IsSuccess = true;
+                    userDtoResult.Message = "Register successully.";
+                    return Ok(userDtoResult);
                 }
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                userDtoResult.IsSuccess = false;
+                userDtoResult.Message = "Error Register.";
+                userDtoResult.Error= e.Message;
+                return BadRequest(userDtoResult);
             }
 
-
-            return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            userDtoResult.IsSuccess = false;
+            userDtoResult.Message = "Error Register.";
+            return BadRequest(userDtoResult);
         }
 
 
@@ -121,16 +136,22 @@ namespace OngProject.Controllers
         [HttpPost("/auth/login")]
         [ProducesResponseType(typeof(UserDto), 200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<UserDto>> Login([FromBody] LoginDTO request)
+        public async Task<ActionResult> Login([FromBody] LoginDTO request)
         {
             var user = await this._auth.login(request);
-
+            GenericResult<UserDto> userDtoResult = new GenericResult<UserDto> ();
             if (user == null)
             {
-                return NotFound();
+               // userDtoResult.data = null;
+                userDtoResult.IsSuccess = false;
+                userDtoResult.Message = "User or password do not exists.";
+                return NotFound(userDtoResult);
             }
 
-            return Ok(user);
+            userDtoResult.data = user;
+            userDtoResult.IsSuccess = true;
+            userDtoResult.Message = "Login successfully.";
+            return Ok(userDtoResult);
 
         }
 
@@ -150,18 +171,27 @@ namespace OngProject.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!_userService.UserExists(id))
-                return NotFound();
-
-            bool response = await _userService.DeleteUser(id);
-
-            if (response == true)
+            GenericResult<bool> userExistsResult = new GenericResult<bool>();
+            userExistsResult.data = _userService.UserExists(id);
+            if (!userExistsResult.data)
             {
-                return Ok();
+                userExistsResult.IsSuccess = false;
+                userExistsResult.Message = "User not found.";
+                return NotFound(userExistsResult);
+            }
+
+            userExistsResult.data = await _userService.DeleteUser(id);
+            if (userExistsResult.data == true)
+            {
+                userExistsResult.IsSuccess = true;
+                userExistsResult.Message = "Delete user successfully.";
+                return Ok(userExistsResult);
             }
             else
             {
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                userExistsResult.IsSuccess = false;
+                userExistsResult.Message = "Delete user failed.";
+                return BadRequest(userExistsResult);
             }
         }
 
@@ -176,9 +206,9 @@ namespace OngProject.Controllers
         [HttpGet("/users")]
         [ProducesResponseType(typeof(UserModel),200)]
         [ProducesResponseType(401)]
-        public async Task<IEnumerable<UserModel>> GetUsers()
+        public async Task<ResponsePagination<GenericPagination<UserModel>>> GetUsers(int page = 1, int sizeByPage = 10)
         {
-            return await _userService.GetUsers();
+            return await _userService.GetUsers(page, sizeByPage);
         }
 
 
@@ -199,25 +229,33 @@ namespace OngProject.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Put(int id, [FromForm] UserUpdateDto userUpdateDto)
         {
+            GenericResult<bool> userExistsResult = new GenericResult<bool>();
             try
             {
-                bool UserExists = _userService.UserExists(id);
+                userExistsResult.data = _userService.UserExists(id);
 
-                if (!UserExists)
+                if (!userExistsResult.data)
                 {
-                    return NotFound("User inexistent");
+                    userExistsResult.IsSuccess = false;
+                    userExistsResult.Message = "User not found.";
+                    return NotFound(userExistsResult);
                 }
                 else
                 {
-                    var res = await _userService.Put(userUpdateDto, id);
-
-                    return Ok(res);
+                    GenericResult<UserModel> userPutResult = new GenericResult<UserModel> ();
+                    userPutResult.data = await _userService.Put(userUpdateDto, id);
+                    userPutResult.IsSuccess = true;
+                    userPutResult.Message = "User update successfully.";
+                    return Ok(userPutResult);
 
                 }
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                userExistsResult.IsSuccess = false;
+                userExistsResult.Message = "Update user failed.";
+                userExistsResult.Error=e.Message;
+                return BadRequest(userExistsResult);
             }
         }
     }

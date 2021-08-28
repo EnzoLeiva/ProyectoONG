@@ -280,7 +280,7 @@
             <response code="401">Unauthorized user</response>
             <response code="404">Not Found</response> 
         </member>
-        <member name="M:OngProject.Controllers.UserController.GetUsers">
+        <member name="M:OngProject.Controllers.UserController.GetUsers(System.Int32,System.Int32)">
             <summary>
             Get the data of all registered users
             </summary>

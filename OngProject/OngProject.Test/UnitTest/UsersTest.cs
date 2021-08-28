@@ -6,6 +6,7 @@ using OngProject.Controllers;
 using OngProject.Core.DTOs;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 using OngProject.Core.Interfaces.IServices.SendEmail;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
@@ -13,6 +14,7 @@ using OngProject.Core.Services;
 using OngProject.Core.Services.Auth;
 using OngProject.Core.Services.AWS;
 using OngProject.Core.Services.SendEmail;
+using OngProject.Core.Services.UriPagination;
 using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Test.Helper;
@@ -38,9 +40,10 @@ namespace OngProject.Test.UnitTest
             _context = MakeContext("TestDb");
             IUnitOfWork unitOfWork = new UnitOfWork(_context);
             IImagenService imagenService = new ImageService();
-            IAuthService authService = new AuthService(unitOfWork, _config, imagenService, null);            
+            IAuthService authService = new AuthService(unitOfWork, _config, imagenService, null);
+            IUriPaginationService uriPaginationService = new UriPaginationService("https://test/");
 
-            UserService userService = new UserService(unitOfWork, imagenService);
+            UserService userService = new UserService(unitOfWork, imagenService, uriPaginationService);
             userController = new UserController(userService, authService);
         }
         [TestCleanup]
