@@ -132,11 +132,11 @@ namespace OngProject.Test.UnitTest
             //Act
             var actionResult = await userController.Put(userTest.Id, userDto);
             var value = actionResult.GetType().GetProperty("Value")?.GetValue(actionResult);
-            var userResponse = value as UserModel;
-
+            var userResponse = value as GenericResult<UserModel>;
+       
             //Assert
             Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
-            Assert.AreEqual(userTest.firstName, userResponse.firstName);
+            Assert.AreEqual(userTest.firstName, userResponse.data.firstName);
         }
 
         [TestMethod]
@@ -180,7 +180,7 @@ namespace OngProject.Test.UnitTest
             var actionResult = await userController.Delete(user.Id);
 
             // Assert
-            Assert.AreEqual(typeof(OkResult), actionResult.GetType());
+            Assert.AreEqual(typeof(OkObjectResult), actionResult.GetType());
 
             Assert.AreEqual(true, user.IsDeleted);
         }
@@ -193,7 +193,7 @@ namespace OngProject.Test.UnitTest
             var actionResult = await userController.Delete(1);
 
             // Assert
-            Assert.AreEqual(typeof(NotFoundResult), actionResult.GetType());
+            Assert.AreEqual(typeof(NotFoundObjectResult), actionResult.GetType());
 
         }
     }
