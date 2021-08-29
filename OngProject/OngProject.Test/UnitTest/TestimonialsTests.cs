@@ -66,7 +66,7 @@ namespace OngProject.Test.UnitTest
             Assert.AreEqual(1, objResult);
         }
 
-        [TestMethod]
+     /*   [TestMethod]
         public async Task Post_Should_NotCreate_Testimonials_And_Return_BadRequest()
         {
             // Arrange
@@ -83,7 +83,7 @@ namespace OngProject.Test.UnitTest
             // Assert
             Assert.AreEqual(typeof(BadRequestObjectResult), actionResult.GetType());
             Assert.AreEqual(0, objResult);
-        }
+        }*/
 
         [TestMethod]
         public async Task Put_Should_Modify_Existing_Testimonials()

@@ -8,6 +8,7 @@ using OngProject.Core.DTOs;
 using OngProject.Core.DTOs.Auth;
 using OngProject.Core.Interfaces.IServices;
 using OngProject.Core.Interfaces.IServices.AWS;
+using OngProject.Core.Interfaces.IServices.IUriPaginationService;
 using OngProject.Core.Interfaces.IServices.SendEmail;
 using OngProject.Core.Interfaces.IUnitOfWork;
 using OngProject.Core.Models;
@@ -15,6 +16,7 @@ using OngProject.Core.Services;
 using OngProject.Core.Services.Auth;
 using OngProject.Core.Services.AWS;
 using OngProject.Core.Services.SendEmail;
+using OngProject.Core.Services.UriPagination;
 using OngProject.Infrastructure;
 using OngProject.Infrastructure.Data;
 using OngProject.Test.Helper;
@@ -50,8 +52,10 @@ namespace OngProject.Test.UnitTest
             IOrganizationService _organization = new OrganizationService(unitOfWork);
             ISendEmailService sendEmailService = new SendEmailService(_configuration, _organization);
             IImagenService imagenService = new ImageService();
-            IAuthService authService = new AuthService(unitOfWork, _configuration, imagenService, sendEmailService);            
-            IUserService userService = new UserService(unitOfWork, imagenService);
+            IAuthService authService = new AuthService(unitOfWork, _configuration, imagenService, sendEmailService);
+            IUriPaginationService uriPaginationService = new UriPaginationService("https://test/");
+
+            IUserService userService = new UserService(unitOfWork, imagenService, uriPaginationService);
             userController = new UserController(userService, authService);
         }
 
@@ -107,7 +111,7 @@ namespace OngProject.Test.UnitTest
 
             //Act 
             var response = await userController.Login(newUser);
-            var result = response.Result as StatusCodeResult;
+            var result = response as StatusCodeResult;
 
             //Assert
             Assert.AreEqual(500, result.StatusCode);
