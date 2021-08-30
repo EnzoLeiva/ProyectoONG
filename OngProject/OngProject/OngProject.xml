@@ -4,7 +4,72 @@
         <name>OngProject</name>
     </assembly>
     <members>
-        <member name="M:OngProject.Controllers.MemberController.GetMembers">
+        <member name="M:OngProject.Controllers.CategoryController.Delete(System.Int32)">
+            <summary>
+            Delete a Category from system 
+            </summary>
+            <param name="id">Category Id</param>
+            <returns>Returns a message that a category was removed</returns>
+            <response code="200">Category deleted successfully</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response>
+        </member>
+        <member name="M:OngProject.Controllers.CategoryController.GetById(System.Int32)">
+            <summary>
+            Get a category by id
+            </summary>
+            <returns>return a category by id</returns>
+            <response code="200">Returns the category information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
+        <member name="M:OngProject.Controllers.CategoryController.GetAll(System.Int32,System.Int32)">
+            <summary>
+            Getting all categories paginated
+            </summary>
+            <returns>return the information of all categories</returns>
+            <response code="200">Returns the categories information</response>
+            <response code="401">Unauthorized user</response>
+            <response code="404">Not Found</response> 
+        </member>
+        <member name="M:OngProject.Controllers.CategoryController.Post(OngProject.Core.DTOs.CategoryCreateDto)">
+             <summary>
+             Create a category
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /category
+                 {
+                    "Name": "TestName",
+                    "Description": "TestDescription"
+                    "Image": FromFile
+                 }
+             </remarks>
+             <response code="200">Create a category</response>
+             <response code="401">Unauthorized user</response>
+             <response code="400">Bad Request</response>
+        </member>
+        <member name="M:OngProject.Controllers.CategoryController.Put(OngProject.Core.DTOs.CategoryCreateDto,System.Int32)">
+             <summary>
+             Update a category for id
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 PUT /category/id
+                 {
+                    "Name": "TestName",
+                    "Description": "TestDescription"
+                    "Image": FromFile
+                 }
+             </remarks>
+             <param name="id">Category Id</param>
+             <response code="200">Update a category</response>
+             <response code="401">Unauthorized user</response>
+             <response code="404">Not Found</response>
+        </member>
+        <member name="M:OngProject.Controllers.MemberController.GetAll(System.Int32,System.Int32)">
             <summary>
             Getting all Members
             </summary>
@@ -215,7 +280,7 @@
             <response code="401">Unauthorized user</response>
             <response code="404">Not Found</response> 
         </member>
-        <member name="M:OngProject.Controllers.UserController.GetUsers">
+        <member name="M:OngProject.Controllers.UserController.GetUsers(System.Int32,System.Int32)">
             <summary>
             Get the data of all registered users
             </summary>

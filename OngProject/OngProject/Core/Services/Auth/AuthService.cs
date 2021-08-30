@@ -52,8 +52,9 @@ namespace OngProject.Core.Services.Auth
                     var user = mapper.FromRegisterDtoToUser(register);
                     user.RoleModel = await _unitOfWork.RoleRepository.GetById(2);
 
-                   
-                    await _imagenService.Save(user.photo, register.photo);
+
+                    if(register.photo!=null)
+                        user.photo = await _imagenService.Save(user.photo, register.photo);
 
                     await _unitOfWork.UserRepository.Insert(user);
                     await _unitOfWork.SaveChangesAsync();

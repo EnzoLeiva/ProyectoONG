@@ -63,18 +63,17 @@ namespace OngProject.Core.Services.SendEmail
             var organization = await _organizationService.GetFirst();
 
             var apiKey = _configuration["SENDGRID_API_KEY:Key"];
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress(_configuration["SENDGRID_API_KEY:FromEmail"], "Almeky");
+            var subject = "Correo de api somos mas";
+            var to = new EmailAddress(toEmail, "Alkemy");
             string html = File.ReadAllText("./Templates/email_template.html");
-
             html = html.Replace("{mail_title}", _configuration["SENDGRID_API_KEY:WelcomeMessage"]);
             html = html.Replace("{mail_body}", _configuration["SENDGRID_API_KEY:ContactBodyMessage"]);
             html = html.Replace("{mail_contact}", organization.Adress + "<br>" + organization.Phone);
 
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(_configuration["SENDGRID_API_KEY:FromEmail"]);
-            var to = new EmailAddress(toEmail);
-            string subject = _configuration["SENDGRID_API_KEY:WeolcomeSubject"];
             var msg = MailHelper.CreateSingleEmail(from, to, subject, "", html);
-            var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
+            var response = await client.SendEmailAsync(msg);
 
             return response.IsSuccessStatusCode;
 

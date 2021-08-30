@@ -58,7 +58,7 @@ namespace OngProject.Infrastructure.Data
                     {
                         Id = i,
                         Name = "Activity " + i,
-                        Image = "ImageActivities" + i + ".jpg",
+                        Image = null,
                         Content = "Content from activity " + i,
                         CreatedAt = DateTime.Now
                     }
@@ -85,8 +85,32 @@ namespace OngProject.Infrastructure.Data
 
         private void SeedUsers(ModelBuilder modelBuilder)
         {
+            string photo="";
             for (int i = 1; i < 21; i++)
             {
+                switch (i)
+                {
+                    case 1: photo = "https://alkemy-ong.s3.amazonaws.com/user_27082021235906"; break;
+                    case 2: photo = "https://alkemy-ong.s3.amazonaws.com/user_27082021235137"; break;
+                    case 3: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100425"; break;
+                    case 4: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100449"; break;
+                    case 5: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100509"; break;
+                    case 6: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100531"; break;
+                    case 7: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100550"; break;
+                    case 8: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100611"; break;
+                    case 9: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100628"; break;
+                    case 10: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100647"; break;
+                    case 11: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100705"; break;
+                    case 12: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100729"; break;
+                    case 13: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100747"; break;
+                    case 14: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100820"; break;
+                    case 15: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100839"; break;
+                    case 16: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100857"; break;
+                    case 17: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100916"; break;
+                    case 18: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202100942"; break;
+                    case 19: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202101137"; break;
+                    case 20: photo = "https://alkemy-ong.s3.amazonaws.com/user_2808202101201"; break;
+                }
                 modelBuilder.Entity<UserModel>().HasData(
                     new UserModel
                     {
@@ -95,7 +119,7 @@ namespace OngProject.Infrastructure.Data
                         lastName = i < 11 ? "AdminUser " + i : "RegularUser " + i,
                         email = "mail" + i + "@Mail.com",
                         password = i < 11 ? UserModel.ComputeSha256Hash("Admin123") : UserModel.ComputeSha256Hash("User123"),
-                        photo = "TestUsers" + i + ".jpg",
+                        photo = photo,
                         roleId = i < 11 ? 1 : 2,
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -116,7 +140,7 @@ namespace OngProject.Infrastructure.Data
                         Id = i,
                         Name = "new's name ",
                         Content = "Content " + i + " Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                        Image = "imageNews" + i + ".jpg",
+                        Image = "imageNewsNoValida" + i + ".jpg",
                         CategoryId = i,
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -150,15 +174,29 @@ namespace OngProject.Infrastructure.Data
         }
         public void SeedCategories(ModelBuilder modelBuilder)
         {
-            for (int i = 1; i < 51; i++)
+            string image = "";
+            for (int i = 1; i < 11; i++)
             {
+                switch (i)
+                {
+                    case 1: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132235"; break;
+                    case 2: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132437"; break;
+                    case 3: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132452"; break;
+                    case 4: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132503"; break;
+                    case 5: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132514"; break;
+                    case 6: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132524"; break;
+                    case 7: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132538"; break;
+                    case 8: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132550"; break;
+                    case 9: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132601"; break;
+                    case 10: image = "https://alkemy-ong.s3.amazonaws.com/category_2808202132612"; break;
+                }
                 modelBuilder.Entity<CategoryModel>().HasData(
                     new CategoryModel
                     {
                         Id = i,
                         Name = "name " + i,
                         Description = "Descripcion " + i + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                        Image = "imageCategories" + i + ".jpg",
+                        Image = image,
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
                     }
@@ -168,8 +206,22 @@ namespace OngProject.Infrastructure.Data
 
         public void SeedMembers(ModelBuilder modelBuilder)
         {
+            string image = "";
             for (int i = 1; i < 11; i++)
             {
+                switch (i)
+                {
+                    case 1: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202130915"; break;
+                    case 2: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131017"; break;
+                    case 3: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131043"; break;
+                    case 4: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131054"; break;
+                    case 5: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131104"; break;
+                    case 6: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131112"; break;
+                    case 7: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131123"; break;
+                    case 8: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131133"; break;
+                    case 9: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131143"; break;
+                    case 10: image = "https://alkemy-ong.s3.amazonaws.com/member_2808202131154"; break;
+                }
                 modelBuilder.Entity<MemberModel>().HasData(
                     new MemberModel
                     {
@@ -178,7 +230,7 @@ namespace OngProject.Infrastructure.Data
                         FacebookUrl = "https://facebook.com/member" + i,
                         InstagramUrl = "https://instagram/member" + i,
                         LinkedinUrl = "https://Linkedin/member" + i,
-                        Image = "imageMembers" + i + ".jpg",
+                        Image = image,
                         Description = "Descripcion" + i + "Lorem ipsum dolor sit amet,sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                         CreatedAt = DateTime.Now,
                         IsDeleted = false
@@ -238,7 +290,7 @@ namespace OngProject.Infrastructure.Data
                    Name = "Somos Más",
                    Image = "imageOrganization.jpg",
                    Adress = "Catamarca 1585 , CP: 1585",
-                   Phone = 1128559685,
+                   Phone = 44808900,
                    Email = "somomasong@gmail.com",
                    WelcomeText = "Bienvenidos a nuestro sitio web",
                    AboutUsText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
